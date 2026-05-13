@@ -9,8 +9,6 @@ const Trainer = () => {
         <div>
             <Breadcrumb />
             <Trainers />
-            <AboutVision />
-            <AboutValues />
         </div>
     );
 };

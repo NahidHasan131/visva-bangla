@@ -89,8 +89,8 @@ const Hero = () => {
         slidesPerView={1}
         onSwiper={swiper => {
           swiperRef.current = swiper;
-          // trigger zoom on first slide after swiper initializes
-          applyZoom(swiper);
+          // wait for DOM to be ready before applying zoom
+          setTimeout(() => applyZoom(swiper), 50);
         }}
         onSlideChangeTransitionStart={applyZoom}
       >
@@ -106,7 +106,7 @@ const Hero = () => {
 
               <div className="relative z-10 h-full flex items-center justify-center">
                 <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
-                  <span className="px-5 py-2 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-sm border border-white/20">
+                  <span className="px-5 py-2 rounded-full bg-secondary/20 text-white text-sm font-medium backdrop-blur-sm border border-white/20">
                     {slide.badge}
                   </span>
                   <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
@@ -117,7 +117,7 @@ const Hero = () => {
                   </p>
                   <NavLink
                     to={slide.ctaPath}
-                    className="px-8 py-3.5 rounded-full bg-secondary text-[#FFEFC5] font-semibold text-sm hover:bg-white hover:text-secondary transition-all duration-300"
+                    className="px-8 py-3.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-white hover:text-secondary transition-all duration-300"
                   >
                     {slide.ctaText}
                   </NavLink>

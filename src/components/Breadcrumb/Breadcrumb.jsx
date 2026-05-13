@@ -3,13 +3,13 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { MdArrowForward } from 'react-icons/md';
 
 const pageMeta = {
-  '/about':         { title: 'About Us',      desc: 'Learn more about our journey, mission and the team behind Shunno Yoga.' },
+  '/about':         { title: 'About Us',      desc: 'Learn more about our journey, mission and the team behind Visva Bangla  .' },
   '/about/trainer': { title: 'Our Trainers',  desc: 'Meet the certified instructors who guide your wellness journey.' },
   '/media':         { title: 'Media',         desc: 'Explore our audio and video yoga sessions for all levels.' },
   '/media/audio':   { title: 'Audio Classes', desc: 'Listen and practice with our guided audio yoga sessions.' },
   '/media/video':   { title: 'Video Classes', desc: 'Watch and follow along with our expert video classes.' },
   '/media/gallery': { title: 'Gallery',      desc: 'Browse our collection of yoga class and event photos.' },
-  '/blog':          { title: 'Blog post',   desc: 'Stay inspired with yoga tips, wellness guides and the latest news from Shunno Yoga.' },
+  '/blog':          { title: 'Blog post',   desc: 'Stay inspired with yoga tips, wellness guides and the latest news from Visva Bangla  .' },
   '/contact':       { title: 'Contact Us',    desc: 'Get in touch with us for classes, queries or partnerships.' },
 };
 
@@ -33,8 +33,7 @@ const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) =>
 
   return (
     <div
-      className="relative py-16 lg:py-24 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #2d4a3e 0%, #3d6b55 40%, #4a7a62 70%, #2a4a3a 100%)' }}
+      className="relative py-16 lg:py-24 overflow-hidden bg-secondary"
     >
       {/* blurred circle decorations */}
       <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white/5 blur-3xl" />

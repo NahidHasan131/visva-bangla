@@ -1,86 +1,80 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import trainer1 from '../../assets/trainer-1.jpg';
-import trainer2 from '../../assets/trainer-2.jpg';
-import trainer3 from '../../assets/trainer-3.jpg';
+import { LuMapPin } from 'react-icons/lu';
+import trainerImg from '../../assets/Trainer1.jpeg';
 
 const trainers = [
   {
-    img: trainer1,
-    tags: ['Hatha Yoga', 'Vinyasa Flow'],
-    name: 'Emily Johnson',
-    experience: '10+ years',
-    level: 'All Levels',
+    img: trainerImg,
+    name: 'Dr. S. M. Hasib Ul Hasan',
+    designation: 'Researcher & Proposer',
+    location: 'Rajshahi, Bangladesh',
+    path: '/contact',
+  },
+  {
+    img: trainerImg,
+    name: 'Dr. S. M. Hasib Ul Hasan',
+    designation: 'Researcher & Proposer',
+    location: 'Rajshahi, Bangladesh',
     path: '/about/trainer',
   },
   {
-    img: trainer2,
-    tags: ['Power Yoga', 'Strength Training'],
-    name: 'Michael Roberts',
-    experience: '8+ years',
-    level: 'Intermediate to Advanced',
-    path: '/about/trainer',
-  },
-  {
-    img: trainer3,
-    tags: ['Mindfulness Meditation'],
-    name: 'Sarah Thompson',
-    experience: '6+ years',
-    level: 'All Levels',
+    img: trainerImg,
+    name: 'Dr. S. M. Hasib Ul Hasan',
+    designation: 'Researcher & Proposer',
+    location: 'Rajshahi, Bangladesh',
     path: '/about/trainer',
   },
 ];
 
 const Trainers = () => {
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-[#f7f8fa]">
       <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* Header */}
-        <div className="flex flex-col items-center gap-3 mb-15">
-          <span className="px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
-            Our Trainer
+        <div className="flex flex-col items-center gap-3 mb-14 text-center">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
+            Our Guides
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] text-center">
-            Meet Our Expert Trainers
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
+            Meet Our <span className="text-secondary">Spiritual Guides</span>
           </h2>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {trainers.map((t) => (
-            <div key={t.name} className="flex flex-col gap-4 border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-
-              {/* Image with tags */}
-              <div className="relative overflow-hidden rounded-t-2xl">
-                <img src={t.img} alt={t.name} className="w-full h-90 object-cover" />
-                <div className="absolute top-5 left-5 flex flex-wrap gap-2">
-                  {t.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 rounded-full bg-white/90 text-xs font-medium text-[#11141B] backdrop-blur-sm">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          {trainers.map((t, i) => (
+            <div
+              key={i}
+              className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.11)] hover:-translate-y-1 transition-all duration-300"
+            >
+              {/* Image */}
+              <div className="overflow-hidden h-90">
+                <img
+                  src={t.img}
+                  alt={t.name}
+                  className="w-full h-full object-fit-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
               {/* Info */}
-              <div className="flex flex-col gap-2 px-8">
-                <h3 className="text-2xl font-semibold text-[#11141B]">{t.name}</h3>
-                <p className="text-gray-700 py-4 border-b font-medium border-gray-200">
-                  Experience: <span className="font-semibold text-[#62826B]">{t.experience}</span>
-                </p>
-                <p className="font-medium py-2 text-gray-700">
-                  Level: <span className="font-semibold text-[#62826B]">{t.level}</span>
-                </p>
+              <div className="flex flex-col gap-3 p-6">
+                <div>
+                  <h3 className="text-lg font-bold text-[#11141B]">{t.name}</h3>
+                  <p className="text-sm text-secondary font-medium mt-0.5">{t.designation}</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <LuMapPin size={13} className="text-secondary shrink-0" />
+                  {t.location}
+                </div>
+                <NavLink
+                  to={t.path}
+                  className="mt-1 text-center py-2.5 rounded-xl border border-secondary text-secondary text-sm font-semibold hover:bg-secondary hover:text-white transition-all duration-300"
+                >
+                  View Profile
+                </NavLink>
               </div>
-
-              {/* Button */}
-              <NavLink
-                to={t.path}
-                className="m-8 mt-1 text-center py-3 px-6 rounded-full bg-[#62826B]/15 border border-[#62826B] text-[#62826B] font-medium  hover:bg-[#11141B] hover:border-[#11141B] hover:text-[#FFEFC5] hover:scale-105 transition-all duration-300"
-              >
-                Learn More About {t.name.split(' ')[0]}
-              </NavLink>
             </div>
           ))}
         </div>

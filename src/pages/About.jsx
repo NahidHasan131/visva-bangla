@@ -12,7 +12,6 @@ const About = () => {
             <AboutUs />
             <AboutVision />
             <AboutValues />
-            <Trainers />
         </div>
     );
 };
