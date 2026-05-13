@@ -24,6 +24,13 @@ const trainers = [
     location: 'Rajshahi, Bangladesh',
     path: '/about/trainer',
   },
+  {
+    img: trainerImg,
+    name: 'Dr. S. M. Hasib Ul Hasan',
+    designation: 'Researcher & Proposer',
+    location: 'Rajshahi, Bangladesh',
+    path: '/about/trainer',
+  },
 ];
 
 const Trainers = () => {
@@ -43,7 +50,7 @@ const Trainers = () => {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {trainers.map((t, i) => (
             <div
               key={i}

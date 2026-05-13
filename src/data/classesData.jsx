@@ -1,10 +1,10 @@
 import { GiLotus, GiMeditation } from 'react-icons/gi';
 import { MdSelfImprovement } from 'react-icons/md';
 import { PiHandsPrayingLight } from 'react-icons/pi';
-import morningYoga   from '../assets/morningYoga.jpg';
-import meditation    from '../assets/meditation.jpg';
-import powerYoga     from '../assets/powerYoga.jpg';
-import meditationImg from '../assets/meditation-img.jpg';
+import morningYoga   from '../assets/feature-classes/meditation.jpg';
+import meditation    from '../assets/feature-classes/yoga.jpg';
+import powerYoga     from '../assets/feature-classes/yoga2.jpg';
+import meditationImg from '../assets/feature-classes/meditation2.jpg';
 
 export const classesData = [
   {
