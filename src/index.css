@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+:root {
+  --primary:  #FE0000;
+  --secondary: #06a4a7;
+}
+
+@theme inline {
+  --color-primary:    var(--primary);
+  --color-secondary:  var(--secondary);
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+.animate-zoom-in {
+  animation: zoomIn 6s ease forwards;
+}
