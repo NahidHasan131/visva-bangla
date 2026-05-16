@@ -1,82 +1,170 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { MdOutlineEmail } from 'react-icons/md';
-import { IoTimeOutline } from 'react-icons/io5';
+import { MdOutlineEmail, MdOutlineLocationOn, MdOutlinePhone } from 'react-icons/md';
+import { FaFacebookF, FaYoutube } from 'react-icons/fa';
+import { TbBrandX } from 'react-icons/tb';
+import visvaBangala from '../../assets/logo/visva-bangala.png';
+
+const quickLinks = [
+  { label: 'Home',        path: '/' },
+  { label: 'About Us',    path: '/about' },
+  { label: 'Our Trainers',path: '/about/trainer' },
+  { label: 'Media',       path: '/media' },
+  { label: 'Blog',        path: '/blog' },
+  { label: 'Contact Us',  path: '/contact' },
+];
+
+const programs = [
+  { label: 'Free Meditation Sessions', path: '/media/audio' },
+  { label: 'Spiritual Education',      path: '/media' },
+  { label: 'Yoga Classes',             path: '/media/video' },
+  { label: 'Sufi Philosophy Programs', path: '/media/audio' },
+  { label: 'Research & Publications',  path: '/others/publication' },
+  { label: 'Gallery',                  path: '/media/gallery' },
+];
+
+const others = [
+  { label: 'Foundation',    path: '/others/foundation' },
+  { label: 'University',    path: '/others/university' },
+  { label: 'Notice',        path: '/others/notice' },
+  { label: 'Privacy Policy',path: '/others/privacy-policy' },
+  { label: 'Term & Condition', path: '/others/terms' },
+  { label: 'Download',      path: '/others/download' },
+];
+
+const socials = [
+  { icon: <FaFacebookF size={14} />, href: '#', label: 'Facebook' },
+  { icon: <FaYoutube size={14} />,   href: '#', label: 'YouTube' },
+  { icon: <TbBrandX size={14} />,    href: '#', label: 'X' },
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-[#11141B] text-gray-300">
-      <div className="max-w-340 mx-auto px-4 lg:px-8 py-16">
-        <div className="flex md:flex-row flex-col justify-between items-center gap-10">
+    <footer className="bg-[#0d1117] text-gray-400">
 
-          {/* Brand */}
-          <div className="flex flex-col gap-4 md:w-4/12 w-11/12">
-            <NavLink to="/" className="flex items-center gap-2 text-4xl font-bold text-white">
-              <span>🌿</span> Shunno Yoga
+      {/* Main footer */}
+      <div className="max-w-340 mx-auto px-6 lg:px-12 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+          {/* ── Brand column ── */}
+          <div className="flex flex-col gap-5 lg:col-span-1">
+            {/* Logo */}
+            <NavLink to="/" className="flex items-center gap-2">
+              <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
+              <span className="text-lg font-bold uppercase text-primary">VisvaBangla</span>
             </NavLink>
-            <p className="font-normal leading-relaxed text-gray-300">
-              Turpis ornare euismod quam odio sit. Egestas molestie eget tellus sed. Aenean enim mattis imperdiet semper erat quam. Tempor blandit elementum urna.
+
+            <p className="text-sm leading-relaxed text-gray-400">
+              Universal Humanitarian Philosophy Institute of Meditation, Knowledge, Education and Spiritual Guidance — Rajshahi, Bangladesh.
             </p>
-            <div className="flex items-center gap-2 text-gray-300 hover:text-gray-200 duration-300 transition-colors">
-              <div className='rounded-full bg-[#FFEFC5] p-2'>
-                <MdOutlineEmail size={18} className="text-[#62826B]" />
-              </div>
-              info@shunnoyoga.com
+
+            {/* Contact info */}
+            <ul className="flex flex-col gap-3 text-sm">
+              <li className="flex items-start gap-2.5">
+                <MdOutlineLocationOn size={16} className="text-secondary shrink-0 mt-0.5" />
+                <span>Shiroil Colony, Ghoramara, Boalia, Rajshahi, Bangladesh</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <MdOutlineEmail size={16} className="text-secondary shrink-0" />
+                <a href="mailto:info@visvabangla.org" className="hover:text-white transition-colors">
+                  info@visvabangla.org
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <MdOutlinePhone size={16} className="text-secondary shrink-0" />
+                <a href="tel:+8801700000000" className="hover:text-white transition-colors">
+                  +880 1700 000000
+                </a>
+              </li>
+            </ul>
+
+            {/* Socials */}
+            <div className="flex items-center gap-2 mt-1">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-secondary hover:text-white hover:border-secondary transition-all duration-200"
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className='md:w-8/12 w-11/12 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-0 mt-5 md:mt-0'>
-                {/* Links */}
-                <div className="flex flex-col md:gap-4 gap-2">
-                    <h4 className="text-white font-semibold text-lg">Links</h4>
-                    <ul className="flex flex-col gap-2 text-sm text-gray-300">
-                    <li><NavLink to="/" className="hover:text-white transition-colors">Home</NavLink></li>
-                    <li><NavLink to="/about" className="hover:text-white transition-colors">About Us</NavLink></li>
-                    <li><NavLink to="/media" className="hover:text-white transition-colors">Media</NavLink></li>
-                    <li><NavLink to="/contact" className="hover:text-white transition-colors">Contact Us</NavLink></li>
-                    </ul>
-                </div>
+          {/* ── Quick Links ── */}
+          <div className="flex flex-col gap-5">
+            <h4 className="text-white font-semibold text-sm uppercase tracking-widest">Quick Links</h4>
+            <ul className="flex flex-col gap-2.5">
+              {quickLinks.map((l) => (
+                <li key={l.label}>
+                  <NavLink
+                    to={l.path}
+                    className="text-sm text-gray-400 hover:text-secondary transition-colors flex items-center gap-2 group"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-secondary transition-colors shrink-0" />
+                    {l.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                {/* Services */}
-                <div className="flex flex-col gap-4">
-                    <h4 className="text-white font-semibold text-base">Services</h4>
-                    <ul className="flex flex-col gap-2 text-sm text-gray-300">
-                    <li><NavLink to="/media/audio" className="hover:text-white transition-colors">Private Yoga Sessions</NavLink></li>
-                    <li><NavLink to="/media/video" className="hover:text-white transition-colors">Group Yoga Classes</NavLink></li>
-                    <li><NavLink to="/media" className="hover:text-white transition-colors">Meditation Workshops</NavLink></li>
-                    <li><NavLink to="/media" className="hover:text-white transition-colors">Corporate Wellness</NavLink></li>
-                    </ul>
-                </div>
+          {/* ── Programs ── */}
+          <div className="flex flex-col gap-5">
+            <h4 className="text-white font-semibold text-sm uppercase tracking-widest">Programs</h4>
+            <ul className="flex flex-col gap-2.5">
+              {programs.map((l) => (
+                <li key={l.label}>
+                  <NavLink
+                    to={l.path}
+                    className="text-sm text-gray-400 hover:text-secondary transition-colors flex items-center gap-2 group"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-secondary transition-colors shrink-0" />
+                    {l.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                {/* Working Hours */}
-                <div className="flex flex-col gap-4 pt-4 md:pt-0">
-                    <h4 className="text-white font-semibold text-base">Working Hours</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed">
-                    Scelerisque justo et sed in purus ornare pulvinar aliquam.
-                    </p>
-                    <div className="flex flex-col gap-2 text-sm text-gray-300">
-                    <div className="flex items-center gap-2">
-                        <IoTimeOutline size={16} className="text-[#62826B]" />
-                        Mon - Fri: 9:00AM - 6:00PM
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <IoTimeOutline size={16} className="text-[#62826B]" />
-                        Sat - Sun: 8:00AM - 4:00PM
-                    </div>
-                    </div>
-                </div>
+          {/* ── Others ── */}
+          <div className="flex flex-col gap-5">
+            <h4 className="text-white font-semibold text-sm uppercase tracking-widest">Others</h4>
+            <ul className="flex flex-col gap-2.5">
+              {others.map((l) => (
+                <li key={l.label}>
+                  <NavLink
+                    to={l.path}
+                    className="text-sm text-gray-400 hover:text-secondary transition-colors flex items-center gap-2 group"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-secondary transition-colors shrink-0" />
+                    {l.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+
+            {/* Reg info */}
+            <div className="mt-2 p-4 rounded-xl bg-white/5 border border-white/8">
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Registered under Ministry of Social Welfare, Govt. of Bangladesh<br />
+                <span className="text-gray-400 font-medium">Reg. No: 1012/15 &nbsp;|&nbsp; July 13, 2015</span>
+              </p>
+            </div>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-340 mx-auto px-4 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-sm text-gray-400">
-          <span>Yoga & Meditation By Shunno Yoga</span>
-          <span>Copyright &copy;2026. All Rights Reserved.</span>
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-white/8">
+        <div className="max-w-340 mx-auto px-6 lg:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500">
+          <span>© 2026 VisvaBangla Foundation. All Rights Reserved.</span>
+          <span>Universal Humanitarian Philosophy Institute — Rajshahi, Bangladesh</span>
         </div>
       </div>
+
     </footer>
   );
 };

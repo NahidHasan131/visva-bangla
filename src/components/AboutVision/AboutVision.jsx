@@ -88,14 +88,14 @@ const AboutVision = () => {
               <img
                 src={visionImg}
                 alt="Our vision"
-                className="w-full h-[580px] object-cover"
+                className="w-full h-145 object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent rounded-3xl" />
             </div>
             {/* floating stat */}
             <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 flex items-center justify-between shadow-lg">
               <div className="text-center">
-                <p className="text-2xl font-bold text-primary">150+</p>
+                <p className="text-2xl font-bold text-primary">300+</p>
                 <p className="text-xs text-gray-500">Regular Participants</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />
