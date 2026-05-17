@@ -50,7 +50,7 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 lg:py-24 pb-32 bg-[#f7f8fa] overflow-visible">
+    <section className="py-16 lg:py-24 bg-[#f7f8fa] overflow-visible">
       <div className="max-w-340 mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-14 items-start">
 

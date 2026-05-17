@@ -16,10 +16,8 @@ const Home = () => {
             <AboutUs />
             <FeaturedClasses />
             <WhyChooseUs />
-            <div className="pt-130 lg:pt-75">
-              <Trainers />
-            </div>
-            <Events />
+            <Trainers />
+            {/* <Events /> */}
             <Testimonials />
             <CallToAction />
             <BlogSection />

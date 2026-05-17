@@ -35,7 +35,7 @@ const trainers = [
 
 const Trainers = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#f7f8fa]">
+    <section className="py-16 lg:py-24">
       <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* Header */}
