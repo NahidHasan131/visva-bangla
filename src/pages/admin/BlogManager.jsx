@@ -94,14 +94,14 @@ const BlogManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdArticle size={30} className="text-[#62826B]" />
+            <MdArticle size={30} className="text-[var(--color-secondary)]" />
             <h1 className="text-3xl font-bold text-[#11141B]">Blog Posts</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">{total} posts total</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
             <MdAdd size={18} /> New Post
           </button>
         )}
@@ -112,7 +112,7 @@ const BlogManager = () => {
         <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input type="text" placeholder="Search posts..."
           value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors bg-white" />
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
       </div>
 
       {/* Post list */}
@@ -137,7 +137,7 @@ const BlogManager = () => {
               {isAdmin && (
                 <>
                   <button onClick={() => openEdit(post)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
+                    className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">
                     <MdEdit size={18} />
                   </button>
                   <button onClick={() => setDeleteId(post._id)}
@@ -165,12 +165,12 @@ const BlogManager = () => {
 
             <AdminFormField label="Title" error={errors.title?.message}>
               <input {...register('title')} placeholder="Post title"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
             <AdminFormField label="Content" error={errors.content?.message}>
               <textarea {...register('content')} rows={5} placeholder="Write content..."
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors resize-none" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors resize-none" />
             </AdminFormField>
 
             <div className="flex items-center justify-end gap-3 pt-2">
@@ -179,7 +179,7 @@ const BlogManager = () => {
                 Cancel
               </button>
               <button type="submit" disabled={creating || updating}
-                className="px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
+                className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
                 {creating || updating ? 'Saving...' : editingPost ? 'Save Changes' : 'Publish Post'}
               </button>
             </div>
@@ -209,3 +209,4 @@ const BlogManager = () => {
 };
 
 export default BlogManager;
+

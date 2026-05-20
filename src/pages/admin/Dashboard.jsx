@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   MdArticle, MdVideoLibrary, MdAudiotrack, MdPhotoLibrary,
@@ -36,29 +35,28 @@ const Dashboard = () => {
   const allAudios  = audiosData?.data          || [];
   const allVideos  = videosData?.data          || [];
   const allGallery = galleryData?.data         || [];
-  const allUsers = Array.isArray(usersData?.data) ? usersData.data :
-                   Array.isArray(usersData?.data?.users) ? usersData.data.users :
-                   Array.isArray(usersData) ? usersData : [];
+  const allUsers   = Array.isArray(usersData?.data) ? usersData.data :
+                     Array.isArray(usersData?.data?.users) ? usersData.data.users :
+                     Array.isArray(usersData) ? usersData : [];
 
-  // user's own content
   const myBlogs   = allBlogs.filter(b => b.writer?._id === user?._id || b.writer === user?._id);
   const myAudios  = allAudios.filter(a => a.uploadedBy === user?._id || a.uploadedBy?._id === user?._id);
   const myVideos  = allVideos.filter(v => v.uploadedBy === user?._id || v.uploadedBy?._id === user?._id);
   const myGallery = allGallery.filter(g => g.uploadedBy === user?._id || g.uploadedBy?._id === user?._id);
 
   const adminStats = [
-    { label: 'Blog Posts',    value: blogsData?.pagination?.total ?? allBlogs.length, icon: <MdArticle size={22} />,      path: '/admin/blog',    bg: 'bg-violet-100', text: 'text-violet-600', border: 'border-violet-200' },
-    { label: 'Videos',        value: allVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  bg: 'bg-blue-100',   text: 'text-blue-600',   border: 'border-blue-200' },
-    { label: 'Audio Tracks',  value: allAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   bg: 'bg-amber-100',  text: 'text-amber-600',  border: 'border-amber-200' },
-    { label: 'Gallery Photos',value: allGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', bg: 'bg-pink-100',   text: 'text-pink-600',   border: 'border-pink-200' },
-    { label: 'Total Users',   value: allUsers.length,   icon: <MdPeople size={22} />,       path: '/admin/users',   bg: 'bg-green-100',  text: 'text-green-600',  border: 'border-green-200' },
+    { label: 'Blog Posts',     value: blogsData?.pagination?.total ?? allBlogs.length, icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
+    { label: 'Videos',         value: allVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
+    { label: 'Audio Tracks',   value: allAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
+    { label: 'Gallery Photos', value: allGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
+    { label: 'Total Users',    value: allUsers.length,   icon: <MdPeople size={22} />,       path: '/admin/users',   gradient: 'from-secondary to-[#047f82]' },
   ];
 
   const userStats = [
-    { label: 'My Blog Posts',    value: myBlogs.length,   icon: <MdArticle size={22} />,      path: '/admin/blog',    bg: 'bg-violet-100', text: 'text-violet-600', border: 'border-violet-200' },
-    { label: 'My Videos',        value: myVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  bg: 'bg-blue-100',   text: 'text-blue-600',   border: 'border-blue-200' },
-    { label: 'My Audio Tracks',  value: myAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   bg: 'bg-amber-100',  text: 'text-amber-600',  border: 'border-amber-200' },
-    { label: 'My Gallery Photos',value: myGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', bg: 'bg-pink-100',   text: 'text-pink-600',   border: 'border-pink-200' },
+    { label: 'My Blog Posts',     value: myBlogs.length,   icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
+    { label: 'My Videos',         value: myVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
+    { label: 'My Audio Tracks',   value: myAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
+    { label: 'My Gallery Photos', value: myGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
   ];
 
   const stats = isAdmin ? adminStats : userStats;
@@ -67,19 +65,25 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col gap-8 w-full">
 
-      {/* Title */}
+      {/* Title bar */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <MdDashboard size={30} className="text-[#62826B]" />
-            <h1 className="text-3xl font-bold text-[#11141B]">Dashboard</h1>
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center">
+              <MdDashboard size={20} className="text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-[#11141B]">Dashboard</h1>
           </div>
-          <p className="text-sm text-gray-400 mt-0.5">
-            Welcome back, <span className="font-medium text-[#11141B]">{user?.name}</span>
-            {user?.role && <span className="ml-2 px-2 py-0.5 rounded-full bg-[#62826B]/10 text-[#62826B] text-xs capitalize">{user.role}</span>}
+          <p className="text-sm text-gray-400 mt-1 ml-11">
+            Welcome back, <span className="font-semibold text-[#11141B]">{user?.name}</span>
+            {user?.role && (
+              <span className="ml-2 px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs font-semibold capitalize">
+                {user.role}
+              </span>
+            )}
           </p>
         </div>
-        <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full hidden sm:block">
+        <span className="text-xs text-gray-400 bg-white border border-gray-100 px-3 py-1.5 rounded-full hidden sm:block shadow-sm">
           {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
         </span>
       </div>
@@ -87,16 +91,21 @@ const Dashboard = () => {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {stats.map(s => (
-          <NavLink key={s.label} to={s.path}
-            className={`group bg-white rounded-2xl p-5 flex flex-col gap-3 border ${s.border} hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200`}>
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${s.bg} ${s.text}`}>
+          <NavLink
+            key={s.label}
+            to={s.path}
+            className="group bg-white rounded-2xl p-5 flex flex-col gap-3 border border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden relative"
+          >
+            {/* gradient top bar */}
+            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${s.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-200`} />
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br ${s.gradient} text-white shadow-sm`}>
               {s.icon}
             </div>
             <div>
               <p className="text-2xl font-bold text-[#11141B]">{s.value}</p>
               <p className="text-xs text-gray-500 mt-0.5 leading-snug">{s.label}</p>
             </div>
-            <div className={`flex items-center gap-1 text-xs font-medium ${s.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
+            <div className="flex items-center gap-1 text-xs font-medium text-secondary opacity-0 group-hover:opacity-100 transition-opacity">
               View <MdArrowForward size={12} />
             </div>
           </NavLink>
@@ -106,12 +115,14 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Recent blog posts */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4 shadow-sm">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-sm uppercase tracking-wide text-gray-400">
+            <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">
               {isAdmin ? 'Recent Blog Posts' : 'My Recent Posts'}
             </h2>
-            <NavLink to="/admin/blog" className="text-xs text-[#62826B] hover:underline">View all</NavLink>
+            <NavLink to="/admin/blog" className="text-xs text-secondary hover:underline font-medium">
+              View all
+            </NavLink>
           </div>
           {recentBlogs.length === 0 ? (
             <p className="text-sm text-gray-400 py-4 text-center">No posts yet.</p>
@@ -139,16 +150,15 @@ const Dashboard = () => {
         {/* Right column */}
         <div className="flex flex-col gap-6">
 
-          {/* Admin: users summary / User: content summary */}
           {isAdmin ? (
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4 shadow-sm">
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold text-sm uppercase tracking-wide text-gray-400">Users</h2>
-                <NavLink to="/admin/users" className="text-xs text-[#62826B] hover:underline">Manage</NavLink>
+                <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">Users</h2>
+                <NavLink to="/admin/users" className="text-xs text-secondary hover:underline font-medium">Manage</NavLink>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#62826B]/10 flex items-center justify-center">
-                  <MdPeople size={24} className="text-[#62826B]" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-[#047f82] flex items-center justify-center shadow-sm">
+                  <MdPeople size={24} className="text-white" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-[#11141B]">{allUsers.length}</p>
@@ -158,8 +168,8 @@ const Dashboard = () => {
               <div className="flex flex-col gap-2 pt-2 border-t border-gray-50">
                 {allUsers.slice(0, 3).map(u => (
                   <div key={u._id} className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#62826B]/10 flex items-center justify-center shrink-0">
-                      <FaUser size={12} className="text-[#62826B]" />
+                    <div className="w-7 h-7 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 text-secondary font-bold text-xs">
+                      {u.name?.charAt(0)?.toUpperCase() || <FaUser size={10} />}
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs font-medium text-[#11141B] truncate">{u.name}</p>
@@ -170,8 +180,8 @@ const Dashboard = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3">
-              <h2 className="font-semibold text-sm uppercase tracking-wide text-gray-400">My Content</h2>
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3 shadow-sm">
+              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">My Content</h2>
               {[
                 { label: 'Blog Posts', value: myBlogs.length,   icon: <MdArticle size={16} className="text-violet-500" /> },
                 { label: 'Videos',     value: myVideos.length,  icon: <MdPlayCircle size={16} className="text-blue-500" /> },
@@ -189,18 +199,21 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Quick actions — admin only */}
+          {/* Quick actions */}
           {isAdmin && (
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3">
-              <h2 className="font-semibold text-sm uppercase tracking-wide text-gray-400">Quick Actions</h2>
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3 shadow-sm">
+              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">Quick Actions</h2>
               {quickActions.map(a => (
-                <NavLink key={a.label} to={a.path}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group">
+                <NavLink
+                  key={a.label}
+                  to={a.path}
+                  className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group"
+                >
                   <div className="flex items-center gap-2">
                     <span className={`w-6 h-6 rounded-lg flex items-center justify-center ${a.color}`}>{a.icon}</span>
                     <span className="text-sm font-medium text-[#11141B]">{a.label}</span>
                   </div>
-                  <MdArrowForward size={14} className="text-gray-300 group-hover:text-gray-500 transition-colors" />
+                  <MdArrowForward size={14} className="text-gray-300 group-hover:text-secondary transition-colors" />
                 </NavLink>
               ))}
             </div>
@@ -213,3 +226,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

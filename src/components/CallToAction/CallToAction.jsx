@@ -1,37 +1,105 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import meditationImg from '../../assets/meditation-img.jpg';
+import { GiLotus } from 'react-icons/gi';
+import { TbArrowRight } from 'react-icons/tb';
+import { PiHandsPrayingLight } from 'react-icons/pi';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, staggerContainer, viewport } from '../../lib/motion';
+import ctaImg from '../../assets/call-to-action.jpg';
+
+const stats = [
+  { value: '150+', label: 'Regular Participants' },
+  { value: '100%', label: 'Free of Cost' },
+  { value: '15+',  label: 'Years of Research' },
+];
 
 const CallToAction = () => {
   return (
-    <section
-      className="relative py-18 lg:py-26 mb-10 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${meditationImg})` }}>
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-[#11141B]/80" />
+    <motion.section
+      className="relative py-20 lg:py-28 overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${ctaImg})` }}
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
+      <div className="absolute inset-0 bg-[#0d1117]/78" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center gap-5 px-4">
-        <span className="px-5 py-2 rounded-full bg-white text-sm text-[#11141B] font-medium">
-          Join the Shanty Wellness Journey
-        </span>
-        <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight max-w-2xl">
-          Start Your Yoga and Meditation Practice Today!
-        </h2>
-        <p className="text-gray-300 text-sm leading-relaxed max-w-md">
-          Tristique posuere bibendum id auctor pellentesque. Donec diam blandit vitae quam. In donec ac dignissim rhoncus sodales porttitor.
-        </p>
-        <NavLink to="/contact" className="px-8 py-3 rounded-full bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B] font-medium hover:opacity-80 hover:scale-110 transition-all duration-300">
-          Try a Free Class
-        </NavLink>
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-gray-100 text-sm">or</span>
-          <NavLink to="/media" className="text-[#FFEFC5] text-sm underline underline-offset-4">
-            <span className='hover:text-[#62826B] transition-colors duration-300'>Explore Membership Options</span>
+      <div className="relative z-10 max-w-340 mx-auto px-6 lg:px-12 flex flex-col items-center text-center gap-8">
+
+        <motion.span
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold uppercase tracking-widest backdrop-blur-sm"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
+          <PiHandsPrayingLight size={14} />
+          Join the Movement
+        </motion.span>
+
+        <motion.div
+          className="flex flex-col gap-4 max-w-3xl"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
+          <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+            Begin Your Journey of
+            <br />
+            <span className="text-secondary">Meditation & Spiritual Freedom</span>
+          </h2>
+          <p className="text-gray-300 text-base leading-relaxed max-w-xl mx-auto">
+            Join Bishwabangla Foundation's free meditation sessions, spiritual education programs, and weekly Sufi philosophy classes — open to all, regardless of religion, class, or background.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-6 lg:gap-12"
+          variants={staggerContainer()}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
+          {stats.map((s, i) => (
+            <motion.div key={i} variants={fadeUp} className="flex flex-col items-center gap-1">
+              <span className="text-3xl lg:text-4xl font-bold text-white">{s.value}</span>
+              <span className="text-xs text-gray-400 uppercase tracking-widest">{s.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-4"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
+          <NavLink
+            to="/media/audio"
+            className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-secondary/90 transition-all duration-300 shadow-[0_4px_20px_rgba(6,164,167,0.4)]"
+          >
+            <GiLotus size={16} />
+            Join Free Meditation
           </NavLink>
-        </div>
+          <NavLink
+            to="/about"
+            className="flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-all duration-300"
+          >
+            Explore Our Vision
+            <TbArrowRight size={16} />
+          </NavLink>
+        </motion.div>
+
+        <p className="text-gray-500 text-xs">
+          No registration fee. No commitment. Everything is completely free.
+        </p>
+
       </div>
-    </section>
+    </motion.section>
   );
 };
 

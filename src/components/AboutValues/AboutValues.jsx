@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { MdOutlineHealthAndSafety, MdOutlineVolunteerActivism } from 'react-icons/md';
 import { LuScale, LuSprout, LuUsers } from 'react-icons/lu';
 import { TbBuildingCommunity } from 'react-icons/tb';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import aboutImg from '../../assets/goals-left-img.jpg';
 
 const objectives = [
@@ -50,22 +52,34 @@ const committee = [
   { role: 'General Secretary', name: 'Md. Sadek Ali' },
   { role: 'Secretary, Industry & Technology', name: 'Md. Shahadat Hossain' },
   { role: 'Secretary, Education & Culture', name: 'Md. Naeem Imtiaz' },
-  { role: 'Secretary, Research & Publications', name: 'Mosha. Sumaiya Akhtar' },
-  { role: 'Organizational Secretary', name: 'Mosha. Mullika Bibi' },
+  { role: 'Secretary, Research & Publications', name: 'Mst. Sumaiya Akhtar' },
+  { role: 'Organizational Secretary', name: 'Mst. Mullika Bibi' },
   { role: 'Treasurer', name: 'Md. Mahabub Rahman' },
   { role: 'Office Secretary', name: 'Md. Sohel Islam Ripon' },
 ];
 
 const AboutValues = () => {
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <motion.section
+      className="py-16 lg:py-24 bg-white"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* ── Goals & Objectives ── */}
         <div className="flex flex-col lg:flex-row gap-14 items-start mb-20">
 
           {/* Left image */}
-          <div className="lg:w-2/5 w-full lg:sticky lg:top-28">
+          <motion.div
+            className="lg:w-2/5 w-full lg:sticky lg:top-28"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.10)]">
               <img
                 src={aboutImg}
@@ -84,10 +98,16 @@ const AboutValues = () => {
                 <p className="text-sm text-gray-500">Shiroil Colony, Ghoramara, Boalia,<br />Rajshahi, Bangladesh</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right content */}
-          <div className="lg:w-3/5 flex flex-col gap-8">
+          <motion.div
+            className="lg:w-3/5 flex flex-col gap-8"
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
 
             <div className="flex flex-col gap-3">
               <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
@@ -103,10 +123,17 @@ const AboutValues = () => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-0">
+            <motion.div
+              className="flex flex-col gap-0"
+              variants={staggerContainer()}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
               {objectives.map((v, i) => (
-                <div
+                <motion.div
                   key={i}
+                  variants={fadeUp}
                   className={`flex items-start gap-5 py-5 group ${i < objectives.length - 1 ? 'border-b border-gray-100' : ''}`}
                 >
                   {/* Number + icon */}
@@ -120,9 +147,9 @@ const AboutValues = () => {
                     <h3 className="text-base font-bold text-[#11141B]">{v.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{v.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <NavLink
               to="/contact"
@@ -130,24 +157,37 @@ const AboutValues = () => {
             >
               Get Involved
             </NavLink>
-          </div>
+          </motion.div>
         </div>
 
         {/* ── Current Committee ── */}
         <div className="flex flex-col gap-8">
-          <div className="flex flex-col items-center text-center gap-3">
+          <motion.div
+            className="flex flex-col items-center text-center gap-3"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
               Leadership
             </span>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#11141B]">Current Committee</h2>
             <p className="text-gray-500 text-sm max-w-md">The dedicated team guiding Bishwabangla Foundation toward its humanitarian and spiritual mission.</p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            variants={staggerContainer()}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
             {committee.map((m, i) => (
-              <div
+              <motion.div
                 key={i}
+                variants={fadeUp}
                 className="flex items-center gap-4 p-5 rounded-2xl bg-[#f7f8fa] border border-gray-100 hover:border-secondary/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.07)] transition-all duration-200"
               >
                 {/* Avatar initial */}
@@ -158,13 +198,13 @@ const AboutValues = () => {
                   <p className="text-sm font-bold text-[#11141B] leading-snug">{m.name}</p>
                   <p className="text-xs text-gray-400 leading-snug mt-0.5">{m.role}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 

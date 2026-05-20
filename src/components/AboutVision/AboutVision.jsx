@@ -3,6 +3,8 @@ import { TbWorld } from 'react-icons/tb';
 import { PiHandsPrayingLight } from 'react-icons/pi';
 import { LuBookOpen, LuGraduationCap } from 'react-icons/lu';
 import { GiLotus } from 'react-icons/gi';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import visionImg from '../../assets/spritual- university.jpg';
 
 const visionPoints = [
@@ -35,12 +37,24 @@ const visionPoints = [
 
 const AboutVision = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#f7f8fa]">
+    <motion.section
+      className="py-16 lg:py-24 bg-[#f7f8fa]"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-14 items-center">
 
           {/* Left content */}
-          <div className="lg:w-1/2 flex flex-col gap-8">
+          <motion.div
+            className="lg:w-1/2 flex flex-col gap-8"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
 
             <div className="flex flex-col gap-3">
               <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
@@ -67,9 +81,15 @@ const AboutVision = () => {
             </blockquote>
 
             {/* Vision points */}
-            <ul className="flex flex-col gap-4">
+            <motion.ul
+              className="flex flex-col gap-4"
+              variants={staggerContainer()}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
               {visionPoints.map((v, i) => (
-                <li key={i} className="flex items-start gap-4 group">
+                <motion.li key={i} variants={fadeUp} className="flex items-start gap-4 group">
                   <span className="mt-0.5 w-9 h-9 rounded-xl bg-white border border-gray-200 text-secondary flex items-center justify-center shrink-0 shadow-sm group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-200">
                     {v.icon}
                   </span>
@@ -77,13 +97,19 @@ const AboutVision = () => {
                     <p className="text-sm font-bold text-[#11141B]">{v.title}</p>
                     <p className="text-sm text-gray-500 leading-relaxed">{v.desc}</p>
                   </div>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
 
           {/* Right image */}
-          <div className="lg:w-1/2 relative">
+          <motion.div
+            className="lg:w-1/2 relative"
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
               <img
                 src={visionImg}
@@ -109,11 +135,11 @@ const AboutVision = () => {
                 <p className="text-xs text-gray-500">Year Established</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

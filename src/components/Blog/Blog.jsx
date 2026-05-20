@@ -1,76 +1,93 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import blog1 from '../../assets/blog-img-1.jpg';
-import blog2 from '../../assets/blog-img-2.jpg';
-import blog3 from '../../assets/blog-img-3.jpg';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
+import { useGetBlogsQuery } from '../../store/blogsApi';
 import BlogCard from './BlogCard';
 
-const posts = [
-  {
-    id: 1,
-    img: blog1,
-    tag: 'Yoga Practices',
-    date: '25 June 2024',
-    readTime: '5 min read',
-    author: 'Emily Johnson',
-    title: 'Yoga for Stress Relief: Poses and Techniques',
-    desc: 'Diam pharetra nulla nullam eget blandit habitasse turpis. Vestibulum odio pulvinar turpis faucibus fermentum nec nunc.',
-    path: '/blog',
-  },
-  {
-    id: 2,
-    img: blog2,
-    tag: 'Holistic Wellness',
-    date: '20 June 2024',
-    readTime: '4 min read',
-    author: 'Michael Roberts',
-    title: 'The Role of Nutrition in Yoga and Meditation',
-    desc: 'Diam pharetra nulla nullam eget blandit habitasse turpis. Vestibulum odio pulvinar turpis faucibus fermentum nec nunc.',
-    path: '/blog',
-  },
-  {
-    id: 3,
-    img: blog3,
-    tag: 'Meditation Techniques',
-    date: '15 June 2024',
-    readTime: '6 min read',
-    author: 'Sarah Thompson',
-    title: 'Introduction to Mindfulness Meditation',
-    desc: 'Diam pharetra nulla nullam eget blandit habitasse turpis. Vestibulum odio pulvinar turpis faucibus fermentum nec nunc.',
-    path: '/blog',
-  },
-];
+const formatDate = (d) =>
+  d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 
 const Blog = () => {
+  const { data, isLoading } = useGetBlogsQuery({ page: 1, limit: 3 });
+  const apiBlogs = data?.data?.blogs || [];
+
+  const posts = apiBlogs.map(b => ({
+    id:     b._id,
+    img:    b.image,
+    tag:    b.tag || 'Blog',
+    date:   formatDate(b.createdAt),
+    author: b.writer?.name || 'Bishwabangla Foundation',
+    title:  b.title,
+    desc:   b.content,
+    path:   '/blog',
+  }));
+
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <motion.section
+      className="py-16 lg:py-24 bg-white"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="flex flex-col gap-3">
-            <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
+          <motion.div
+            className="flex flex-col gap-3"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
               Blog & News
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
-              Explore Our Blog & <br /> Latest News
+              Latest Articles &<br />
+              <span className="text-secondary">Spiritual Insights</span>
             </h2>
-          </div>
-          <NavLink
-            to="/blog"
-            className="self-start md:self-end px-8 py-3 rounded-full font-medium bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B] hover:scale-110 transition-all duration-300"
-          >
-            Read All
-          </NavLink>
+          </motion.div>
+
+          <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={viewport}>
+            <NavLink
+              to="/blog"
+              className="self-start md:self-end px-7 py-3 rounded-full text-sm font-semibold border border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
+            >
+              View All Posts
+            </NavLink>
+          </motion.div>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map(p => <BlogCard key={p.id} post={p} />)}
-        </div>
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="rounded-2xl bg-gray-100 animate-pulse h-80" />
+            ))}
+          </div>
+        ) : posts.length === 0 ? (
+          <p className="text-center py-16 text-gray-400">No posts available yet.</p>
+        ) : (
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-7"
+            variants={staggerContainer()}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
+            {posts.map((p, i) => (
+              <motion.div key={p.id || i} variants={fadeUp}>
+                <BlogCard post={p} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 

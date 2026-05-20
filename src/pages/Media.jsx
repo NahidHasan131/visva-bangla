@@ -38,13 +38,13 @@ const Media = () => {
           </div>
 
           {/* Tabs */}
-          <div className="flex items-center gap-2 bg-[#F0F7F2] p-1.5 rounded-full">
+          <div className="flex items-center gap-2 bg-secondary/10 p-1.5 rounded-full">
             {tabs.map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
                 className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer"
                 style={{
-                  backgroundColor: activeTab === tab ? '#62826B' : 'transparent',
-                  color: activeTab === tab ? '#FFEFC5' : '#11141B',
+                  backgroundColor: activeTab === tab ? 'var(--color-secondary)' : 'transparent',
+                  color: activeTab === tab ? '#ffffff' : '#11141B',
                 }}>
                 {tab}
               </button>

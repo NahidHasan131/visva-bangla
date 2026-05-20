@@ -54,7 +54,7 @@ const BlogDetail = () => {
                           <img src={b.image} alt={b.title}
                             className="w-16 h-14 rounded-xl object-cover shrink-0" />
                           <div className="min-w-0">
-                            <p className="text-sm font-medium text-[#11141B] group-hover:text-[#62826B] transition-colors line-clamp-2 leading-snug">
+                            <p className="text-sm font-medium text-[#11141B] group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                               {b.title}
                             </p>
                             <p className="text-xs text-gray-400 mt-1">{formatDate(b.createdAt)}</p>
@@ -64,18 +64,18 @@ const BlogDetail = () => {
                     ))}
                   </ul>
                   <NavLink to="/blog"
-                    className="flex items-center gap-1 text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity mt-1">
+                    className="flex items-center gap-1 text-sm text-primary font-medium hover:opacity-70 transition-opacity mt-1">
                     ← All Posts
                   </NavLink>
                 </div>
               )}
 
               {/* CTA */}
-              <div className="bg-[#F0F7F2] rounded-2xl p-6 flex flex-col gap-4">
+              <div className="bg-primary/8 rounded-2xl p-6 flex flex-col gap-4">
                 <h4 className="font-bold text-[#11141B]">Start Your Journey</h4>
-                <p className="text-sm text-gray-500 leading-relaxed">Join thousands of members and transform your life with yoga.</p>
+                <p className="text-sm text-gray-500 leading-relaxed">Join our free meditation sessions and spiritual education programs.</p>
                 <NavLink to="/contact"
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium hover:bg-[#11141B] transition-colors">
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-secondary/90 transition-colors">
                   Join Free Class <MdArrowForward size={15} />
                 </NavLink>
               </div>

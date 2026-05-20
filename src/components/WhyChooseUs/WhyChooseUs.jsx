@@ -2,6 +2,8 @@ import { TbWorld, TbHeartHandshake, TbBuildingCommunity, TbLeaf } from 'react-ic
 import { LuGraduationCap, LuScale, LuUsers } from 'react-icons/lu';
 import { GiLotus } from 'react-icons/gi';
 import { PiHandsPrayingLight } from 'react-icons/pi';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import whyChooseImg from '../../assets/why choose.jpg';
 import Newsletter from '../Newsletter/Newsletter';
 
@@ -50,12 +52,24 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#f7f8fa] overflow-visible">
+    <motion.section
+      className="py-16 lg:py-24 bg-[#f7f8fa] overflow-visible"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-14 items-start">
 
           {/* ── Left: content ── */}
-          <div className="lg:w-1/2 flex flex-col gap-8">
+          <motion.div
+            className="lg:w-1/2 flex flex-col gap-8"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
 
             {/* Badge + heading */}
             <div className="flex flex-col gap-4">
@@ -73,10 +87,17 @@ const WhyChooseUs = () => {
             </div>
 
             {/* Reasons grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              variants={staggerContainer()}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+            >
               {reasons.map((r, i) => (
-                <div
+                <motion.div
                   key={i}
+                  variants={fadeUp}
                   className="group flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-[0_4px_20px_rgba(0,0,0,0.07)] transition-all duration-200"
                 >
                   <span className="mt-0.5 w-8 h-8 rounded-lg bg-primary/8 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-200">
@@ -86,14 +107,20 @@ const WhyChooseUs = () => {
                     <p className="text-sm font-bold text-[#11141B] leading-snug">{r.title}</p>
                     <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{r.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* ── Right: image ── */}
-          <div className="lg:w-1/2 lg:sticky lg:top-28 w-full">
+          <motion.div
+            className="lg:w-1/2 lg:sticky lg:top-28 w-full"
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+          >
             <div className="relative rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
               <img
                 src={whyChooseImg}
@@ -119,12 +146,12 @@ const WhyChooseUs = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
       <Newsletter />
-    </section>
+    </motion.section>
   );
 };
 

@@ -30,7 +30,7 @@ const Profile = () => {
 
       {/* Page title */}
       <div className="flex items-center gap-2">
-        <MdPerson size={30} className="text-[#62826B]" />
+        <MdPerson size={30} className="text-[var(--color-secondary)]" />
         <h1 className="text-3xl font-bold text-[#11141B]">Profile</h1>
       </div>
 
@@ -38,7 +38,7 @@ const Profile = () => {
 
         {/* Left: avatar card */}
         <div className="bg-white rounded-2xl border border-gray-100 p-8 flex flex-col items-center gap-4 text-center">
-          <div className="w-24 h-24 rounded-full bg-[#62826B] flex items-center justify-center text-white text-3xl font-bold">
+          <div className="w-24 h-24 rounded-full bg-[var(--color-secondary)] flex items-center justify-center text-white text-3xl font-bold">
             {initials}
           </div>
           <div>
@@ -46,7 +46,7 @@ const Profile = () => {
             <p className="text-sm text-gray-400 mt-1">{user?.email || '—'}</p>
           </div>
           {user?.role && (
-            <span className="px-4 py-1.5 rounded-full bg-[#62826B]/10 text-[#62826B] text-sm font-medium capitalize">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] text-sm font-medium capitalize">
               {user.role}
             </span>
           )}
@@ -69,7 +69,7 @@ const Profile = () => {
                 { icon: <MdVerifiedUser size={18} />,  label: 'Role',        value: user?.role },
               ].map(f => (
                 <div key={f.label} className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
-                  <span className="text-[#62826B] mt-0.5 shrink-0">{f.icon}</span>
+                  <span className="text-[var(--color-secondary)] mt-0.5 shrink-0">{f.icon}</span>
                   <div>
                     <p className="text-xs text-gray-400 uppercase tracking-wide">{f.label}</p>
                     <p className="text-sm font-semibold text-[#11141B] mt-0.5 capitalize">{f.value || '—'}</p>
@@ -82,12 +82,12 @@ const Profile = () => {
           <div className="bg-white rounded-2xl border border-gray-100 p-6">
             <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-4">Activity</h2>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-[#62826B]/5 text-center">
-                <p className="text-2xl font-bold text-[#62826B]">{totalPosts}</p>
+              <div className="p-4 rounded-xl bg-[var(--color-secondary)]/5 text-center">
+                <p className="text-2xl font-bold text-[var(--color-secondary)]">{totalPosts}</p>
                 <p className="text-xs text-gray-400 mt-1">Posts Published</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#62826B]/5 text-center">
-                <p className="text-lg font-bold text-[#62826B]">{lastPostDate}</p>
+              <div className="p-4 rounded-xl bg-[var(--color-secondary)]/5 text-center">
+                <p className="text-lg font-bold text-[var(--color-secondary)]">{lastPostDate}</p>
                 <p className="text-xs text-gray-400 mt-1">Last Post</p>
               </div>
             </div>
@@ -100,3 +100,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

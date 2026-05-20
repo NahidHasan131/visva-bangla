@@ -5,3 +5,4 @@ const TrainerManager = () => {
 };
 
 export default TrainerManager;
+

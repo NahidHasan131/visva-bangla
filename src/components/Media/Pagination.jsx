@@ -22,28 +22,30 @@ const Pagination = ({ page, totalPages, total, label, onPageChange, limit }) => 
         <button
           onClick={() => handleChange(Math.max(1, page - 1))}
           disabled={page === 1}
-          className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-[#62826B] hover:text-[#FFEFC5] hover:border-[#62826B] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+          className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-secondary hover:text-white hover:border-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
         >
           ← Prev
         </button>
+
         {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
           <button
             key={p}
             onClick={() => handleChange(p)}
             className="w-9 h-9 rounded-full text-sm font-medium border transition-all duration-200"
             style={{
-              backgroundColor: page === p ? '#62826B' : 'white',
-              color: page === p ? '#FFEFC5' : '#11141B',
-              borderColor: page === p ? '#62826B' : '#e5e7eb',
+              backgroundColor: page === p ? 'var(--color-secondary)' : 'white',
+              color:           page === p ? '#ffffff' : '#11141B',
+              borderColor:     page === p ? 'var(--color-secondary)' : '#e5e7eb',
             }}
           >
             {p}
           </button>
         ))}
+
         <button
           onClick={() => handleChange(Math.min(totalPages, page + 1))}
           disabled={page === totalPages}
-          className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-[#62826B] hover:text-[#FFEFC5] hover:border-[#62826B] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+          className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-secondary hover:text-white hover:border-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
         >
           Next →
         </button>

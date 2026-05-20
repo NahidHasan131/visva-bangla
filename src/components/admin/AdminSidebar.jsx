@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   MdDashboard, MdArticle, MdVideoLibrary, MdAudiotrack,
@@ -8,6 +7,7 @@ import { TbLayoutSidebarLeftCollapse, TbLayoutSidebarLeftExpand } from 'react-ic
 import { HiHome } from 'react-icons/hi';
 import { IoClose } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
+import visvaBangala from '../../assets/logo/visva-bangala.png';
 
 const baseNavItems = [
   { label: 'Dashboard',  path: '/admin',           icon: <MdDashboard size={20} />,    end: true },
@@ -38,42 +38,51 @@ const AdminSidebar = ({ open, onToggle }) => {
   return (
     <>
       {open && (
-        <div className="fixed inset-0 bg-black/30 z-20 lg:hidden" onClick={onToggle} />
+        <div className="fixed inset-0 bg-black/40 z-20 lg:hidden" onClick={onToggle} />
       )}
 
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-30
-        h-screen bg-white border-r border-gray-200 flex flex-col shrink-0
+        h-screen flex flex-col shrink-0
         transition-all duration-300 ease-in-out
+        bg-[#0d1117] border-r border-white/10
         ${open ? 'w-60 translate-x-0' : '-translate-x-full lg:translate-x-0 lg:w-16'}
       `}>
-        <div className="flex items-center border-b border-gray-200 h-16 px-4 justify-between">
-          <span className={`text-[#11141B] font-bold text-base whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
-            🌿 Shunno Admin
-          </span>
-          <button onClick={onToggle}
-            className="text-gray-400 hover:text-[#62826B] transition-colors shrink-0 hidden lg:block"
-            title={open ? 'Collapse sidebar' : 'Expand sidebar'}>
-            {open ? <TbLayoutSidebarLeftCollapse size={22} /> : <TbLayoutSidebarLeftExpand size={22} />}
+        {/* Logo */}
+        <div className="flex items-center h-16 px-4 justify-between border-b border-white/8">
+          <div className={`flex items-center gap-2 overflow-hidden transition-all duration-300 ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
+            <img src={visvaBangala} alt="Visva Bangla" className="h-7 w-auto object-contain shrink-0" />
+            <span className="text-white font-bold text-sm uppercase whitespace-nowrap">VisvaBangla</span>
+          </div>
+          <button
+            onClick={onToggle}
+            className="text-white/50 hover:text-white transition-colors shrink-0 hidden lg:block"
+            title={open ? 'Collapse' : 'Expand'}
+          >
+            {open ? <TbLayoutSidebarLeftCollapse size={20} /> : <TbLayoutSidebarLeftExpand size={20} />}
           </button>
-          <button onClick={onToggle}
-            className="text-gray-400 hover:text-[#62826B] transition-colors shrink-0 lg:hidden">
-            <IoClose size={22} />
+          <button onClick={onToggle} className="text-white/40 hover:text-white transition-colors shrink-0 lg:hidden">
+            <IoClose size={20} />
           </button>
         </div>
 
+        {/* Nav */}
         <nav className="flex-1 py-3 overflow-y-auto overflow-x-hidden">
           {navItems.map(item => (
-            <NavLink key={item.path} to={item.path} end={item.end}
+            <NavLink
+              key={item.path}
+              to={item.path}
+              end={item.end}
               title={!open ? item.label : undefined}
               onClick={() => { if (window.innerWidth < 1024) onToggle(); }}
               className={({ isActive }) =>
-                `flex items-center h-11 px-4 text-sm font-medium transition-colors duration-200 gap-3 ${
+                `flex items-center h-11 px-4 text-sm font-medium transition-all duration-200 gap-3 mx-2 rounded-xl mb-0.5 ${
                   isActive
-                    ? 'bg-[#62826B]/10 text-[#62826B] border-r-2 border-[#62826B]'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-[#11141B]'
+                    ? 'bg-secondary text-white shadow-[0_2px_12px_rgba(6,164,167,0.35)]'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`
-              }>
+              }
+            >
               <span className="shrink-0">{item.icon}</span>
               <span className={`whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
                 {item.label}
@@ -82,9 +91,13 @@ const AdminSidebar = ({ open, onToggle }) => {
           ))}
         </nav>
 
-        <div className="border-t border-gray-200 py-3">
-          <NavLink to="/" title={!open ? 'Back to Site' : undefined}
-            className="flex items-center h-11 px-4 gap-3 text-gray-600 hover:text-[#62826B] transition-colors">
+        {/* Bottom */}
+        <div className="border-t border-white/10 py-3">
+          <NavLink
+            to="/"
+            title={!open ? 'Back to Site' : undefined}
+            className="flex items-center h-11 px-4 gap-3 mx-2 rounded-xl text-white/60 hover:bg-white/8 hover:text-white transition-all duration-200"
+          >
             <HiHome size={20} className="shrink-0" />
             <span className={`text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
               Back to Site

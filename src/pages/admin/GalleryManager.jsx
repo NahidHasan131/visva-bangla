@@ -96,14 +96,14 @@ const GalleryManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdPhotoLibrary size={30} className="text-[#62826B]" />
+            <MdPhotoLibrary size={30} className="text-[var(--color-secondary)]" />
             <h1 className="text-3xl font-bold text-[#11141B]">Gallery</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">{filtered.length} images total</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
             <MdAdd size={18} /> Add Image
           </button>
         )}
@@ -114,7 +114,7 @@ const GalleryManager = () => {
         <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input type="text" placeholder="Search gallery..."
           value={search} onChange={e => { setSearch(e.target.value); setPage(1); }}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors bg-white" />
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
       </div>
 
       {/* Grid */}
@@ -167,12 +167,12 @@ const GalleryManager = () => {
 
             <AdminFormField label="Title" error={errors.title?.message}>
               <input {...register('title')} placeholder="Image title"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
             <AdminFormField label="Location" error={errors.location?.message}>
               <input {...register('location')} placeholder="e.g. Dhaka Studio"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
             <div className="flex items-center justify-end gap-3 pt-2">
@@ -181,7 +181,7 @@ const GalleryManager = () => {
                 Cancel
               </button>
               <button type="submit" disabled={creating || updating}
-                className="px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
+                className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
                 {creating || updating ? 'Saving...' : editingItem ? 'Save Changes' : 'Add Image'}
               </button>
             </div>
@@ -211,3 +211,4 @@ const GalleryManager = () => {
 };
 
 export default GalleryManager;
+

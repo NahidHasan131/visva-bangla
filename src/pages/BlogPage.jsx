@@ -58,10 +58,10 @@ const BlogPage = () => {
             {/* Featured post */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-8 h-0.5 bg-[#62826B]" />
-                <span className="text-sm font-medium text-[#62826B]">Featured Post</span>
+                <span className="w-8 h-0.5 bg-secondary" />
+                <span className="text-sm font-medium text-secondary">Featured Post</span>
               </div>
-              <div className="grid md:grid-cols-2 gap-0 items-stretch bg-[#F0F7F2] rounded-3xl overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0 items-stretch bg-secondary/8 rounded-3xl overflow-hidden">
                 <NavLink to={`/blog/${featured._id}`} className="block overflow-hidden h-72 md:h-auto">
                   <img src={featured.image} alt={featured.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -73,13 +73,13 @@ const BlogPage = () => {
                     <span>{formatDate(featured.createdAt)}</span>
                   </div>
                   <NavLink to={`/blog/${featured._id}`}>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-[#11141B] leading-tight hover:text-[#62826B] transition-colors duration-300">
+                    <h2 className="text-2xl lg:text-3xl font-bold text-[#11141B] leading-tight hover:text-secondary transition-colors duration-300">
                       {featured.title}
                     </h2>
                   </NavLink>
                   <p className="text-gray-500 leading-relaxed line-clamp-3">{featured.content}</p>
                   <NavLink to={`/blog/${featured._id}`}
-                    className="self-start flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium hover:bg-[#11141B] transition-colors duration-300">
+                    className="self-start flex items-center gap-2 px-6 py-2.5 rounded-full bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition-colors duration-300">
                     Read More <MdArrowForward size={16} />
                   </NavLink>
                 </div>
@@ -96,7 +96,7 @@ const BlogPage = () => {
                   <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input type="text" placeholder="Search posts..."
                     value={search} onChange={e => { setSearch(e.target.value); setPage(1); }}
-                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors bg-white" />
+                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-secondary transition-colors bg-white" />
                 </div>
 
                 {filteredRest.length === 0 && (
@@ -125,7 +125,7 @@ const BlogPage = () => {
                           <img src={b.image} alt={b.title} className="w-16 h-16 rounded-xl object-cover" />
                         </NavLink>
                         <div className="flex flex-col gap-1 min-w-0">
-                          <NavLink to="/blog" className="text-sm font-medium text-[#11141B] hover:text-[#62826B] transition-colors leading-snug line-clamp-2">
+                          <NavLink to="/blog" className="text-sm font-medium text-[#11141B] hover:text-primary transition-colors leading-snug line-clamp-2">
                             {b.title}
                           </NavLink>
                           <span className="text-xs text-gray-400">{formatDate(b.createdAt)}</span>
@@ -138,9 +138,9 @@ const BlogPage = () => {
                 {/* CTA */}
                 <div className="bg-[#11141B] rounded-2xl p-6 flex flex-col gap-4">
                   <h4 className="text-white font-bold text-lg">Start Your Journey</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">Join thousands of members and transform your life with yoga.</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">Join our free meditation sessions and spiritual education programs.</p>
                   <NavLink to="/contact"
-                    className="text-center py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium hover:opacity-80 transition-opacity">
+                    className="text-center py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-opacity">
                     Join Free Class
                   </NavLink>
                 </div>

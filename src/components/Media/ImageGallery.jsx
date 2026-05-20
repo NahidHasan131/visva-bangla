@@ -44,21 +44,24 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
 
   return (
     <div>
-      {/* Tag filter — only show if tags provided */}
+      {/* Tag filter */}
       {tags && tags.length > 0 && (
-      <div className="flex flex-wrap gap-2 mb-10">
-        {tags.map(tag => (
-          <button key={tag} onClick={() => handleTagChange(tag)}
-            className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer"
-            style={{
-              backgroundColor: activeTag === tag ? '#62826B' : 'white',
-              color: activeTag === tag ? '#FFEFC5' : '#11141B',
-              borderColor: activeTag === tag ? '#62826B' : '#e5e7eb',
-            }}>
-            {tag}
-          </button>
-        ))}
-      </div>
+        <div className="flex flex-wrap gap-2 mb-10">
+          {tags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => handleTagChange(tag)}
+              className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer"
+              style={{
+                backgroundColor: activeTag === tag ? 'var(--color-secondary)' : 'white',
+                color:           activeTag === tag ? '#ffffff' : '#11141B',
+                borderColor:     activeTag === tag ? 'var(--color-secondary)' : '#e5e7eb',
+              }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
       )}
 
       {/* Masonry grid */}
@@ -66,13 +69,20 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
         {paged.map((img) => {
           const globalIndex = filtered.indexOf(img);
           return (
-            <div key={img.id} onClick={() => setLightbox(globalIndex)}
-              className="break-inside-avoid group relative rounded-2xl overflow-hidden cursor-pointer">
+            <div
+              key={img.id}
+              onClick={() => setLightbox(globalIndex)}
+              className="break-inside-avoid group relative rounded-2xl overflow-hidden cursor-pointer"
+            >
               <img src={img.src} alt={img.title} className="w-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-[#11141B]/0 group-hover:bg-[#11141B]/50 transition-all duration-300 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100">
-                <span className="self-start px-2 py-0.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-xs font-medium mb-2">{img.tag}</span>
+                {img.tag && (
+                  <span className="self-start px-2 py-0.5 rounded-full bg-secondary text-white text-xs font-medium mb-2">{img.tag}</span>
+                )}
                 <p className="text-white font-semibold text-sm leading-snug">{img.title}</p>
-                <p className="text-gray-300 text-xs mt-1 flex items-center gap-1"><MdLocationOn size={12} /> {img.location}</p>
+                {img.location && (
+                  <p className="text-gray-300 text-xs mt-1 flex items-center gap-1"><MdLocationOn size={12} /> {img.location}</p>
+                )}
               </div>
             </div>
           );
@@ -85,8 +95,10 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
 
       {/* Lightbox */}
       {activeImg && (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={(e) => e.target === e.currentTarget && closeLightbox()}>
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={(e) => e.target === e.currentTarget && closeLightbox()}
+        >
           <button onClick={closeLightbox}
             className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
             <IoClose size={20} />
@@ -95,18 +107,26 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
             className="absolute left-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
             <MdArrowBackIos size={16} />
           </button>
+
           <div className="flex flex-col lg:flex-row gap-6 max-w-5xl w-full max-h-[90vh]">
             <img src={activeImg.src} alt={activeImg.title} className="lg:flex-1 max-h-[70vh] lg:max-h-[85vh] object-contain rounded-2xl" />
             <div className="lg:w-64 flex flex-col gap-4 text-white shrink-0 justify-center">
-              <span className="self-start px-3 py-1 rounded-full bg-[#62826B] text-[#FFEFC5] text-xs font-medium">{activeImg.tag}</span>
+              {activeImg.tag && (
+                <span className="self-start px-3 py-1 rounded-full bg-secondary text-white text-xs font-medium">{activeImg.tag}</span>
+              )}
               <h3 className="text-xl font-bold">{activeImg.title}</h3>
               <div className="flex flex-col gap-3 text-sm text-gray-300">
-                <div className="flex items-center gap-2"><MdLocationOn size={16} className="text-[#62826B] shrink-0" />{activeImg.location}</div>
-                <div className="flex items-center gap-2"><MdCalendarToday size={16} className="text-[#62826B] shrink-0" />{activeImg.date}</div>
+                {activeImg.location && (
+                  <div className="flex items-center gap-2"><MdLocationOn size={16} className="text-secondary shrink-0" />{activeImg.location}</div>
+                )}
+                {activeImg.date && (
+                  <div className="flex items-center gap-2"><MdCalendarToday size={16} className="text-secondary shrink-0" />{activeImg.date}</div>
+                )}
               </div>
               <p className="text-xs text-gray-400 mt-2">{lightbox + 1} / {filtered.length}</p>
             </div>
           </div>
+
           <button onClick={nextImg}
             className="absolute right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
             <MdArrowForwardIos size={16} />

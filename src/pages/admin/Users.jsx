@@ -48,7 +48,7 @@ const Users = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdPeople size={30} className="text-[#62826B]" />
+            <MdPeople size={30} className="text-[var(--color-secondary)]" />
             <h1 className="text-3xl font-bold text-[#11141B]">Users</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">{filtered.length} users total</p>
@@ -60,7 +60,7 @@ const Users = () => {
         <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input type="text" placeholder="Search by name or email..."
           value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors bg-white" />
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
       </div>
 
       {/* Table */}
@@ -75,7 +75,7 @@ const Users = () => {
               <th className="px-5 py-3.5 text-right font-semibold text-gray-500 text-xs uppercase tracking-wide">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-50">
+          <tbody className="divide-y divide-gray-200">
             {isLoading && (
               <tr><td colSpan={5} className="text-center py-12 text-gray-400">Loading...</td></tr>
             )}
@@ -83,7 +83,7 @@ const Users = () => {
               <tr><td colSpan={5} className="text-center py-12 text-gray-400">No users found.</td></tr>
             )}
             {filtered.map(user => (
-              <tr key={user._id} className="hover:bg-gray-50 transition-colors">
+              <tr key={user._id} className="hover:bg-gray-100 transition-colors">
                 <td className="px-5 py-4">
                   <p className="font-medium text-[#11141B]">{user.name}</p>
                   <p className="text-xs text-gray-400 mt-0.5">{user.email}</p>
@@ -91,7 +91,7 @@ const Users = () => {
                 <td className="px-5 py-4 text-gray-500 hidden md:table-cell">{user.mobile || '—'}</td>
                 <td className="px-5 py-4">
                   <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize ${
-                    user.role === 'admin' ? 'bg-[#62826B]/10 text-[#62826B]' : 'bg-gray-100 text-gray-600'
+                    user.role === 'admin' ? 'bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]' : 'bg-gray-100 text-gray-600'
                   }`}>
                     {user.role}
                   </span>
@@ -103,7 +103,7 @@ const Users = () => {
                   <div className="flex items-center justify-end gap-2">
                     <button
                       onClick={() => setRoleModal({ id: user._id, name: user.name, currentRole: user.role })}
-                      className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors"
+                      className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors"
                       title="Change role"
                     >
                       <MdAdminPanelSettings size={18} />
@@ -133,7 +133,7 @@ const Users = () => {
             <button
               onClick={() => handleRoleChange('admin')}
               disabled={updating || roleModal.currentRole === 'admin'}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#62826B] text-[#62826B] font-medium text-sm hover:bg-[#62826B] hover:text-[#FFEFC5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[var(--color-secondary)] text-[var(--color-secondary)] font-medium text-sm hover:bg-[var(--color-secondary)] hover:text-[#ffffff] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <MdAdminPanelSettings size={18} /> Make Admin
             </button>
@@ -170,3 +170,4 @@ const Users = () => {
 };
 
 export default Users;
+

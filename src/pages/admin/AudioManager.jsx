@@ -97,14 +97,14 @@ const AudioManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdAudiotrack size={30} className="text-[#62826B]" />
+            <MdAudiotrack size={30} className="text-[var(--color-secondary)]" />
             <h1 className="text-3xl font-bold text-[#11141B]">Audio</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">{filtered.length} tracks total</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
             <MdAdd size={18} /> Add Audio
           </button>
         )}
@@ -115,7 +115,7 @@ const AudioManager = () => {
         <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input type="text" placeholder="Search audio..."
           value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors bg-white" />
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
       </div>
 
       {/* List */}
@@ -128,10 +128,10 @@ const AudioManager = () => {
           <div key={item._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex items-center gap-4 p-4">
 
             {/* Thumbnail */}
-            <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[#62826B]/10 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[var(--color-secondary)]/10 flex items-center justify-center">
               {item.thumbnail
                 ? <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
-                : <MdMusicNote size={24} className="text-[#62826B]" />}
+                : <MdMusicNote size={24} className="text-[var(--color-secondary)]" />}
             </div>
 
             {/* Info */}
@@ -139,9 +139,9 @@ const AudioManager = () => {
               <p className="font-semibold text-[#11141B] line-clamp-1">{item.title}</p>
               <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{item.description}</p>
               <div className="flex items-center gap-1 mt-1">
-                <MdLink size={12} className="text-[#62826B]" />
+                <MdLink size={12} className="text-[var(--color-secondary)]" />
                 <a href={item.audioUrl} target="_blank" rel="noreferrer"
-                  className="text-xs text-[#62826B] hover:underline truncate max-w-xs">
+                  className="text-xs text-[var(--color-secondary)] hover:underline truncate max-w-xs">
                   {item.audioUrl}
                 </a>
               </div>
@@ -152,7 +152,7 @@ const AudioManager = () => {
               {isAdmin && (
                 <>
                   <button onClick={() => openEdit(item)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
+                    className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">
                     <MdEdit size={18} />
                   </button>
                   <button onClick={() => setDeleteId(item._id)}
@@ -179,17 +179,17 @@ const AudioManager = () => {
 
             <AdminFormField label="Title" error={errors.title?.message}>
               <input {...register('title')} placeholder="Audio title"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
             <AdminFormField label="Description" error={errors.description?.message}>
               <textarea {...register('description')} rows={3} placeholder="Short description..."
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors resize-none" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors resize-none" />
             </AdminFormField>
 
             <AdminFormField label="Audio URL" error={errors.audioUrl?.message}>
               <input {...register('audioUrl')} placeholder="https://example.com/audio.mp3"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#62826B] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
             <div className="flex items-center justify-end gap-3 pt-2">
@@ -198,7 +198,7 @@ const AudioManager = () => {
                 Cancel
               </button>
               <button type="submit" disabled={creating || updating}
-                className="px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
+                className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
                 {creating || updating ? 'Saving...' : editingItem ? 'Save Changes' : 'Add Audio'}
               </button>
             </div>
@@ -228,3 +228,4 @@ const AudioManager = () => {
 };
 
 export default AudioManager;
+

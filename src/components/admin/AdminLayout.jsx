@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
@@ -7,7 +7,7 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className="flex h-screen bg-[#f7f8fa] overflow-hidden">
       <AdminSidebar open={sidebarOpen} onToggle={() => setSidebarOpen(prev => !prev)} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader onMenuClick={() => setSidebarOpen(prev => !prev)} />

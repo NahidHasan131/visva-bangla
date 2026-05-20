@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdNotifications, MdAccountCircle, MdLogout, MdKeyboardArrowDown, MdPerson } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,50 +19,64 @@ const AdminHeader = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 h-16 px-6 flex items-center justify-between shrink-0">
-      <button onClick={onMenuClick} className="lg:hidden text-gray-500 hover:text-[#62826B] transition-colors" aria-label="Open menu">
+    <header className="bg-white border-b border-gray-100 h-16 px-6 flex items-center justify-between shrink-0 shadow-sm">
+      <button
+        onClick={onMenuClick}
+        className="lg:hidden text-gray-500 hover:text-secondary transition-colors"
+        aria-label="Open menu"
+      >
         <RxHamburgerMenu size={22} />
       </button>
       <div className="hidden lg:block" />
 
       <div className="flex items-center gap-4">
-        <button className="text-gray-500 hover:text-[#62826B] transition-colors relative">
+        {/* Notification */}
+        <button className="relative text-gray-400 hover:text-secondary transition-colors">
           <MdNotifications size={22} />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#62826B] rounded-full text-[10px] text-white flex items-center justify-center">3</span>
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full text-[10px] text-white flex items-center justify-center font-bold">
+            3
+          </span>
         </button>
 
         {/* User dropdown */}
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(p => !p)}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#62826B] transition-colors"
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-secondary transition-colors"
           >
-            <MdAccountCircle size={28} className="text-[#62826B]" />
+            <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white font-bold text-sm shrink-0">
+              {user?.name?.charAt(0)?.toUpperCase() || 'A'}
+            </div>
             <span className="font-medium hidden sm:block">{user?.name || 'Admin'}</span>
             {user?.role && (
-              <span className="hidden sm:block text-xs px-2 py-0.5 rounded-full bg-[#62826B]/10 text-[#62826B] font-medium capitalize">
+              <span className="hidden sm:block text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-semibold capitalize">
                 {user.role}
               </span>
             )}
-            <MdKeyboardArrowDown size={16} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+            <MdKeyboardArrowDown
+              size={16}
+              className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+            />
           </button>
 
           {dropdownOpen && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setDropdownOpen(false)} />
-              <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 z-20 overflow-hidden">
-                <div className="px-4 py-3 border-b border-gray-100">
-                  <p className="font-semibold text-[#11141B] text-sm">{user?.name || 'Admin'}</p>
+              <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-gray-100 z-20 overflow-hidden">
+                <div className="px-4 py-3 border-b border-gray-100 bg-secondary/5">
+                  <p className="font-bold text-[#11141B] text-sm">{user?.name || 'Admin'}</p>
                   <p className="text-xs text-gray-400 mt-0.5">{user?.email || ''}</p>
                 </div>
-                <NavLink to="/admin/profile"
+                <NavLink
+                  to="/admin/profile"
                   onClick={() => setDropdownOpen(false)}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-                  <MdPerson size={16} /> View Profile
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  <MdPerson size={16} className="text-secondary" /> View Profile
                 </NavLink>
                 <button
                   onClick={handleSignOut}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-primary hover:bg-primary/5 transition-colors"
                 >
                   <MdLogout size={16} /> Sign Out
                 </button>
