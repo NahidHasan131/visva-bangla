@@ -5,8 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import { MdOutlineRateReview } from 'react-icons/md';
 import { GiLotus } from 'react-icons/gi';
 import { toast } from 'sonner';
-import { motion } from 'framer-motion';
-import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
+import { fadeIn, fadeUp, fadeLeft, fadeRight, viewport } from '../../lib/motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -61,7 +60,7 @@ const saveReviews = (reviews) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
 };
 
-// ── Star picker ──────────────────────────────────────────────────────────────
+// ── Star picker ───
 const StarPicker = ({ value, onChange }) => (
   <div className="flex items-center gap-1">
     {[1, 2, 3, 4, 5].map((s) => (
@@ -81,7 +80,7 @@ const StarPicker = ({ value, onChange }) => (
   </div>
 );
 
-// ── Single review card ───────────────────────────────────────────────────────
+// ── Single review card ───
 const ReviewCard = ({ review }) => (
   <div className="flex flex-col gap-4 bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] h-full">
     {/* Stars */}
@@ -116,7 +115,7 @@ const ReviewCard = ({ review }) => (
   </div>
 );
 
-// ── Main component ───────────────────────────────────────────────────────────
+// ── Main component ───
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: '', role: '', text: '', stars: 5 });

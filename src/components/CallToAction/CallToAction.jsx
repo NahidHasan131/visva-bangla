@@ -52,7 +52,7 @@ const CallToAction = () => {
             <span className="text-secondary">Meditation & Spiritual Freedom</span>
           </h2>
           <p className="text-gray-300 text-base leading-relaxed max-w-xl mx-auto">
-            Join Bishwabangla Foundation's free meditation sessions, spiritual education programs, and weekly Sufi philosophy classes — open to all, regardless of religion, class, or background.
+            Join VisvaBangla Foundation's free meditation sessions, spiritual education programs, and weekly Sufi philosophy classes — open to all, regardless of religion, class, or background.
           </p>
         </motion.div>
 

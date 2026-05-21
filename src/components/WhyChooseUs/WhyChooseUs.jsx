@@ -82,7 +82,7 @@ const WhyChooseUs = () => {
                 <span className="text-primary">Truth & Humanity</span>
               </h2>
               <p className="text-gray-500 text-[15px] leading-relaxed">
-                Bishwabangla Foundation is not just an organization — it is a movement toward a peaceful, compassionate, and non-communal world through free education, meditation, and spiritual guidance.
+                VisvaBangla Foundation is not just an organization — it is a movement toward a peaceful, compassionate, and non-communal world through free education, meditation, and spiritual guidance.
               </p>
             </div>
 
@@ -124,7 +124,7 @@ const WhyChooseUs = () => {
             <div className="relative rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
               <img
                 src={whyChooseImg}
-                alt="Why Choose Bishwabangla Foundation"
+                alt="Why Choose VisvaBangla Foundation"
                 className="w-full h-150 object-cover"
               />
               {/* gradient overlay */}

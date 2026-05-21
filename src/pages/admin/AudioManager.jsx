@@ -10,6 +10,8 @@ import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
 import Pagination from '../../components/Media/Pagination';
+import ViewToggle from '../../components/admin/ViewToggle';
+import useViewMode from '../../lib/useViewMode';
 import { useSearchParams } from 'react-router-dom';
 
 const PER_PAGE = 10;
@@ -28,6 +30,7 @@ const AudioManager = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [deleteId, setDeleteId]     = useState(null);
   const [thumbnail, setThumbnail]   = useState('');
+  const [view, setView]             = useViewMode('audio');
 
   const { data, isLoading } = useGetAudiosQuery();
   const [createAudio, { isLoading: creating }] = useCreateAudioMutation();
@@ -111,58 +114,82 @@ const AudioManager = () => {
       </div>
 
       {/* Search */}
-      <div className="relative">
-        <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input type="text" placeholder="Search audio..."
-          value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1">
+          <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input type="text" placeholder="Search audio..."
+            value={search} onChange={e => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
+        </div>
+        <ViewToggle view={view} onChange={setView} />
       </div>
 
-      {/* List */}
-      <div className="flex flex-col gap-3">
-        {isLoading && <p className="text-center py-12 text-gray-400">Loading...</p>}
+      {/* List / Grid */}
+      <div className={view === 'grid'
+        ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
+        : 'flex flex-col gap-3'
+      }>
+        {isLoading && <p className="text-center py-12 text-gray-400 col-span-full">Loading...</p>}
         {!isLoading && filtered.length === 0 && (
-          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100">No audio found.</div>
+          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100 col-span-full">No audio found.</div>
         )}
         {paged.map(item => (
-          <div key={item._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex items-center gap-4 p-4">
-
-            {/* Thumbnail */}
-            <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[var(--color-secondary)]/10 flex items-center justify-center">
-              {item.thumbnail
-                ? <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
-                : <MdMusicNote size={24} className="text-[var(--color-secondary)]" />}
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-[#11141B] line-clamp-1">{item.title}</p>
-              <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{item.description}</p>
-              <div className="flex items-center gap-1 mt-1">
-                <MdLink size={12} className="text-[var(--color-secondary)]" />
+          view === 'grid' ? (
+            <div key={item._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex flex-col overflow-hidden">
+              <div className="h-36 bg-[var(--color-secondary)]/8 flex items-center justify-center overflow-hidden">
+                {item.thumbnail
+                  ? <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
+                  : <MdMusicNote size={40} className="text-[var(--color-secondary)]/40" />}
+              </div>
+              <div className="p-4 flex flex-col gap-2 flex-1">
+                <p className="font-semibold text-[#11141B] line-clamp-2 text-sm">{item.title}</p>
+                <p className="text-xs text-gray-400 line-clamp-2 flex-1">{item.description}</p>
                 <a href={item.audioUrl} target="_blank" rel="noreferrer"
-                  className="text-xs text-[var(--color-secondary)] hover:underline truncate max-w-xs">
-                  {item.audioUrl}
+                  className="text-xs text-[var(--color-secondary)] hover:underline truncate flex items-center gap-1">
+                  <MdLink size={12} /> {item.audioUrl}
                 </a>
+                {isAdmin && (
+                  <div className="flex items-center gap-1 pt-2 border-t border-gray-100">
+                    <button onClick={() => openEdit(item)}
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">Edit</button>
+                    <button onClick={() => setDeleteId(item._id)}
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">Delete</button>
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* Actions */}
-            <div className="flex items-center gap-1 shrink-0">
-              {isAdmin && (
-                <>
-                  <button onClick={() => openEdit(item)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">
-                    <MdEdit size={18} />
-                  </button>
-                  <button onClick={() => setDeleteId(item._id)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
-                    <MdDelete size={18} />
-                  </button>
-                </>
-              )}
+          ) : (
+            <div key={item._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex items-center gap-4 p-4">
+              <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[var(--color-secondary)]/10 flex items-center justify-center">
+                {item.thumbnail
+                  ? <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
+                  : <MdMusicNote size={24} className="text-[var(--color-secondary)]" />}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-[#11141B] line-clamp-1">{item.title}</p>
+                <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{item.description}</p>
+                <div className="flex items-center gap-1 mt-1">
+                  <MdLink size={12} className="text-[var(--color-secondary)]" />
+                  <a href={item.audioUrl} target="_blank" rel="noreferrer"
+                    className="text-xs text-[var(--color-secondary)] hover:underline truncate max-w-xs">{item.audioUrl}</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 shrink-0">
+                {isAdmin && (
+                  <>
+                    <button onClick={() => openEdit(item)}
+                      className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">
+                      <MdEdit size={18} />
+                    </button>
+                    <button onClick={() => setDeleteId(item._id)}
+                      className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
+                      <MdDelete size={18} />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
+          )
         ))}
       </div>
 

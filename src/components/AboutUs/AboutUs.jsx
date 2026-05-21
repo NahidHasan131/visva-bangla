@@ -57,7 +57,7 @@ const AboutUs = () => {
             Universal Humanitarian Philosophy
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight max-w-2xl">
-            Bishwabangla <span className="text-primary">Foundation</span>
+            VisvaBangla <span className="text-primary">Foundation</span>
           </h2>
           <p className="text-gray-500 text-base leading-relaxed max-w-xl">
             A non-political, non-communal spiritual organization dedicated to meditation,
@@ -108,7 +108,7 @@ const AboutUs = () => {
             viewport={viewport}
           >
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
-              <img src={aboutImg} alt="Bishwabangla Foundation" className="w-full h-[420px] object-cover" />
+              <img src={aboutImg} alt="VisvaBangla Foundation" className="w-full h-[420px] object-cover" />
             </div>
             <div className="absolute -bottom-5 -right-4 bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] px-5 py-4 flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
@@ -138,10 +138,10 @@ const AboutUs = () => {
               </h3>
             </div>
             <p className="text-gray-500 leading-relaxed text-[15px]">
-              Founded by <span className="font-semibold text-[#11141B]">Dr. Shah Syed Hasib Ul Hasan Raza</span>, Bishwabangla Foundation is a registered humanitarian organization under the Ministry of Social Welfare, Government of Bangladesh <span className="text-gray-400">(Reg. No: 1012/15, July 13, 2015)</span>.
+              Founded by <span className="font-semibold text-[#11141B]">Dr. Shah Syed Hasib Ul Hasan Raza</span>, VisvaBangla Foundation is a registered humanitarian organization under the Ministry of Social Welfare, Government of Bangladesh <span className="text-gray-400">(Reg. No: 1012/15, July 13, 2015)</span>.
             </p>
             <p className="text-gray-500 leading-relaxed text-[15px]">
-              Inspired by the timeless wisdom of Sufi philosophy and universal humanitarian values, the foundation is working toward the establishment of the <span className="font-semibold text-[#11141B]">Bishwabangla Spiritual University</span> — a unique, completely free platform for meditation, knowledge, and spiritual education open to all people regardless of religion, class, or background.
+              Inspired by the timeless wisdom of Sufi philosophy and universal humanitarian values, the foundation is working toward the establishment of the <span className="font-semibold text-[#11141B]">VisvaBangla Spiritual University</span> — a unique, completely free platform for meditation, knowledge, and spiritual education open to all people regardless of religion, class, or background.
             </p>
             <ul className="flex flex-col gap-3 mt-1">
               {highlights.map((h, i) => (

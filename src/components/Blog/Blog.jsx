@@ -16,7 +16,7 @@ const Blog = () => {
     img:    b.image,
     tag:    b.tag || 'Blog',
     date:   formatDate(b.createdAt),
-    author: b.writer?.name || 'Bishwabangla Foundation',
+    author: b.writer?.name || 'VisvaBangla Foundation',
     title:  b.title,
     desc:   b.content,
     path:   '/blog',

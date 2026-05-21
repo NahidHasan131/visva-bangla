@@ -119,7 +119,7 @@ const AboutValues = () => {
                 <span className="text-secondary">Humanity & Society</span>
               </h2>
               <p className="text-gray-500 text-[15px] leading-relaxed">
-                According to the constitution approved by the District Social Services Office of the Government of Bangladesh, the aims, objectives, and ideals of Bishwabangla Foundation are as follows:
+                According to the constitution approved by the District Social Services Office of the Government of Bangladesh, the aims, objectives, and ideals of VisvaBangla Foundation are as follows:
               </p>
             </div>
 
@@ -174,7 +174,7 @@ const AboutValues = () => {
               Leadership
             </span>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#11141B]">Current Committee</h2>
-            <p className="text-gray-500 text-sm max-w-md">The dedicated team guiding Bishwabangla Foundation toward its humanitarian and spiritual mission.</p>
+            <p className="text-gray-500 text-sm max-w-md">The dedicated team guiding VisvaBangla Foundation toward its humanitarian and spiritual mission.</p>
           </motion.div>
 
           <motion.div

@@ -58,7 +58,7 @@ const Newsletter = () => {
               <span className="text-white/80">Events & Spiritual Programs</span>
             </h2>
             <p className="text-white/65 text-sm leading-relaxed max-w-md">
-              Subscribe to receive announcements about free meditation sessions, spiritual education programs, weekly classes, and humanitarian activities from Bishwabangla Foundation.
+              Subscribe to receive announcements about free meditation sessions, spiritual education programs, weekly classes, and humanitarian activities from VisvaBangla Foundation.
             </p>
           </div>
 

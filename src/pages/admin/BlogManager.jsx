@@ -11,6 +11,8 @@ import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
 import Pagination from '../../components/Media/Pagination';
+import ViewToggle from '../../components/admin/ViewToggle';
+import useViewMode from '../../lib/useViewMode';
 
 const schema = yup.object({
   title:   yup.string().required('Title is required').min(5, 'Min 5 characters'),
@@ -25,6 +27,7 @@ const BlogManager = () => {
   const [editingPost, setEditingPost] = useState(null);
   const [deleteId, setDeleteId]     = useState(null);
   const [image, setImage]           = useState('');
+  const [view, setView]             = useViewMode('blog');
 
   const { data, isLoading } = useGetBlogsQuery({ page, limit: 10 });
   const [createBlog, { isLoading: creating }] = useCreateBlogMutation();
@@ -94,60 +97,95 @@ const BlogManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdArticle size={30} className="text-[var(--color-secondary)]" />
+            <MdArticle size={30} className="text-(--color-secondary)" />
             <h1 className="text-3xl font-bold text-[#11141B]">Blog Posts</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">{total} posts total</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-(--color-secondary) text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
             <MdAdd size={18} /> New Post
           </button>
         )}
       </div>
 
       {/* Search */}
-      <div className="relative">
-        <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input type="text" placeholder="Search posts..."
-          value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1">
+          <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input type="text" placeholder="Search posts..."
+            value={search} onChange={e => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors bg-white" />
+        </div>
+        <ViewToggle view={view} onChange={setView} />
       </div>
 
-      {/* Post list */}
-      <div className="flex flex-col gap-3">
-        {isLoading && <p className="text-center py-12 text-gray-400">Loading...</p>}
+      {/* Post list / grid */}
+      <div className={view === 'grid'
+        ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
+        : 'flex flex-col gap-3'
+      }>
+        {isLoading && <p className="text-center py-12 text-gray-400 col-span-full">Loading...</p>}
         {!isLoading && filtered.length === 0 && (
-          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100">No posts found.</div>
+          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100 col-span-full">No posts found.</div>
         )}
         {filtered.map(post => (
-          <div key={post._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex items-center gap-4 p-4">
-            <div className="w-20 h-16 rounded-xl overflow-hidden shrink-0 bg-gray-100 flex items-center justify-center">
-              {post.image
-                ? <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                : <MdImage size={24} className="text-gray-300" />}
+          view === 'grid' ? (
+            /* ── Grid card ── */
+            <div key={post._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex flex-col overflow-hidden">
+              <div className="h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+                {post.image
+                  ? <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  : <MdImage size={32} className="text-gray-300" />}
+              </div>
+              <div className="p-4 flex flex-col gap-2 flex-1">
+                <p className="font-semibold text-[#11141B] line-clamp-2 text-sm">{post.title}</p>
+                <p className="text-xs text-gray-400 line-clamp-2 flex-1">{post.content}</p>
+                <p className="text-xs text-gray-500">By {post.writer?.name || '—'} · {new Date(post.createdAt).toLocaleDateString()}</p>
+                {isAdmin && (
+                  <div className="flex items-center gap-1 pt-2 border-t border-gray-100">
+                    <button onClick={() => openEdit(post)}
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-(--color-secondary) hover:bg-secondary/10 transition-colors">
+                      Edit
+                    </button>
+                    <button onClick={() => setDeleteId(post._id)}
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-[#11141B] line-clamp-1">{post.title}</p>
-              <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{post.content}</p>
-              <p className="text-xs text-gray-500 mt-1">By {post.writer?.name || '—'} · {new Date(post.createdAt).toLocaleDateString()}</p>
+          ) : (
+            /* ── List row ── */
+            <div key={post._id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-200 flex items-center gap-4 p-4">
+              <div className="w-20 h-16 rounded-xl overflow-hidden shrink-0 bg-gray-100 flex items-center justify-center">
+                {post.image
+                  ? <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  : <MdImage size={24} className="text-gray-300" />}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-[#11141B] line-clamp-1">{post.title}</p>
+                <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{post.content}</p>
+                <p className="text-xs text-gray-500 mt-1">By {post.writer?.name || '—'} · {new Date(post.createdAt).toLocaleDateString()}</p>
+              </div>
+              <div className="flex items-center gap-1 shrink-0">
+                {isAdmin && (
+                  <>
+                    <button onClick={() => openEdit(post)}
+                      className="p-2 rounded-lg text-gray-400 hover:text-(--color-secondary) hover:bg-secondary/10 transition-colors">
+                      <MdEdit size={18} />
+                    </button>
+                    <button onClick={() => setDeleteId(post._id)}
+                      className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
+                      <MdDelete size={18} />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-            <div className="flex items-center gap-1 shrink-0">
-              {isAdmin && (
-                <>
-                  <button onClick={() => openEdit(post)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">
-                    <MdEdit size={18} />
-                  </button>
-                  <button onClick={() => setDeleteId(post._id)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
-                    <MdDelete size={18} />
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
+          )
         ))}
       </div>
 
@@ -165,12 +203,12 @@ const BlogManager = () => {
 
             <AdminFormField label="Title" error={errors.title?.message}>
               <input {...register('title')} placeholder="Post title"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors" />
             </AdminFormField>
 
             <AdminFormField label="Content" error={errors.content?.message}>
               <textarea {...register('content')} rows={5} placeholder="Write content..."
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors resize-none" />
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors resize-none" />
             </AdminFormField>
 
             <div className="flex items-center justify-end gap-3 pt-2">
@@ -179,7 +217,7 @@ const BlogManager = () => {
                 Cancel
               </button>
               <button type="submit" disabled={creating || updating}
-                className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
+                className="px-5 py-2.5 rounded-xl bg-(--color-secondary) text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
                 {creating || updating ? 'Saving...' : editingPost ? 'Save Changes' : 'Publish Post'}
               </button>
             </div>
