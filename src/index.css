@@ -4,6 +4,10 @@
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --primary:  #FE0000;
   --secondary: #06a4a7;

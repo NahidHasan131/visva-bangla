@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import { MdOutlineRateReview } from 'react-icons/md';
 import { GiLotus } from 'react-icons/gi';
 import { toast } from 'sonner';
+import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, viewport } from '../../lib/motion';
 import 'swiper/css';
 import 'swiper/css/pagination';

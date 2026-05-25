@@ -26,6 +26,9 @@ import TrainerManager from './pages/admin/TrainerManager'
 import EventManager from './pages/admin/EventManager'
 import Profile from './pages/admin/Profile'
 import Users from './pages/admin/Users'
+import OthersPage from './pages/others/OthersPage'
+import Foundation from './pages/others/Foundation'
+import University from './pages/others/University'
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +56,18 @@ function App() {
         { path: '/blog', element: <Blog /> },
         { path: '/blog/:id', element: <BlogDetail /> },
         { path: '/contact', element: <Contact /> },
+        {
+          path: '/others',
+          children: [
+            { path: 'foundation',     element: <Foundation /> },
+            { path: 'university',     element: <University /> },
+            { path: 'publication',    element: <OthersPage title="Publication"           desc="Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy." /> },
+            { path: 'notice',         element: <OthersPage title="Notice"                desc="Official notices and announcements from VisvaBangla Foundation." /> },
+            { path: 'privacy-policy', element: <OthersPage title="Privacy & Policy"      desc="Read our privacy policy and understand how VisvaBangla Foundation handles your information." /> },
+            { path: 'terms',          element: <OthersPage title="Terms & Condition"     desc="Terms and conditions governing the use of VisvaBangla Foundation's services and platforms." /> },
+            { path: 'download',       element: <OthersPage title="Download"              desc="Download resources, forms, research papers, and materials from VisvaBangla Foundation." /> },
+          ]
+        },
       ]
     },
     {

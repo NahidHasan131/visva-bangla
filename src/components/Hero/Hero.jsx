@@ -12,7 +12,7 @@ import banner3   from '../../assets/banner/visvaBanglaBanner-3.jpg';
 const slides = [
   {
     img:     banner1,
-    badge:   'Welcome To Shunno Yoga',
+    badge:   'Welcome To VisvaBangla',
     title:   'Discover the Power of Yoga & Meditation',
     desc:    'Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.',
     ctaPath: '/media',
