@@ -26,6 +26,7 @@ import TrainerManager from './pages/admin/TrainerManager'
 import EventManager from './pages/admin/EventManager'
 import Profile from './pages/admin/Profile'
 import Users from './pages/admin/Users'
+import ReviewManager from './pages/admin/ReviewManager'
 import OthersPage from './pages/others/OthersPage'
 import Foundation from './pages/others/Foundation'
 import University from './pages/others/University'
@@ -94,6 +95,7 @@ function App() {
             { path: 'events',           element: <EventManager /> },
             { path: 'profile',          element: <Profile /> },
             { path: 'users',            element: <Users /> },
+            { path: 'reviews',          element: <ReviewManager /> },
           ]
         }
       ]

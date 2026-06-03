@@ -4,6 +4,7 @@ import { MdPeople, MdSearch, MdDelete, MdAdminPanelSettings, MdPerson } from 're
 import { useGetUsersQuery, useUpdateUserRoleMutation, useDeleteUserMutation } from '../../store/usersApi';
 import AdminModal from '../../components/admin/AdminModal';
 import ViewToggle from '../../components/admin/ViewToggle';
+import useViewMode from '../../lib/useViewMode';
 
 const Users = () => {
   const [search, setSearch]     = useState('');

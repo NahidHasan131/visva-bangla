@@ -1,23 +1,24 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeUp, staggerContainer, viewport } from '../../lib/motion';
 import eventLeft from '../../assets/event-left.jpg';
 import eventRight from '../../assets/event-right.jpg';
 
 const events = [
   {
-    date: 'June 15-17, 2024',
-    title: 'Full Moon Yoga Retreat',
-    location: 'Shanty Wellness Center',
-    desc: 'Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.',
+    date: 'Every Friday',
+    title: 'Free Weekly Meditation Session',
+    location: 'Bishwabangla Foundation, Rajshahi',
+    desc: 'Join our weekly free meditation and spiritual education session open to all — regardless of religion, class, or background.',
     img: eventLeft,
     path: '/contact',
   },
   {
-    date: 'June 15-17, 2024',
-    title: 'Yoga for Beginners',
-    location: 'Shanty Wellness Center',
-    desc: 'Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.',
+    date: 'Every Saturday',
+    title: 'Sufi Philosophy & Spiritual Class',
+    location: 'Bishwabangla Foundation, Rajshahi',
+    desc: 'Weekly thematic classes on humanitarian philosophy, Sufi wisdom, and spiritual knowledge — simplified for all seekers.',
     img: eventRight,
     path: '/contact',
   },
@@ -25,57 +26,68 @@ const events = [
 
 const Events = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#F0F7F2]">
+    <motion.section
+      className="py-16 lg:py-24 bg-[#f7f8fa]"
+      variants={fadeIn} initial="hidden" whileInView="show" viewport={viewport}
+    >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="flex flex-col gap-3">
-            <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800 bg-white">
-              Our Events
+          <motion.div className="flex flex-col gap-3"
+            variants={fadeUp} initial="hidden" whileInView="show" viewport={viewport}>
+            <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
+              Our Programs
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
-              Upcoming Events & <br /> Workshops
+              Upcoming Events &<br />
+              <span className="text-secondary">Weekly Programs</span>
             </h2>
-          </div>
-          <NavLink
-            to="/contact" className="self-start md:self-end px-8 py-3 rounded-full font-medium bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B]  hover:scale-110 transition-all duration-300">
-            All Events
-          </NavLink>
+          </motion.div>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewport}>
+            <NavLink to="/contact"
+              className="self-start md:self-end px-7 py-3 rounded-full text-sm font-semibold bg-secondary text-white hover:bg-secondary/90 transition-all duration-300">
+              All Events
+            </NavLink>
+          </motion.div>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          variants={staggerContainer()} initial="hidden" whileInView="show" viewport={viewport}
+        >
           {events.map((e) => (
-            <div key={e.title} className="bg-white rounded-2xl p-8 flex items-center justify-between gap-4 shadow-sm">
+            <motion.div key={e.title} variants={fadeUp}
+              className="bg-white rounded-2xl p-8 flex items-center justify-between gap-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.10)] transition-shadow duration-300">
 
               {/* Left content */}
-              <div className="space-y-4">
-                <span className="text-sm text-gray-500 bg-[#62826B]/10 px-5 py-2 rounded-full mb-7 inline-block">{e.date}</span>
-                <h3 className="text-2xl font-semibold text-[#11141B]">{e.title}</h3>
-                <div className="flex items-center gap-1 text-[#62826B]/50">
-                  <MdLocationOn size={20} className="text-[#62826B]" />
+              <div className="flex flex-col gap-3">
+                <span className="self-start text-xs font-semibold text-secondary bg-secondary/10 px-4 py-1.5 rounded-full">
+                  {e.date}
+                </span>
+                <h3 className="text-xl font-bold text-[#11141B]">{e.title}</h3>
+                <div className="flex items-center gap-1.5 text-sm text-gray-400">
+                  <MdLocationOn size={16} className="text-secondary shrink-0" />
                   {e.location}
                 </div>
-                <p className=" text-gray-400 leading-relaxed">{e.desc}</p>
+                <p className="text-sm text-gray-500 leading-relaxed">{e.desc}</p>
                 <NavLink to={e.path}
-                  className="self-start font-medium text-[#62826B] underline underline-offset-4 hover:text-[#62826B]/70 transition-colors duration-300 mt-6" >
+                  className="self-start text-sm font-semibold text-secondary underline underline-offset-4 hover:text-secondary/70 transition-colors duration-300">
                   Reserve Your Spot
                 </NavLink>
               </div>
 
               {/* Right image */}
-              <img
-                src={e.img}
-                alt={e.title}
-                className="w-50 h-73 object-cover rounded-xl md:block hidden"
-              />
-            </div>
+              <img src={e.img} alt={e.title}
+                className="w-44 h-64 object-cover rounded-xl hidden md:block shrink-0" />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -66,7 +66,7 @@ const VideoGrid = ({ videos: rawVideos }) => {
                     <button onClick={() => setActiveVideo(video.id)}
                       className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors duration-200">
                       <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
-                        <FaPlay size={18} className="text-[#62826B] ml-1" />
+                        <FaPlay size={18} className="text-secondary ml-1" />
                       </div>
                     </button>
                   </>

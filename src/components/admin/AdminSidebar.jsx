@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import {
   MdDashboard, MdArticle, MdVideoLibrary, MdAudiotrack,
-  MdPhotoLibrary, MdPeople, MdPerson
+  MdPhotoLibrary, MdPeople, MdPerson, MdStar
 } from 'react-icons/md';
 import { TbLayoutSidebarLeftCollapse, TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { HiHome } from 'react-icons/hi';
@@ -15,6 +15,7 @@ const baseNavItems = [
   { label: 'Videos',     path: '/admin/videos',     icon: <MdVideoLibrary size={20} /> },
   { label: 'Audio',      path: '/admin/audio',      icon: <MdAudiotrack size={20} /> },
   { label: 'Gallery',    path: '/admin/gallery',    icon: <MdPhotoLibrary size={20} /> },
+  { label: 'Reviews',    path: '/admin/reviews',    icon: <MdStar size={20} /> },
 ];
 
 const adminOnlyItems = [
