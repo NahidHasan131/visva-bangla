@@ -33,6 +33,7 @@ const ReviewManager = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [deleteId, setDeleteId]       = useState(null);
   const [view, setView]               = useViewMode('reviews');
+  const [filter, setFilter]           = useState('all'); // 'all' | 'approved' | 'pending'
 
   const { data, isLoading } = useGetReviewsQuery();
   const [createReview, { isLoading: creating }] = useCreateReviewMutation();
@@ -42,10 +43,17 @@ const ReviewManager = () => {
   const isAdmin = currentUser?.role === 'admin';
 
   const allReviews = data?.data || [];
-  const filtered = allReviews.filter(r =>
+  const searchFiltered = allReviews.filter(r =>
     (r.title || r.name || '').toLowerCase().includes(search.toLowerCase()) ||
     (r.description || '').toLowerCase().includes(search.toLowerCase())
   );
+  const filtered = searchFiltered.filter(r => {
+    if (filter === 'approved') return r.approve === true;
+    if (filter === 'pending')  return r.approve !== true;
+    return true;
+  });
+  const approvedCount = allReviews.filter(r => r.approve === true).length;
+  const pendingCount  = allReviews.filter(r => r.approve !== true).length;
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -209,6 +217,21 @@ const ReviewManager = () => {
               <span className="text-xs text-gray-400 shrink-0 hidden md:block">
                 {new Date(item.createdAt).toLocaleDateString()}
               </span>
+              {/* Approve toggle */}
+              <button
+                onClick={() => handleApproveToggle(item)}
+                title={item.approve ? 'Click to unapprove' : 'Click to approve'}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all duration-200 ${
+                  item.approve
+                    ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
+                    : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                }`}
+              >
+                {item.approve
+                  ? <><MdCheckCircle size={14} /> Approved</>
+                  : <><MdCancel size={14} /> Pending</>
+                }
+              </button>
               {isAdmin && (
                 <div className="flex items-center gap-1 shrink-0">
                   <button onClick={() => openEdit(item)}
