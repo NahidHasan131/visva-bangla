@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 * {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  /* font-family: "Plus Jakarta Sans", sans-serif; */
+   font-family: "Noto Sans Display", sans-serif;
 }
 
 html {
@@ -10,7 +11,8 @@ html {
 
 :root {
   --primary:  #FE0000;
-  --secondary: #06a4a7;
+  /* --secondary: #06a4a7; */
+  --secondary: #205158;
 }
 
 @theme inline {

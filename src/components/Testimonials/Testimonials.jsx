@@ -56,7 +56,7 @@ const Testimonials = () => {
   const [createReview, { isLoading: submitting }] = useCreateReviewMutation();
 
   const reviews = data?.data || [];
-  const approvedReviews = reviews.filter(r => r.approve === true);
+  const approvedReviews = reviews.filter(r => r.approved === true);
 
   const avgRating = approvedReviews.length
     ? (approvedReviews.reduce((s, r) => s + (r.rating || 0), 0) / approvedReviews.length).toFixed(1)
@@ -80,7 +80,7 @@ const Testimonials = () => {
         role:        form.role.trim() || 'Community Member',
         rating:      String(form.stars),
         description: form.text.trim(),
-        approve:     false,
+        approved:     false,
       }).unwrap();
       setForm({ name: '', role: '', text: '', stars: 5 });
       setErrors({});

@@ -38,7 +38,7 @@ const visionPoints = [
 const AboutVision = () => {
   return (
     <motion.section
-      className="py-16 lg:py-24 bg-[#f7f8fa]"
+      className="py-14 lg:py-20 bg-[#f7f8fa]"
       variants={fadeIn}
       initial="hidden"
       whileInView="show"
@@ -57,8 +57,8 @@ const AboutVision = () => {
           >
 
             <div className="flex flex-col gap-3">
-              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
+              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 Our Vision
               </span>
               <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
@@ -90,7 +90,7 @@ const AboutVision = () => {
             >
               {visionPoints.map((v, i) => (
                 <motion.li key={i} variants={fadeUp} className="flex items-start gap-4 group">
-                  <span className="mt-0.5 w-9 h-9 rounded-xl bg-white border border-gray-200 text-secondary flex items-center justify-center shrink-0 shadow-sm group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-200">
+                  <span className="mt-0.5 w-9 h-9 rounded-xl bg-white border border-gray-200 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-200">
                     {v.icon}
                   </span>
                   <div>
@@ -110,11 +110,11 @@ const AboutVision = () => {
             whileInView="show"
             viewport={viewport}
           >
-            <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
+            <div className="rounded-3xl sticky overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
               <img
                 src={visionImg}
                 alt="Our vision"
-                className="w-full h-145 object-cover"
+                className="w-full h-160 object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent rounded-3xl" />
             </div>

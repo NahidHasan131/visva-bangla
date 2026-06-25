@@ -41,7 +41,7 @@ const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) =>
 
   return (
     <div
-      className="relative py-16 lg:py-24 overflow-hidden bg-secondary"
+      className="relative py-14 lg:py-20 overflow-hidden bg-secondary"
     >
       {/* blurred circle decorations */}
       <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white/5 blur-3xl" />

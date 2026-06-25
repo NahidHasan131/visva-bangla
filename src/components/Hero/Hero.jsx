@@ -74,7 +74,7 @@ const Hero = () => {
           background: white; opacity: 0.5; width: 8px; height: 8px;
         }
         .swiper-pagination-bullet-active {
-          opacity: 1; width: 24px; border-radius: 4px; background: #06a4a7;
+          opacity: 1; width: 24px; border-radius: 4px; background: #205158;
         }
       `}</style>
 
@@ -96,7 +96,7 @@ const Hero = () => {
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="relative w-full h-[87vh] min-h-125">
+            <div className="relative w-full h-[80vh] min-h-125">
               <img
                 src={slide.img}
                 alt={slide.title}

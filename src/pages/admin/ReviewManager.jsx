@@ -13,9 +13,9 @@ import ViewToggle from '../../components/admin/ViewToggle';
 import useViewMode from '../../lib/useViewMode';
 
 const schema = yup.object({
-  name:        yup.string().required('Name is required').min(2, 'Min 2 characters'),
-  role:        yup.string().required('Role is required'),
-  rating:      yup.number().min(1).max(5).required('Rating is required'),
+  name: yup.string().required('Name is required').min(2, 'Min 2 characters'),
+  role: yup.string().required('Role is required'),
+  rating: yup.number().min(1).max(5).required('Rating is required'),
   description: yup.string().required('Review is required').min(10, 'Min 10 characters'),
 });
 
@@ -28,12 +28,12 @@ const StarDisplay = ({ rating }) => (
 );
 
 const ReviewManager = () => {
-  const [search, setSearch]           = useState('');
-  const [showForm, setShowForm]       = useState(false);
+  const [search, setSearch]  = useState('');
+  const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [deleteId, setDeleteId]       = useState(null);
-  const [view, setView]               = useViewMode('reviews');
-  const [filter, setFilter]           = useState('all'); // 'all' | 'approved' | 'pending'
+  const [deleteId, setDeleteId] = useState(null);
+  const [view, setView] = useViewMode('reviews');
+  const [filter, setFilter] = useState('all'); // 'all' | 'approved' | 'pending'
 
   const { data, isLoading } = useGetReviewsQuery();
   const [createReview, { isLoading: creating }] = useCreateReviewMutation();
@@ -48,12 +48,12 @@ const ReviewManager = () => {
     (r.description || '').toLowerCase().includes(search.toLowerCase())
   );
   const filtered = searchFiltered.filter(r => {
-    if (filter === 'approved') return r.approve === true;
-    if (filter === 'pending')  return r.approve !== true;
+    if (filter === 'approved') return r.approved === true;
+    if (filter === 'pending')  return r.approved !== true;
     return true;
   });
-  const approvedCount = allReviews.filter(r => r.approve === true).length;
-  const pendingCount  = allReviews.filter(r => r.approve !== true).length;
+  const approvedCount = allReviews.filter(r => r.approved === true).length;
+  const pendingCount  = allReviews.filter(r => r.approved !== true).length;
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -68,28 +68,30 @@ const ReviewManager = () => {
   const openEdit = (item) => {
     setEditingItem(item);
     reset({
-      name:        item.title || item.name || '',
-      role:        item.role || '',
-      rating:      item.rating || 5,
-      description: item.description || '',
+      name: item.title || item.name || '',
+      role: item.role || '',
+      rating:item.rating || 5,
+      description:  item.description || '',
+      approved: true
     });
     setShowForm(true);
   };
 
   const handleApproveToggle = async (item) => {
     try {
-      await updateReview({ id: item._id, approve: !item.approve }).unwrap();
-      toast.success(item.approve ? 'Review unapproved.' : 'Review approved!');
+      await updateReview({ id: item._id, approved: !item.approved }).unwrap();
+      toast.success(item.approved ? 'Review unapproved.' : 'Review approved!');
     } catch (err) {
       toast.error(err?.data?.message || 'Failed to update.');
     }
   };
 
-  const onSubmit = async (formData) => {    const body = {
-      name:        formData.name,
-      role:        formData.role,
-      rating:      String(formData.rating),
-      description: formData.description,
+  const onSubmit = async (formData) => { const body = {
+      name: formData.name,
+      role: formData.role,
+      rating: String(formData.rating),
+      description:  formData.description,
+      approved: true,
     };
     try {
       if (editingItem) {
@@ -123,17 +125,41 @@ const ReviewManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdStar size={30} className="text-[var(--color-secondary)]" />
+            <MdStar size={30} className="text-(--color-secondary)" />
             <h1 className="text-3xl font-bold text-[#11141B]">Reviews</h1>
           </div>
-          <p className="text-sm text-gray-400 mt-1">{filtered.length} reviews total</p>
+          <div className="flex items-center gap-3 mt-1">
+            <span className="text-sm text-gray-400">{allReviews.length} total</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-medium">{approvedCount} approved</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 font-medium">{pendingCount} pending</span>
+          </div>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-(--color-secondary) text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
             <MdAdd size={18} /> Add Review
           </button>
         )}
+      </div>
+
+      {/* Filter tabs */}
+      <div className="flex items-center gap-2 p-1 bg-gray-100 rounded-xl self-start">
+        {[
+          { key: 'all',      label: `All (${allReviews.length})` },
+          { key: 'approved', label: `Approved (${approvedCount})` },
+          { key: 'pending',  label: `Pending (${pendingCount})` },
+        ].map(tab => (
+          <button key={tab.key} onClick={() => setFilter(tab.key)}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+              filter === tab.key
+                ? tab.key === 'approved' ? 'bg-white text-emerald-600 shadow-sm'
+                  : tab.key === 'pending' ? 'bg-white text-amber-600 shadow-sm'
+                  : 'bg-white text-(--color-secondary) shadow-sm'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}>
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {/* Search + toggle */}
@@ -142,7 +168,7 @@ const ReviewManager = () => {
           <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input type="text" placeholder="Search reviews..."
             value={search} onChange={e => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors bg-white" />
         </div>
         <ViewToggle view={view} onChange={setView} />
       </div>
@@ -169,7 +195,7 @@ const ReviewManager = () => {
               </div>
               <p className="text-sm text-gray-600 italic line-clamp-3 flex-1">"{item.description}"</p>
               <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
-                <div className="w-8 h-8 rounded-lg bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] font-bold text-sm flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg--secondary/10 text-(--color-secondary) font-bold text-sm flex items-center justify-center shrink-0">
                   {(item.title || item.name || '?').charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -181,12 +207,12 @@ const ReviewManager = () => {
               <button
                 onClick={() => handleApproveToggle(item)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                  item.approve
+                  item.approved
                     ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
                     : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                 }`}
               >
-                {item.approve
+                {item.approved
                   ? <><MdCheckCircle size={14} /> Approved</>
                   : <><MdCancel size={14} /> Not Approved</>
                 }
@@ -220,14 +246,14 @@ const ReviewManager = () => {
               {/* Approve toggle */}
               <button
                 onClick={() => handleApproveToggle(item)}
-                title={item.approve ? 'Click to unapprove' : 'Click to approve'}
+                title={item.approved ? 'Click to unapproved' : 'Click to approved'}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all duration-200 ${
-                  item.approve
+                  item.approved
                     ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
                     : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
                 }`}
               >
-                {item.approve
+                {item.approved
                   ? <><MdCheckCircle size={14} /> Approved</>
                   : <><MdCancel size={14} /> Pending</>
                 }

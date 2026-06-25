@@ -183,15 +183,15 @@ const Navbar = () => {
     <>
       {/* ── Main navbar — relative so mega menu absolute child works ── */}
       <nav
-        className="bg-white sticky top-0 z-50 shadow-sm relative"
+        className="bg-white sticky top-0 z-50 shadow-sm "
         onMouseLeave={() => setOpenDropdown(null)}
       >
         <div className="max-w-340 mx-auto flex items-center justify-between px-4 lg:px-8 py-4">
 
           {/* Logo */}
           <NavLink to="/" className="flex items-center">
-            <img src={visvaBangala} alt="Visva Bangla" className="h-12 w-auto object-contain" />
-            <span className="pl-1 text-xl lg:text-3xl font-bold uppercase text-primary">VisvaBangla</span>
+            <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
+            <span className="pl-1 text-xl lg:text-2xl font-bold uppercase text-primary">Visva<span className='text-secondary'>Bangla</span></span>
           </NavLink>
 
           {/* Desktop nav links */}
@@ -257,9 +257,9 @@ const Navbar = () => {
               <>
                 <NavLink
                   to="/admin"
-                  className="px-5 py-2 rounded-full font-medium text-white bg-primary hover:bg-secondary transition-all duration-300"
+                  className="px-5 py-2 rounded-full font-medium text-white bg-secondary hover:bg-primary transition-all duration-300"
                 >
-                  Admin panel
+                  Admin Panel
                 </NavLink>
                 <button
                   onClick={handleSignOut}
