@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -9,6 +9,7 @@ import { logout } from '../../store/authSlice';
 import { toast } from 'sonner';
 import visvaBangala from '../../assets/logo/visva-bangala.png';
 import visvaBanglaMenuImg from '../../assets/visvaBanglaMenuImg.jpeg';
+
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -66,11 +67,11 @@ const DropdownMenu = ({ items }) => (
             end
             className="block px-5 py-3 text-sm font-medium transition-colors"
             style={({ isActive }) => ({
-              backgroundColor: isActive ? 'var(--color-primary)' : 'white',
+              backgroundColor: isActive ? 'var(--color-secondary)' : 'white',
               color: isActive ? '#ffffff' : '#11141B',
             })}
             onMouseEnter={e => {
-              e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+              e.currentTarget.style.backgroundColor = 'var(--color-secondary)';
               e.currentTarget.style.color = '#ffffff';
             }}
             onMouseLeave={e => {
@@ -102,7 +103,7 @@ const MegaMenu = ({ columns }) => (
         <div className="flex flex-1 divide-x divide-gray-100">
           {columns.map((col) => (
             <div key={col.heading} className="flex-1 px-8 py-7">
-              <p className="font-bold uppercase tracking-widest mb-4 text-primary">
+              <p className="font-bold uppercase tracking-widest mb-4 text-secondary">
                 {col.heading}
               </p>
               <ul className="flex flex-col gap-0.5">
@@ -113,11 +114,11 @@ const MegaMenu = ({ columns }) => (
                       end
                       className="block px-5 py-3 text-sm font-medium transition-colors rounded-lg"
                       style={({ isActive }) => ({
-                        backgroundColor: isActive ? 'var(--color-primary)' : 'white',
+                        backgroundColor: isActive ? 'var(--color-secondary)' : 'white',
                         color: isActive ? '#ffffff' : '#11141B',
                       })}
                       onMouseEnter={e => {
-                        e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+                        e.currentTarget.style.backgroundColor = 'var(--color-secondary)';
                         e.currentTarget.style.color = '#ffffff';
                       }}
                       onMouseLeave={e => {
@@ -156,10 +157,24 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
+  const [isSticky, setIsSticky] = useState(false);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(state => state.auth.token);
+
+  const isHomePage = location.pathname === '/';
+  // Opaque (white bg) when: not on home page, OR on home page after scrolling
+  const isOpaque = !isHomePage || isSticky;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSignOut = () => {
     dispatch(logout());
@@ -181,9 +196,15 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ── Main navbar — relative so mega menu absolute child works ── */}
+      {/* ── Main navbar ── */}
       <nav
-        className="bg-white sticky top-0 z-50 shadow-sm "
+        className={`w-full z-50 transition-all duration-300 ${
+          isHomePage
+            ? isSticky
+              ? 'fixed top-0 left-0 bg-white shadow-md'
+              : 'absolute top-0 left-0 bg-transparent'
+            : 'fixed top-0 left-0 bg-white shadow-md'
+        }`}
         onMouseLeave={() => setOpenDropdown(null)}
       >
         <div className="max-w-340 mx-auto flex items-center justify-between px-4 lg:px-8 py-4">
@@ -191,7 +212,9 @@ const Navbar = () => {
           {/* Logo */}
           <NavLink to="/" className="flex items-center">
             <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
-            <span className="pl-1 text-xl lg:text-2xl font-bold uppercase text-primary">Visva<span className='text-secondary'>Bangla</span></span>
+            <span className={`pl-1 text-xl lg:text-2xl font-medium uppercase ${isOpaque ? 'text-secondary' : 'text-white/90'}`}>
+              VisvaBangla
+            </span>
           </NavLink>
 
           {/* Desktop nav links */}
@@ -201,13 +224,15 @@ const Navbar = () => {
                 key={link.label}
                 className="relative"
                 onMouseEnter={() => (link.children || link.mega) && setOpenDropdown(link.label)}
-                /* no onMouseLeave here — nav's onMouseLeave handles closing */
               >
                 {link.mega ? (
+                  /* "Others" — mega trigger, no route */
                   <span
-                    className="flex items-center gap-1 text-sm lg:text-base font-medium cursor-pointer hover:opacity-70 transition-opacity"
+                    className={`flex items-center gap-1 text-sm lg:text-base font-medium cursor-pointer transition-opacity relative pb-1 ${
+                      isParentActive(link) ? 'opacity-100' : 'hover:opacity-70'
+                    }`}
                     style={{
-                      color: (openDropdown === link.label || isParentActive(link)) ? 'var(--color-primary)' : '#11141B',
+                      color: isOpaque ? '#11141B' : '#fff',
                       fontWeight: (openDropdown === link.label || isParentActive(link)) ? '600' : '500',
                     }}
                   >
@@ -219,31 +244,51 @@ const Navbar = () => {
                         transition: 'transform 0.2s',
                       }}
                     />
+                    {/* Underline for active mega parent */}
+                    {isParentActive(link) && (
+                      <span
+                        className="absolute bottom-0 left-0 w-full h-0.5"
+                        style={{ backgroundColor: 'var(--color-secondary)' }}
+                      />
+                    )}
                   </span>
                 ) : (
+                  /* Regular nav link */
                   <NavLink
                     to={link.path}
-                    className="flex items-center gap-1 text-sm lg:text-base font-medium hover:opacity-70 transition-opacity"
+                    end={link.path === '/'}
+                    className="flex items-center gap-1 text-sm lg:text-base font-medium transition-opacity relative pb-1 hover:opacity-70"
                     style={({ isActive }) => ({
-                      color: (isActive || isParentActive(link)) ? 'var(--color-primary)' : '#11141B',
+                      color: isOpaque ? '#11141B' : '#fff',
                       fontWeight: (isActive || isParentActive(link)) ? '600' : '500',
                     })}
                     onMouseEnter={() => !link.children && setOpenDropdown(null)}
                   >
-                    {link.label}
-                    {link.children && (
-                      <MdKeyboardArrowDown
-                        size={16}
-                        style={{
-                          transform: openDropdown === link.label ? 'rotate(180deg)' : 'rotate(0)',
-                          transition: 'transform 0.2s',
-                        }}
-                      />
+                    {({ isActive }) => (
+                      <>
+                        {link.label}
+                        {link.children && (
+                          <MdKeyboardArrowDown
+                            size={16}
+                            style={{
+                              transform: openDropdown === link.label ? 'rotate(180deg)' : 'rotate(0)',
+                              transition: 'transform 0.2s',
+                            }}
+                          />
+                        )}
+                        {/* Underline for active state */}
+                        {(isActive || isParentActive(link)) && (
+                          <span
+                            className="absolute bottom-0 left-0 w-full h-0.5"
+                            style={{ backgroundColor: 'var(--color-secondary)' }}
+                          />
+                        )}
+                      </>
                     )}
                   </NavLink>
                 )}
 
-                {/* Regular dropdown — stays inside li, absolute from li */}
+                {/* Regular dropdown */}
                 {link.children && openDropdown === link.label && (
                   <DropdownMenu items={link.children} />
                 )}
@@ -263,7 +308,7 @@ const Navbar = () => {
                 </NavLink>
                 <button
                   onClick={handleSignOut}
-                  className="px-5 py-2 rounded-full font-medium border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                  className="px-5 py-2 rounded-full font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
                 >
                   Sign Out
                 </button>
@@ -271,19 +316,11 @@ const Navbar = () => {
             ) : (
               <NavLink
                 to="/auth/signin"
-                className="px-5 py-2 rounded-full font-medium border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 ease-in-out"
+                className="px-5 py-2 rounded-full font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300 ease-in-out"
               >
                 Sign In
               </NavLink>
             )}
-            <NavLink to="/contact">
-              <button
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white bg-secondary hover:scale-110 transition-all duration-300"
-                aria-label="Call us"
-              >
-                <FaPhoneAlt size={14} />
-              </button>
-            </NavLink>
           </div>
 
           {/* Mobile hamburger */}
@@ -345,16 +382,18 @@ const Navbar = () => {
                   {link.mega ? (
                     <span
                       className="text-base font-medium"
-                      style={{ color: isParentActive(link) ? 'var(--color-primary)' : '#11141B' }}
+                      style={{ color: '#11141B', fontWeight: isParentActive(link) ? '600' : '500' }}
                     >
                       {link.label}
                     </span>
                   ) : (
                     <NavLink
                       to={link.path}
+                      end={link.path === '/'}
                       className="text-base font-medium"
                       style={({ isActive }) => ({
-                        color: (isActive || isParentActive(link)) ? 'var(--color-primary)' : '#11141B',
+                        color: '#11141B',
+                        fontWeight: (isActive || isParentActive(link)) ? '600' : '500',
                       })}
                       onClick={() => !allChildren && setMobileOpen(false)}
                     >
@@ -380,7 +419,7 @@ const Navbar = () => {
                     {allChildren.map((child) =>
                       child.isHeading ? (
                         <li key={child.label}>
-                          <p className="px-4 pt-3 pb-1 text-xs font-bold uppercase tracking-widest text-primary">
+                          <p className="px-4 pt-3 pb-1 text-xs font-bold uppercase tracking-widest text-secondary">
                             {child.label}
                           </p>
                         </li>
@@ -391,7 +430,7 @@ const Navbar = () => {
                             end
                             className="block px-4 py-2.5 text-sm"
                             style={({ isActive }) => ({
-                              color: isActive ? 'var(--color-primary)' : '#11141B',
+                              color: '#11141B',
                               fontWeight: isActive ? '600' : '400',
                             })}
                             onClick={() => setMobileOpen(false)}
@@ -415,13 +454,13 @@ const Navbar = () => {
               <NavLink
                 to="/admin"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-primary"
+                className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-secondary"
               >
                 Admin Panel
               </NavLink>
               <button
                 onClick={() => { handleSignOut(); setMobileOpen(false); }}
-                className="w-full py-2.5 rounded-full border border-primary text-primary text-sm font-medium"
+                className="w-full py-2.5 rounded-full border border-secondary text-secondary text-sm font-medium"
               >
                 Sign Out
               </button>
@@ -430,7 +469,7 @@ const Navbar = () => {
             <NavLink
               to="/auth/signin"
               onClick={() => setMobileOpen(false)}
-              className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-primary"
+              className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-secondary"
             >
               Sign In
             </NavLink>

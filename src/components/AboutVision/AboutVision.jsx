@@ -57,13 +57,13 @@ const AboutVision = () => {
           >
 
             <div className="flex flex-col gap-3">
-              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
+              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
                 Our Vision
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
                 The Purpose Behind <br />
-                <span className="text-primary">VisvaBangla Foundation</span>
+                <span className="text-secondary">VisvaBangla Foundation</span>
               </h2>
               <p className="text-gray-500 text-[15px] leading-relaxed">
                 Inspired by more than fifteen years of research, the foundation envisions a peaceful, compassionate, and non-communal world through the study, research, and publication of the philosophies of great human beings throughout history.
@@ -71,7 +71,7 @@ const AboutVision = () => {
             </div>
 
             {/* Vision statement quote */}
-            <blockquote className="relative pl-5 border-l-4 border-primary">
+            <blockquote className="relative pl-5 border-l-4 border-secondary">
               <p className="text-[#11141B] font-medium text-[15px] leading-relaxed italic">
                 "Nowhere in the world has a university been established solely for the free distribution of universal humanitarian and spiritual meditation-based knowledge dedicated to self-purification. We dream of building a peaceful, compassionate, and non-communal world."
               </p>
@@ -90,7 +90,7 @@ const AboutVision = () => {
             >
               {visionPoints.map((v, i) => (
                 <motion.li key={i} variants={fadeUp} className="flex items-start gap-4 group">
-                  <span className="mt-0.5 w-9 h-9 rounded-xl bg-white border border-gray-200 text-primary flex items-center justify-center shrink-0 shadow-sm group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-200">
+                  <span className="mt-0.5 w-9 h-9 rounded-xl bg-white border border-gray-200 text-secondary flex items-center justify-center shrink-0 shadow-sm group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-200">
                     {v.icon}
                   </span>
                   <div>
@@ -121,7 +121,7 @@ const AboutVision = () => {
             {/* floating stat */}
             <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 flex items-center justify-between shadow-lg">
               <div className="text-center">
-                <p className="text-2xl font-bold text-primary">300+</p>
+                <p className="text-2xl font-bold text-secondary">300+</p>
                 <p className="text-xs text-gray-500">Regular Participants</p>
               </div>
               <div className="w-px h-10 bg-gray-200" />

@@ -56,10 +56,10 @@ const AboutUs = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
             Universal Humanitarian Philosophy
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight max-w-2xl">
+          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight max-w-2xl">
             VisvaBangla <span className="text-primary">Foundation</span>
           </h2>
-          <p className="text-gray-500 text-base leading-relaxed max-w-xl">
+          <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
             A non-political, non-communal spiritual organization dedicated to meditation,
             self-purification, universal knowledge, and human welfare — based in Rajshahi, Bangladesh.
           </p>
@@ -79,7 +79,7 @@ const AboutUs = () => {
               variants={fadeUp}
               className="group relative flex flex-col gap-3 p-7 rounded-2xl bg-white border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.11)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-0.75 bg-linear-to-r from-primary to-secondary rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-0 left-0 right-0 h-0.75 bg-linear-to-r from-primary to-primary rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="w-13 h-13 rounded-2xl flex items-center justify-center bg-primary/8 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 {React.cloneElement(card.icon, { size: 26 })}
               </div>
@@ -87,7 +87,7 @@ const AboutUs = () => {
                 <h3 className="text-base font-bold text-[#11141B] tracking-tight">{card.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
               </div>
-              <div className="mt-auto pt-2 flex items-center gap-1.5 text-xs font-semibold text-secondary opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
+              <div className="mt-auto pt-2 flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
                 Learn more
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2.5 7h9M8 4l3.5 3L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -111,7 +111,7 @@ const AboutUs = () => {
               <img src={aboutImg} alt="VisvaBangla Foundation" className="w-full h-130 object-cover" />
             </div>
             <div className="absolute -bottom-5 -right-4 bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] px-5 py-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                 <GiLotus size={20} />
               </div>
               <div>
@@ -129,12 +129,12 @@ const AboutUs = () => {
             viewport={viewport}
           >
             <div className="flex flex-col gap-3">
-              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
+              <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
                 About the Foundation
               </span>
-              <h3 className="text-3xl lg:text-4xl font-bold text-[#11141B] leading-snug">
+              <h3 className="text-3xl lg:text-4xl font-medium text-[#11141B] leading-snug">
                 A Vision for Universal <br />
-                <span className="text-secondary">Peace & Spiritual Freedom</span>
+                <span className="text-primary">Peace & Spiritual Freedom</span>
               </h3>
             </div>
             <p className="text-gray-500 leading-relaxed text-[15px]">
@@ -146,13 +146,13 @@ const AboutUs = () => {
             <ul className="flex flex-col gap-3">
               {highlights.map((h, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-secondary/8 text-secondary flex items-center justify-center shrink-0">{h.icon}</span>
+                  <span className="w-8 h-8 rounded-lg bg-primary/8 text-primary flex items-center justify-center shrink-0">{h.icon}</span>
                   <span className="text-sm font-medium text-[#11141B]">{h.label}</span>
                 </li>
               ))}
             </ul>
             <div className="flex flex-wrap items-center gap-3">
-              <NavLink to="/blog" className="px-6 py-3 rounded-full bg-secondary text-white text-sm font-semibold hover:bg-primary transition-all duration-300">
+              <NavLink to="/blog" className="px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary transition-all duration-300">
                 Learn More
               </NavLink>
               <NavLink to="/about" className="px-6 py-3 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300">

@@ -92,7 +92,7 @@ const Testimonials = () => {
 
   return (
     <motion.section
-      className="py-16 lg:py-24 bg-[#f7f8fa]"
+      className="pb-16 lg:pb-24 bg-[#f7f8fa]"
       variants={fadeIn} initial="hidden" whileInView="show" viewport={viewport}
     >
       <div className="max-w-340 mx-auto px-6 lg:px-12">
@@ -104,7 +104,7 @@ const Testimonials = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
             Community Reviews
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
+          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B]">
             What Our <span className="text-secondary">Community Says</span>
           </h2>
           <p className="text-gray-500 text-sm max-w-md leading-relaxed">

@@ -52,7 +52,7 @@ const Newsletter = () => {
 
           {/* Heading */}
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl lg:text-4xl font-bold text-white leading-snug">
+            <h2 className="text-2xl lg:text-[42px] font-medium text-white leading-snug">
               Get Updates on Free Classes,
               <br />
               <span className="text-white/80">Events & Spiritual Programs</span>

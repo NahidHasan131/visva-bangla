@@ -33,9 +33,12 @@ const Trainers = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
             Our Guides
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
+          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B]">
             Meet Our <span className="text-secondary">Spiritual Guides</span>
           </h2>
+          <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
+            Our guides are dedicated researchers, educators, and practitioners rooted in universal humanitarian philosophy — committed to sharing the wisdom of meditation, Sufi tradition, and spiritual science freely with all.
+          </p>
         </motion.div>
 
         <motion.div

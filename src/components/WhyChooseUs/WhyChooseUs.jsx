@@ -5,7 +5,6 @@ import { PiHandsPrayingLight } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import whyChooseImg from '../../assets/why choose.jpg';
-import Newsletter from '../Newsletter/Newsletter';
 
 const reasons = [
   {
@@ -77,7 +76,7 @@ const WhyChooseUs = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 Why Choose Us
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
                 A Foundation Built on <br />
                 <span className="text-primary">Truth & Humanity</span>
               </h2>
@@ -88,7 +87,7 @@ const WhyChooseUs = () => {
 
             {/* Reasons grid */}
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               variants={staggerContainer()}
               initial="hidden"
               whileInView="show"
@@ -98,17 +97,39 @@ const WhyChooseUs = () => {
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  className="group flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-[0_4px_20px_rgba(0,0,0,0.07)] transition-all duration-200"
+                  className="group relative flex items-start gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/25 hover:shadow-[0_6px_24px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
                 >
-                  <span className="mt-0.5 w-8 h-8 rounded-lg bg-primary/8 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-200">
+                  {/* Subtle bg glow on hover */}
+                  <div className="absolute inset-0 bg-linear-to-br from-primary/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" />
+
+                  {/* Icon */}
+                  <span className="relative mt-0.5 w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 bg-primary/8 text-primary group-hover:bg-primary group-hover:text-white group-hover:shadow-[0_4px_12px_rgba(254,0,0,0.3)]">
                     {r.icon}
                   </span>
-                  <div>
-                    <p className="text-sm font-bold text-[#11141B] leading-snug">{r.title}</p>
-                    <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{r.desc}</p>
+
+                  {/* Text */}
+                  <div className="relative flex flex-col gap-0.5">
+                    <p className="text-sm font-bold text-[#11141B] leading-snug group-hover:text-primary transition-colors duration-200">{r.title}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
                   </div>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* Bottom CTA strip */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+              className="flex items-center gap-4 p-4 rounded-2xl bg-linear-to-r from-primary/6 to-secondary/6 border border-primary/15"
+            >
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+                <LuScale size={18} />
+              </div>
+              <p className="text-sm text-gray-600 leading-snug">
+                <span className="font-semibold text-[#11141B]">Rooted in universal values</span> — no discrimination, no fees, no boundaries. Just truth, humanity, and spiritual freedom.
+              </p>
             </motion.div>
 
           </motion.div>
@@ -150,7 +171,6 @@ const WhyChooseUs = () => {
 
         </div>
       </div>
-      <Newsletter />
     </motion.section>
   );
 };

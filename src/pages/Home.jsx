@@ -8,6 +8,7 @@ import Events from '../components/Events/Events';
 import Testimonials from '../components/Testimonials/Testimonials';
 import CallToAction from '../components/CallToAction/CallToAction';
 import BlogSection from '../components/Blog/Blog';
+import Newsletter from '../components/Newsletter/Newsletter';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <AboutUs />
             <FeaturedClasses />
             <WhyChooseUs />
+            <Newsletter />
             <Trainers />
             {/* <Events /> */}
             <Testimonials />

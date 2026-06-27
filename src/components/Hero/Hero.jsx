@@ -1,36 +1,41 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+
+// Swiper CSS Styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import banner1     from '../../assets/banner/visvaBanglaBanner-1.jpg';
-import banner2 from '../../assets/banner/visvaBanglaBanner-2.jpg';
-import banner3   from '../../assets/banner/visvaBanglaBanner-3.jpg';
+import 'swiper/css/effect-fade';
+
+// React Icons 
+import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from 'react-icons/hi';
+import banner1 from '../../assets/banner/visvaBanglaBanner-1.png';
+import banner2 from '../../assets/banner/visvaBanglaBanner-2.png';
+import banner3 from '../../assets/banner/visvaBanglaBanner-3.png';
 
 const slides = [
   {
-    img:     banner1,
-    badge:   'Welcome To VisvaBangla',
-    title:   'Discover the Power of Yoga & Meditation',
-    desc:    'Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.',
+    img: banner1,
+    badge: 'Welcome To VisvaBangla',
+    title: 'Discover the Power of Yoga & Meditation',
+    desc: 'Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.',
     ctaPath: '/media',
     ctaText: 'Explore Classes',
   },
   {
-    img:     banner2,
-    badge:   'Find Your Inner Peace',
-    title:   'Start Your Morning with Mindful Yoga Flow',
-    desc:    'A gentle morning routine that energizes your body and clears your mind before the day begins.',
+    img: banner2,
+    badge: 'Find Your Inner Peace',
+    title: 'Start Your Morning with Mindful Yoga Flow',
+    desc: 'A gentle morning routine that energizes your body and clears your mind before the day begins.',
     ctaPath: '/media/audio',
     ctaText: 'Listen Now',
   },
   {
-    img:     banner3,
-    badge:   'Transform Your Life',
-    title:   'Build Strength & Balance Through Meditation',
-    desc:    'Challenge yourself with power yoga and guided meditation sessions led by certified instructors.',
+    img: banner3,
+    badge: 'Transform Your Life',
+    title: 'Build Strength & Balance Through Meditation',
+    desc: 'Challenge yourself with power yoga and guided meditation sessions led by certified instructors.',
     ctaPath: '/media/video',
     ctaText: 'Watch Videos',
   },
@@ -38,111 +43,154 @@ const slides = [
 
 const Hero = () => {
   const swiperRef = useRef(null);
-
-  const applyZoom = (swiper) => {
-    // remove zoom from all slides
-    swiper.slides.forEach(slide => {
-      const img = slide.querySelector('.hero-img');
-      if (img) img.classList.remove('hero-img--zoom');
-    });
-    // add zoom to current active slide
-    const activeSlide = swiper.slides[swiper.activeIndex];
-    if (activeSlide) {
-      const img = activeSlide.querySelector('.hero-img');
-      if (img) {
-        // force reflow so transition plays from scale(1)
-        void img.offsetWidth;
-        img.classList.add('hero-img--zoom');
-      }
-    }
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full  max-h-screen h-175 overflow-hidden bg-gray-950">
+      {/* Custom Style Overrides */}
       <style>{`
-        .hero-swiper { overflow: hidden !important; }
-        .hero-swiper .swiper-wrapper { align-items: stretch; }
-        .hero-swiper .swiper-slide { overflow: hidden; }
-        .hero-img {
-          transform: scale(1);
-          transition: transform 6s ease;
+        .hero-swiper .swiper-slide-active .ken-burns-img {
+          transform: scale(1.08);
         }
-        .hero-img--zoom {
-          transform: scale(1.1);
+        
+        .hero-swiper .swiper-pagination {
+          bottom: 2.5rem !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: auto !important;
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+          z-index: 40 !important;
         }
-        .swiper-pagination-bullet {
-          background: white; opacity: 0.5; width: 8px; height: 8px;
+        
+        .hero-swiper .swiper-pagination-bullet {
+          background: rgba(255, 255, 255, 0.4) !important;
+          width: 8px !important;
+          height: 8px !important;
+          margin: 0 !important;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          opacity: 1 !important;
         }
-        .swiper-pagination-bullet-active {
-          opacity: 1; width: 24px; border-radius: 4px; background: #205158;
+        
+        .hero-swiper .swiper-pagination-bullet-active {
+          background: #ffffff !important;
+          width: 26px !important;
+          border-radius: 9999px !important;
+        }
+
+        /* Pure CSS Content Animation */
+        .hero-swiper .swiper-slide-active .animate-fade-up {
+          animation: fadeInUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
 
       <Swiper
-        className="hero-swiper"
-        modules={[Autoplay, Pagination]}
+        className="hero-swiper h-full w-full"
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect={'fade'}
         autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-        pagination={{ clickable: true }}
-        loop={true}
-        speed={900}
-        spaceBetween={0}
-        slidesPerView={1}
-        onSwiper={swiper => {
-          swiperRef.current = swiper;
-          // wait for DOM to be ready before applying zoom
-          setTimeout(() => applyZoom(swiper), 50);
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: false
         }}
-        onSlideChangeTransitionStart={applyZoom}
+        loop={true}
+        speed={1000}
+        allowTouchMove={true}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+          setActiveIndex(swiper.realIndex);
+        }}
+        onSlideChange={(swiper) => {
+          setActiveIndex(swiper.realIndex);
+        }}
       >
         {slides.map((slide, i) => (
-          <SwiperSlide key={i}>
-            <div className="relative w-full h-[80vh] min-h-125">
+          <SwiperSlide key={i} className="relative w-full h-full overflow-hidden">
+            {/* Background Image & Cinematic Overlay */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
               <img
                 src={slide.img}
                 alt={slide.title}
-                className="hero-img absolute inset-0 w-full h-full object-cover"
+                className="ken-burns-img w-full h-full object-cover transition-transform duration-5000 ease-out"
               />
-              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/70" />
+            </div>
 
-              <div className="relative z-10 h-full flex items-center justify-center">
-                <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
-                  <span className="px-5 py-2 rounded-full bg-secondary/20 text-white text-sm font-medium backdrop-blur-sm border border-white/20">
-                    {slide.badge}
-                  </span>
-                  <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-                    {slide.title}
-                  </h1>
-                  <p className="text-gray-200 text-base lg:text-lg leading-relaxed max-w-xl">
-                    {slide.desc}
-                  </p>
+            {/* Slide Content */}
+            <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+              <div className="max-w-4xl mx-auto flex flex-col items-center gap-5 md:gap-8">
+                
+                {/* Badge */}
+                <span className="animate-fade-up opacity-0 [animation-delay:150ms] px-4 py-1.5 rounded-full bg-white/10 text-white/90 text-xs tracking-widest font-semibold backdrop-blur-md border border-white/15 uppercase">
+                  {slide.badge}
+                </span>
+
+                {/* Title */}
+                <h1 className="animate-fade-up opacity-0 [animation-delay:350ms] text-5xl md:text-6xl lg:text-7xl font-light text-white/95 leading-[1.2] tracking-tight max-w-3xl">
+                  {slide.title}
+                </h1>
+
+                {/* Description */}
+                <p className="animate-fade-up opacity-0 [animation-delay:550ms] text-gray-300 text-sm md:text-base md:max-w-xl max-w-sm leading-relaxed font-light hidden">
+                  {slide.desc}
+                </p>
+
+                {/* CTA Button */}
+                <div className="animate-fade-up opacity-0 [animation-delay:750ms] mt-2">
                   <NavLink
                     to={slide.ctaPath}
-                    className="px-8 py-3.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-white hover:text-secondary transition-all duration-300"
+                    className="inline-block px-10 py-4 rounded-full bg-white text-secondary font-bold text-xs tracking-wider uppercase shadow-lg hover:bg-[#06a4a7] hover:text-white transition-all duration-300 transform"
                   >
                     {slide.ctaText}
                   </NavLink>
                 </div>
+
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <button
-        onClick={() => swiperRef.current?.slidePrev()}
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
-        aria-label="Previous"
-      >
-        <MdChevronLeft size={24} />
-      </button>
+      {/* Left Aligned Controller (Arrows + Page Index) */}
+      <div className="absolute bottom-9 right-6 lg:right-12 z-50 flex items-center gap-4 bg-transparent select-none">
+        {/* Left Arrow */}
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="text-white/50 hover:text-white transition-colors duration-200"
+          aria-label="Previous slide"
+        >
+          <HiOutlineArrowSmLeft size={24} />
+        </button>
 
-      <button
-        onClick={() => swiperRef.current?.slideNext()}
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
-        aria-label="Next"
-      >
-        <MdChevronRight size={24} />
-      </button>
+        {/* Dynamic Page Index Indicator (e.g., 01 / 03) */}
+        <div className="text-white/90 font-mono text-sm tracking-wider min-w-11">
+          {String(activeIndex + 1).padStart(2, '0')}{' '}
+          <span className="text-white/30">/</span>{' '}
+          {String(slides.length).padStart(2, '0')}
+        </div>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="text-white/50 hover:text-white transition-colors duration-200"
+          aria-label="Next slide"
+        >
+          <HiOutlineArrowSmRight size={24} />
+        </button>
+      </div>
     </section>
   );
 };

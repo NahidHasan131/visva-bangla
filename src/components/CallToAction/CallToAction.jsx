@@ -15,7 +15,7 @@ const stats = [
 const CallToAction = () => {
   return (
     <motion.section
-      className="relative py-20 lg:py-28 overflow-hidden bg-cover bg-center bg-no-repeat"
+      className="relative py-20 lg:py-28 overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: `url(${ctaImg})` }}
       variants={fadeIn}
       initial="hidden"
@@ -23,9 +23,6 @@ const CallToAction = () => {
       viewport={viewport}
     >
       <div className="absolute inset-0 bg-[#0d1117]/78" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-
       <div className="relative z-10 max-w-340 mx-auto px-6 lg:px-12 flex flex-col items-center text-center gap-8">
 
         <motion.span
@@ -46,7 +43,7 @@ const CallToAction = () => {
           whileInView="show"
           viewport={viewport}
         >
-          <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
             Begin Your Journey of
             <br />
             <span className="text-secondary">Meditation & Spiritual Freedom</span>

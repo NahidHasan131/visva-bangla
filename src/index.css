@@ -11,8 +11,8 @@ html {
 
 :root {
   --primary:  #FE0000;
-  /* --secondary: #06a4a7; */
-  --secondary: #205158;
+  --secondary: #06a4a7;
+  /* --secondary: #205158; */
 }
 
 @theme inline {
