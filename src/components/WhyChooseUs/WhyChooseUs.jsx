@@ -5,51 +5,56 @@ import { PiHandsPrayingLight } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import whyChooseImg from '../../assets/why choose.jpg';
+import { useTranslation } from 'react-i18next';
 
-const reasons = [
-  {
-    icon: <GiLotus size={18} />,
-    title: 'Completely Free',
-    desc: 'All programs — meditation, spiritual education, and knowledge sessions — are entirely free of cost, open to every seeker regardless of background.',
-  },
-  {
-    icon: <TbWorld size={18} />,
-    title: 'Universal & Non-Communal',
-    desc: 'Rooted in the belief that the whole world is one family. We welcome all people beyond religion, caste, or sectarian identity.',
-  },
-  {
-    icon: <PiHandsPrayingLight size={18} />,
-    title: 'Sufi-Inspired Spiritual Guidance',
-    desc: 'Programs inspired by centuries of Sufi wisdom, guiding seekers toward self-purification, inner liberation, and spiritual awareness.',
-  },
-  {
-    icon: <LuGraduationCap size={18} />,
-    title: 'Research-Based Education',
-    desc: 'Teachers, researchers, and scholars simplify and freely distribute research-based spiritual and philosophical knowledge for all.',
-  },
-  {
-    icon: <LuUsers size={18} />,
-    title: 'Community & Self-Reliance',
-    desc: 'Empowering individuals — especially youth and disadvantaged communities — through training, skill development, and socio-economic participation.',
-  },
-  {
-    icon: <TbHeartHandshake size={18} />,
-    title: 'Humanitarian Mission',
-    desc: 'Working toward healthcare, legal aid, child rights, environmental protection, and housing welfare for poor and marginalized communities.',
-  },
-  {
-    icon: <TbBuildingCommunity size={18} />,
-    title: 'World Human Religion Center',
-    desc: 'Building a safe, service-oriented residential meditation center open to people from all walks of life — a sanctuary for peace and reflection.',
-  },
-  {
-    icon: <TbLeaf size={18} />,
-    title: 'Environmental & Social Action',
-    desc: 'Committed to afforestation, sanitation, anti-drug awareness, and environmentally friendly self-employment and cottage industries.',
-  },
-];
 
 const WhyChooseUs = () => {
+
+ const {t} = useTranslation()
+
+  const reasons = [
+    {
+      icon: <GiLotus size={18} />,
+      title: `${t("completely_free")}`,
+      desc: `${t("completely_free_description")}`,
+    },
+    {
+      icon: <TbWorld size={18} />,
+      title: `${t("universal_non_communal")}`,
+      desc: `${t("universal_non_communal_description")}`,
+    },
+    {
+      icon: <PiHandsPrayingLight size={18} />,
+      title: `${t("sufi_spiritual_guidance")}`,
+      desc: `${t("sufi_spiritual_guidance_description")}`,
+    },
+    {
+      icon: <LuGraduationCap size={18} />,
+      title: `${t("research_based_education")}`,
+      desc: `${t("research_based_education_description")}`,
+    },
+    {
+      icon: <LuUsers size={18} />,
+      title: `${t("community_self_reliance")}`,
+      desc: `${t("community_self_reliance_description")}`,
+    },
+    {
+      icon: <TbHeartHandshake size={18} />,
+      title: `${t("humanitarian_mission")}`,
+      desc: `${t("humanitarian_mission_description")}`,
+    },
+    {
+      icon: <TbBuildingCommunity size={18} />,
+      title: `${t("world_human_religion_center")}`,
+      desc: `${t("world_human_religion_center_description")}`,
+    },
+    {
+      icon: <TbLeaf size={18} />,
+      title: `${t("environmental_social_action")}`,
+      desc: `${t("environmental_social_action_description")}`,
+    },
+  ];
+
   return (
     <motion.section
       className="py-16 lg:py-24 bg-[#f7f8fa] overflow-visible"
@@ -74,14 +79,14 @@ const WhyChooseUs = () => {
             <div className="flex flex-col gap-4">
               <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-                Why Choose Us
+                {t("why_choose_us")}
               </span>
               <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
-                A Foundation Built on <br />
-                <span className="text-primary">Truth & Humanity</span>
+                {t("Why_Choose_Us_title_line_1")} <br />
+                <span className="text-primary">{t("Why_Choose_Us_title_line_2")}</span>
               </h2>
               <p className="text-gray-500 text-[15px] leading-relaxed">
-                VisvaBangla Foundation is not just an organization — it is a movement toward a peaceful, compassionate, and non-communal world through free education, meditation, and spiritual guidance.
+                {t("Why_Choose_Us_description")}
               </p>
             </div>
 
@@ -127,8 +132,8 @@ const WhyChooseUs = () => {
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary">
                 <LuScale size={18} />
               </div>
-              <p className="text-sm text-gray-600 leading-snug">
-                <span className="font-semibold text-[#11141B]">Rooted in universal values</span> — no discrimination, no fees, no boundaries. Just truth, humanity, and spiritual freedom.
+              <p className="text-sm text-gray-600 ">
+                <span className="font-semibold text-[#11141B]">{t("values_line_1")}</span>{t("values_line_2")}
               </p>
             </motion.div>
 
@@ -155,15 +160,15 @@ const WhyChooseUs = () => {
               <div className="absolute bottom-6 left-6 right-6 flex gap-3">
                 <div className="flex-1 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 text-center shadow-lg">
                   <p className="text-xl font-bold text-primary">150+</p>
-                  <p className="text-xs text-gray-500">Regular Participants</p>
+                  <p className="text-xs text-gray-500">{t("regular_participants")}</p>
                 </div>
                 <div className="flex-1 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 text-center shadow-lg">
                   <p className="text-xl font-bold text-secondary">100%</p>
-                  <p className="text-xs text-gray-500">Free of Cost</p>
+                  <p className="text-xs text-gray-500">{t("free_of_cost")}</p>
                 </div>
                 <div className="flex-1 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 text-center shadow-lg">
                   <p className="text-xl font-bold text-[#11141B]">15+</p>
-                  <p className="text-xs text-gray-500">Years Research</p>
+                  <p className="text-xs text-gray-500">{t("years_research")}</p>
                 </div>
               </div>
             </div>

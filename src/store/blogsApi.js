@@ -23,7 +23,7 @@ export const blogsApi = createApi({
     }),
 
     updateBlog: builder.mutation({
-      query: ({ id, ...body }) => ({ url: `/blogs/${id}`, method: 'PUT', body }),
+      query: ({ id, ...body }) => ({ url: `/blogs/${id}`, method: 'PATCH', body }),
       invalidatesTags: ['Blog'],
     }),
 

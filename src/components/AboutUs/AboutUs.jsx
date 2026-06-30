@@ -8,32 +8,35 @@ import { PiHandsPrayingLight } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import aboutImg from '../../assets/visvaBanglaAboutImg.jpeg';
+import { useTranslation } from 'react-i18next';
 
-const learningCards = [
-  {
-    icon: <GiLotus />,
-    title: 'Yoga & Meditation',
-    desc: 'Structured sessions for inner calm, self-purification, and spiritual awakening for all levels.',
-  },
-  {
-    icon: <MdSelfImprovement />,
-    title: 'Spiritual Growth',
-    desc: 'Universal Sufi-inspired programs blending ancient wisdom with modern humanitarian values.',
-  },
-  {
-    icon: <GiMeditation />,
-    title: 'Free Education',
-    desc: 'Knowledge, research, and spiritual guidance freely available to every seeker regardless of background.',
-  },
-];
 
-const highlights = [
-  { icon: <TbWorld size={18} />,           label: 'Universal Humanitarian Philosophy' },
-  { icon: <PiHandsPrayingLight size={18} />, label: 'Free Meditation & Spiritual Education' },
-  { icon: <LuBookOpen size={18} />,         label: 'Research, Culture & Human Development' },
-];
+  const AboutUs = () => {
+    const {t} = useTranslation()
+    const learningCards = [
+    {
+      icon: <GiLotus />,
+      title: `${t("yoga_meditation")}`,
+      desc: `${t("yoga_meditation_description")}`,
+    },
+    {
+      icon: <MdSelfImprovement />,
+      title: `${t("spiritual_growth")}`,
+      desc: `${t("spiritual_growth_description")}`,
+    },
+    {
+      icon: <GiMeditation />,
+      title: `${t("free_education")}`,
+      desc: `${t("free_education_description")}`,
+    },
+  ];
 
-const AboutUs = () => {
+  const highlights = [
+    { icon: <TbWorld size={18} />,           label: `${t("universal_humanitarian_philosophy")}`},
+    { icon: <PiHandsPrayingLight size={18} />, label: `${t("free_meditation_spiritual_education")}` },
+    { icon: <LuBookOpen size={18} />,         label: `${t("research_culture_human_development")}` },
+  ];
+
   return (
     <motion.section
       className="py-14 lg:py-20 bg-white"
@@ -54,14 +57,13 @@ const AboutUs = () => {
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
             <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-            Universal Humanitarian Philosophy
+            {t("universal_humanitarian_philosophy")}
           </span>
           <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight max-w-2xl">
-            VisvaBangla <span className="text-primary">Foundation</span>
+            {t("visvabangla")} <span className="text-primary">{t("foundation")}</span>
           </h2>
           <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
-            A non-political, non-communal spiritual organization dedicated to meditation,
-            self-purification, universal knowledge, and human welfare — based in Rajshahi, Bangladesh.
+            {t("foundation_description")}
           </p>
         </motion.div>
 
@@ -88,7 +90,7 @@ const AboutUs = () => {
                 <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
               </div>
               <div className="mt-auto pt-2 flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
-                Learn more
+                {t("learn_more")}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2.5 7h9M8 4l3.5 3L8 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -115,8 +117,8 @@ const AboutUs = () => {
                 <GiLotus size={20} />
               </div>
               <div>
-                <p className="text-xs text-gray-400 leading-none mb-0.5">Established</p>
-                <p className="text-sm font-bold text-[#11141B]">Since 2015</p>
+                <p className="text-xs text-gray-400 leading-none mb-0.5">{t("established")}</p>
+                <p className="text-sm font-bold text-[#11141B]">{t("since_2015")}</p>
               </div>
             </div>
           </motion.div>
@@ -130,18 +132,17 @@ const AboutUs = () => {
           >
             <div className="flex flex-col gap-3">
               <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
-                About the Foundation
+               {t("about_foundation")}
               </span>
               <h3 className="text-3xl lg:text-4xl font-medium text-[#11141B] leading-snug">
-                A Vision for Universal <br />
-                <span className="text-primary">Peace & Spiritual Freedom</span>
+                {t("vision_line_1")} <br />
+                <span className="text-primary">{t("vision_line_2")}</span>
               </h3>
             </div>
-            <p className="text-gray-500 leading-relaxed text-[15px]">
-              Founded by <span className="font-semibold text-[#11141B]">Dr. Shah Syed Hasib Ul Hasan Raza</span>, VisvaBangla Foundation is a registered humanitarian organization under the Ministry of Social Welfare, Government of Bangladesh <span className="text-gray-400">(Reg. No: 1012/15, July 13, 2015)</span>.
+            <p className="text-gray-500 leading-relaxed text-[15px]">{t("founded_by")}<span className="font-semibold text-[#11141B]">{t("founder_name")}</span>{t("foundation_about_description")}
             </p>
             <p className="text-gray-500 leading-relaxed text-[15px]">
-              Inspired by the timeless wisdom of Sufi philosophy and universal humanitarian values, the foundation is working toward the establishment of the <span className="font-semibold text-[#11141B]">VisvaBangla Spiritual University</span> — a unique, completely free platform for meditation, knowledge, and spiritual education open to all people regardless of religion, class, or background.
+              {t("foundation_about_description_2")}
             </p>
             <ul className="flex flex-col gap-3">
               {highlights.map((h, i) => (
@@ -153,10 +154,10 @@ const AboutUs = () => {
             </ul>
             <div className="flex flex-wrap items-center gap-3">
               <NavLink to="/blog" className="px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary transition-all duration-300">
-                Learn More
+               {t("learn_more")}
               </NavLink>
               <NavLink to="/about" className="px-6 py-3 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300">
-                Explore Vision
+                {t("explore_vision")}
               </NavLink>
             </div>
           </motion.div>

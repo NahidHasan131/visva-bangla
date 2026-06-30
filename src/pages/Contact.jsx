@@ -77,7 +77,7 @@ const Contact = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
                 Get In Touch
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B] leading-tight">
                 We'd Love to <span className="text-secondary">Hear From You</span>
               </h2>
               <p className="text-gray-500 leading-relaxed">
@@ -185,7 +185,7 @@ const Contact = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                   FAQ
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">Frequently Asked <span className="text-primary">Questions</span></h2>
+                <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">Frequently Asked <span className="text-primary">Questions</span></h2>
                 <p className="text-gray-500 text-sm">Everything you need to know before joining us.</p>
               </div>
 

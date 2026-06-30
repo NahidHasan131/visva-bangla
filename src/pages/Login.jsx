@@ -47,7 +47,7 @@ const Login = () => {
         <div className="flex items-center justify-between mb-8">
           <NavLink to="/" className="flex items-center gap-2">
             <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
-            <span className="text-xl font-bold uppercase text-primary">VisvaBangla</span>
+            <span className="text-xl font-bold uppercase text-secondary">VisvaBangla</span>
           </NavLink>
           <NavLink to="/" className="text-sm text-secondary font-medium hover:opacity-70 transition-opacity">
             ← Back to Home

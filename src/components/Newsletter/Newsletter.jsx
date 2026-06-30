@@ -3,14 +3,13 @@ import { MdOutlineEmail } from 'react-icons/md';
 import { GiLotus } from 'react-icons/gi';
 import { TbBell, TbCheck } from 'react-icons/tb';
 import newsletterImg from '../../assets/newsletter.png';
+import { useTranslation } from 'react-i18next';
 
-const highlights = [
-  'Free Meditation Alerts',
-  'Weekly Class Schedule',
-  'Event Announcements',
-];
 
 const Newsletter = () => {
+
+  const {t} = useTranslation()
+
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -18,6 +17,12 @@ const Newsletter = () => {
     e.preventDefault();
     if (email) setSubmitted(true);
   };
+
+  const highlights = [
+  `${t("free_meditation_alerts")}`,
+  `${t("weekly_class_schedule")}`,
+  `${t("event_announcements")}`,
+];
 
   return (
     <div className="max-w-340 mx-auto px-6 lg:px-12 mt-24">
@@ -47,18 +52,18 @@ const Newsletter = () => {
           {/* Badge */}
           <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 text-white text-xs font-semibold uppercase tracking-widest backdrop-blur-sm">
             <TbBell size={13} />
-            Stay Connected
+            {t("stay_connected")}
           </span>
 
           {/* Heading */}
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl lg:text-[42px] font-medium text-white leading-snug">
-              Get Updates on Free Classes,
+              {t("updates_title_line_1")},
               <br />
-              <span className="text-white/80">Events & Spiritual Programs</span>
+              <span className="text-white/80">{t("updates_title_line_2")}</span>
             </h2>
             <p className="text-white/65 text-sm leading-relaxed max-w-md">
-              Subscribe to receive announcements about free meditation sessions, spiritual education programs, weekly classes, and humanitarian activities from VisvaBangla Foundation.
+              {t("updates_description")}
             </p>
           </div>
 
@@ -82,7 +87,7 @@ const Newsletter = () => {
                 <TbCheck size={16} className="text-secondary" />
               </span>
               <p className="text-sm text-white font-medium">
-                Thank you! We'll keep you updated on all programs.
+                {t("subscription_success")}
               </p>
             </div>
           ) : (
@@ -93,7 +98,7 @@ const Newsletter = () => {
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
+                  placeholder={t("enter_email_address")}
                   required
                   className="flex-1 bg-transparent text-sm text-white placeholder-white/40 outline-none"
                 />
@@ -102,13 +107,13 @@ const Newsletter = () => {
                 type="submit"
                 className="px-6 py-3.5 rounded-xl bg-white text-secondary text-sm font-bold hover:bg-white/90 active:scale-95 transition-all duration-200 shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
               >
-                Subscribe
+                {t("subscribe")}
               </button>
             </form>
           )}
 
           <p className="text-xs text-white/40">
-            No spam. Only meaningful updates. Unsubscribe anytime.
+            {t("subscription_note")}
           </p>
         </div>
 

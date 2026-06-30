@@ -27,9 +27,9 @@ import EventManager from './pages/admin/EventManager'
 import Profile from './pages/admin/Profile'
 import Users from './pages/admin/Users'
 import ReviewManager from './pages/admin/ReviewManager'
-import OthersPage from './pages/others/OthersPage'
-import Foundation from './pages/others/Foundation'
-import University from './pages/others/University'
+import OthersPage from './pages/institutional-info/OthersPage'
+import Foundation from './pages/institutional-info/Foundation'
+import University from './pages/institutional-info/University'
 
 function App() {
   const router = createBrowserRouter([
@@ -58,7 +58,7 @@ function App() {
         { path: '/blog/:id', element: <BlogDetail /> },
         { path: '/contact', element: <Contact /> },
         {
-          path: '/others',
+          path: '/institutional-info',
           children: [
             { path: 'foundation',     element: <Foundation /> },
             { path: 'university',     element: <University /> },

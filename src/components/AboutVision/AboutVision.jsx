@@ -5,7 +5,7 @@ import { LuBookOpen, LuGraduationCap } from 'react-icons/lu';
 import { GiLotus } from 'react-icons/gi';
 import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
-import visionImg from '../../assets/spritual- university.jpg';
+import visionImg from '../../assets/spritual- university.png';
 
 const visionPoints = [
   {
@@ -49,7 +49,7 @@ const AboutVision = () => {
 
           {/* Left content */}
           <motion.div
-            className="lg:w-1/2 flex flex-col gap-8"
+            className="lg:w-1/2 flex flex-col gap-8 "
             variants={fadeLeft}
             initial="hidden"
             whileInView="show"
@@ -110,7 +110,7 @@ const AboutVision = () => {
             whileInView="show"
             viewport={viewport}
           >
-            <div className="rounded-3xl sticky overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
+            <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
               <img
                 src={visionImg}
                 alt="Our vision"

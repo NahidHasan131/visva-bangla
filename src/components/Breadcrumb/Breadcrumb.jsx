@@ -11,14 +11,14 @@ const pageMeta = {
   '/media/gallery':        { title: 'Gallery',              desc: 'Browse our collection of yoga class and event photos.' },
   '/blog':                 { title: 'Blog & News',          desc: 'Stay inspired with spiritual insights, wellness guides and the latest news from VisvaBangla Foundation.' },
   '/contact':              { title: 'Contact Us',           desc: 'Get in touch with us for classes, queries or partnerships.' },
-  '/others':               { title: 'Others',               desc: 'Explore more from VisvaBangla Foundation.' },
-  '/others/foundation':    { title: 'Foundation',           desc: 'Learn about VisvaBangla Foundation — its history, registration, goals, and humanitarian vision.' },
-  '/others/university':    { title: 'Spiritual University', desc: 'Discover the VisvaBangla Spiritual University — a free, non-communal institution for meditation, knowledge, and spiritual education.' },
-  '/others/publication':   { title: 'Publication',          desc: 'Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy.' },
-  '/others/notice':        { title: 'Notice',               desc: 'Official notices and announcements from VisvaBangla Foundation.' },
-  '/others/privacy-policy':{ title: 'Privacy & Policy',     desc: 'Read our privacy policy and understand how VisvaBangla Foundation handles your information.' },
-  '/others/terms':         { title: 'Terms & Condition',    desc: 'Terms and conditions governing the use of VisvaBangla Foundation\'s services and platforms.' },
-  '/others/download':      { title: 'Download',             desc: 'Download resources, forms, research papers, and materials from VisvaBangla Foundation.' },
+  '/institutional-info':               { title: 'Others',               desc: 'Explore more from VisvaBangla Foundation.' },
+  '/institutional-info/foundation':    { title: 'Foundation',           desc: 'Learn about VisvaBangla Foundation — its history, registration, goals, and humanitarian vision.' },
+  '/institutional-info/university':    { title: 'Spiritual University', desc: 'Discover the VisvaBangla Spiritual University — a free, non-communal institution for meditation, knowledge, and spiritual education.' },
+  '/institutional-info/publication':   { title: 'Publication',          desc: 'Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy.' },
+  '/institutional-info/notice':        { title: 'Notice',               desc: 'Official notices and announcements from VisvaBangla Foundation.' },
+  '/institutional-info/privacy-policy':{ title: 'Privacy & Policy',     desc: 'Read our privacy policy and understand how VisvaBangla Foundation handles your information.' },
+  '/institutional-info/terms':         { title: 'Terms & Condition',    desc: 'Terms and conditions governing the use of VisvaBangla Foundation\'s services and platforms.' },
+  '/institutional-info/download':      { title: 'Download',             desc: 'Download resources, forms, research papers, and materials from VisvaBangla Foundation.' },
 };
 
 const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) => {
@@ -51,9 +51,9 @@ const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) =>
 
         {/* Left: title + desc */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white">{title}</h1>
+          <h1 className="text-4xl lg:text-5xl font-semibold text-white">{title}</h1>
           {desc && (
-            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">{desc}</p>
+            <p className="text-gray-300 text-sm leading-relaxed max-w-md">{desc}</p>
           )}
         </div>
 

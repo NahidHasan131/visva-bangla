@@ -8,7 +8,7 @@ import { PiHandsPrayingLight } from 'react-icons/pi';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import aboutImg from '../../assets/visvaBanglaAboutImg.jpeg';
-import visionImg from '../../assets/spritual- university.jpg';
+import visionImg from '../../assets/spritual- university.png';
 
 const objectives = [
   { num: '01', icon: <TbWorld size={16} />,                    title: 'Universal Family & Global Outreach',       desc: 'The whole world is one family. The foundation works globally to spread the light of universal education and spiritual guidance, following great souls who devoted their lives to the spiritual and humanitarian development of humanity.' },
@@ -58,7 +58,7 @@ const Foundation = () => (
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 VisvaBangla Foundation
               </span>
-              <h1 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-semibold text-[#11141B] leading-tight">
                 Universal Humanitarian <br />
                 <span className="text-primary">Philosophy Institute</span>
               </h1>
@@ -172,7 +172,7 @@ const Foundation = () => (
             <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
             Goals & Objectives
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
+          <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">
             Our Commitment to <span className="text-secondary">Humanity & Society</span>
           </h2>
           <p className="text-gray-500 text-sm max-w-xl leading-relaxed">
@@ -214,7 +214,7 @@ const Foundation = () => (
           <motion.div className="lg:w-1/2 relative"
             variants={fadeLeft} initial="hidden" whileInView="show" viewport={viewport}>
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
-              <img src={visionImg} alt="VisvaBanglaSpiritual University" className="w-full h-105 object-cover" />
+              <img src={visionImg} alt="VisvaBanglaSpiritual University" className="w-full h-125 object-cover" />
             </div>
             
           </motion.div>

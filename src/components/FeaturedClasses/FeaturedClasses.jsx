@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import { classesData } from '../../data/classesData';
 import ClassCard from './ClassCard';
+import { useTranslation } from 'react-i18next';
 
 const FeaturedClasses = () => {
+  const {t} = useTranslation();
   return (
     <motion.section
       className="relative py-16 lg:py-24 overflow-hidden"
@@ -44,14 +46,14 @@ const FeaturedClasses = () => {
           >
             <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-white text-xs font-semibold uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
-              Featured Programs
+              {t("featured_programs")}
             </span>
             <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
-              Explore Our Yoga &<br />
-              <span className="text-white">Meditation Programs</span>
+              {t("explore_programs_line_1")}<br />
+              <span className="text-white/80">{t("explore_programs_line_2")}</span>
             </h2>
             <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
-              Free and open to all — from beginners to advanced practitioners. Rooted in universal humanitarian philosophy and spiritual wisdom.
+              {t("programs_description")}
             </p>
           </motion.div>
           <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={viewport}>
@@ -59,7 +61,7 @@ const FeaturedClasses = () => {
               to="/media"
               className="self-start md:self-end px-7 py-3 rounded-full text-sm font-semibold bg-white text-secondary hover:bg-white/90 transition-all duration-300"
             >
-              View All Programs
+              {t("view_all_programs")}
             </NavLink>
           </motion.div>
         </div>

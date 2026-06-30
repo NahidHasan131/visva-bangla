@@ -13,37 +13,41 @@ import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from 'react-icons/hi';
 import banner1 from '../../assets/banner/visvaBanglaBanner-1.png';
 import banner2 from '../../assets/banner/visvaBanglaBanner-2.png';
 import banner3 from '../../assets/banner/visvaBanglaBanner-3.png';
+import { useTranslation } from 'react-i18next';
 
-const slides = [
+
+
+const Hero = () => {
+  const {t} = useTranslation()
+  const swiperRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const slides = [
   {
     img: banner1,
-    badge: 'Welcome To VisvaBangla',
-    title: 'Discover the Power of Yoga & Meditation',
-    desc: 'Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.',
+    badge: `${t("welcome_to_visvabangla")}`,
+    title: `${t("discover_the_power")}`,
+    desc: `${t("begin_your_wellness_journey")}`,
     ctaPath: '/media',
-    ctaText: 'Explore Classes',
+    ctaText: `${t("explore_classes")}`,
   },
   {
     img: banner2,
-    badge: 'Find Your Inner Peace',
-    title: 'Start Your Morning with Mindful Yoga Flow',
-    desc: 'A gentle morning routine that energizes your body and clears your mind before the day begins.',
+    badge: `${t("find_your_inner_peace")}`,
+    title: `${t("start_your_morning")}`,
+    desc: `${t("gentle_morning_routine")}`,
     ctaPath: '/media/audio',
-    ctaText: 'Listen Now',
+    ctaText: `${t("listen_now")}`,
   },
   {
     img: banner3,
-    badge: 'Transform Your Life',
-    title: 'Build Strength & Balance Through Meditation',
-    desc: 'Challenge yourself with power yoga and guided meditation sessions led by certified instructors.',
+    badge: `${t("transform_your_life")}`,
+    title: `${t("build_strength_balance")}`,
+    desc: `${t("challenge_yourself")}`,
     ctaPath: '/media/video',
-    ctaText: 'Watch Videos',
+    ctaText: `${t("watch_videos")}`,
   },
 ];
-
-const Hero = () => {
-  const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section className="relative w-full  max-h-screen h-175 overflow-hidden bg-gray-950">

@@ -9,52 +9,8 @@ import { logout } from '../../store/authSlice';
 import { toast } from 'sonner';
 import visvaBangala from '../../assets/logo/visva-bangala.png';
 import visvaBanglaMenuImg from '../../assets/visvaBanglaMenuImg.jpeg';
+import { useTranslation } from "react-i18next";
 
-
-const navLinks = [
-  { label: 'Home', path: '/' },
-  {
-    label: 'About Us', path: '/about',
-    children: [
-      { label: 'About Us', path: '/about' },
-      { label: 'Trainer', path: '/about/trainer' },
-    ],
-  },
-  {
-    label: 'Media', path: '/media',
-    children: [
-      { label: 'All Media', path: '/media' },
-      { label: 'Audio', path: '/media/audio' },
-      { label: 'Video', path: '/media/video' },
-      { label: 'Gallery', path: '/media/gallery' },
-    ],
-  },
-  { label: 'Blog', path: '/blog' },
-  {
-    label: 'Others',
-    mega: true,
-    columns: [
-      {
-        heading: 'Academic',
-        items: [
-          { label: 'Foundation', path: '/others/foundation' },
-          { label: 'University', path: '/others/university' },
-          { label: 'Publication', path: '/others/publication' },
-          { label: 'Notice', path: '/others/notice' },
-        ],
-      },
-      {
-        heading: 'Policies',
-        items: [
-          { label: 'Privacy & Policy', path: '/others/privacy-policy' },
-          { label: 'Term & Condition', path: '/others/terms' },
-          { label: 'Download', path: '/others/download' },
-        ],
-      },
-    ],
-  },
-  { label: 'Contact Us', path: '/contact' },
-];
 
 /* ── Regular small dropdown ── */
 const DropdownMenu = ({ items }) => (
@@ -154,6 +110,8 @@ const MegaMenu = ({ columns }) => (
 
 /* ══════════════════════════════════════════ */
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
@@ -167,6 +125,74 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
   // Opaque (white bg) when: not on home page, OR on home page after scrolling
   const isOpaque = !isHomePage || isSticky;
+
+  const navLinks = [
+  { label: t("home"), path: "/" },
+  {
+    label: t("about_us"),
+    path: "/about",
+    children: [
+      { label: t("about_us"), path: "/about" },
+      { label: t("trainer"), path: "/about/trainer" },
+    ],
+  },
+  {
+    label: t("media"),
+    path: "/media",
+    children: [
+      { label: t("all_media"), path: "/media" },
+      { label: t("audio"), path: "/media/audio" },
+      { label: t("video"), path: "/media/video" },
+      { label: t("gallery"), path: "/media/gallery" },
+    ],
+  },
+  { label: t("blog"), path: "/blog" },
+  {
+    label: t("institutional_info"),
+    mega: true,
+    columns: [
+      {
+        heading: t("academic"),
+        items: [
+          {
+            label: t("foundation"),
+            path: "/institutional-info/foundation",
+          },
+          {
+            label: t("university"),
+            path: "/institutional-info/university",
+          },
+          {
+            label: t("publication"),
+            path: "/institutional-info/publication",
+          },
+          {
+            label: t("notice"),
+            path: "/institutional-info/notice",
+          },
+        ],
+      },
+      {
+        heading: t("policies"),
+        items: [
+          {
+            label: t("privacy_policy"),
+            path: "/institutional-info/privacy-policy",
+          },
+          {
+            label: t("term_condition"),
+            path: "/institutional-info/terms",
+          },
+          {
+            label: t("download"),
+            path: "/institutional-info/download",
+          },
+        ],
+      },
+    ],
+  },
+  { label: t("contact_us"), path: "/contact" },
+];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -213,7 +239,7 @@ const Navbar = () => {
           <NavLink to="/" className="flex items-center">
             <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
             <span className={`pl-1 text-xl lg:text-2xl font-medium uppercase ${isOpaque ? 'text-secondary' : 'text-white/90'}`}>
-              VisvaBangla
+              {t('visvabangla')}
             </span>
           </NavLink>
 
@@ -228,7 +254,7 @@ const Navbar = () => {
                 {link.mega ? (
                   /* "Others" — mega trigger, no route */
                   <span
-                    className={`flex items-center gap-1 text-sm lg:text-base font-medium cursor-pointer transition-opacity relative pb-1 ${
+                    className={`flex items-center gap-1 text-sm  font-medium cursor-pointer transition-opacity relative pb-1 ${
                       isParentActive(link) ? 'opacity-100' : 'hover:opacity-70'
                     }`}
                     style={{
@@ -257,7 +283,7 @@ const Navbar = () => {
                   <NavLink
                     to={link.path}
                     end={link.path === '/'}
-                    className="flex items-center gap-1 text-sm lg:text-base font-medium transition-opacity relative pb-1 hover:opacity-70"
+                    className="flex items-center gap-1 text-sm font-medium transition-opacity relative pb-1 hover:opacity-70"
                     style={({ isActive }) => ({
                       color: isOpaque ? '#11141B' : '#fff',
                       fontWeight: (isActive || isParentActive(link)) ? '600' : '500',
@@ -295,30 +321,45 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-
-          {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Language toggle */}
+            <button
+              onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'bn' : 'en')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 border group
+                ${isOpaque
+                  ? 'border-secondary/40 text-secondary hover:bg-secondary hover:text-white hover:border-secondary'
+                  : 'border-white/40 text-white hover:bg-white/15 hover:border-white/70'
+                }`}
+              aria-label="Toggle language"
+            >
+              <span>{i18n.language === 'en' ? 'EN' : 'বাং'}</span>
+              <span className="opacity-30">|</span>
+              <span className="opacity-40 group-hover:opacity-80 transition-opacity duration-200">
+                {i18n.language === 'en' ? 'বাং' : 'EN'}
+              </span>
+            </button>
+
             {token ? (
               <>
                 <NavLink
                   to="/admin"
-                  className="px-5 py-2 rounded-full font-medium text-white bg-secondary hover:bg-primary transition-all duration-300"
+                  className="px-5 py-2 rounded-full text-sm font-medium text-white bg-secondary hover:bg-primary transition-all duration-300"
                 >
-                  Admin Panel
+                  {t("admin_panel")}
                 </NavLink>
                 <button
                   onClick={handleSignOut}
-                  className="px-5 py-2 rounded-full font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
+                  className="px-5 py-1.75 rounded-full text-sm  font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
                 >
-                  Sign Out
+                  {t("sign_out")}
                 </button>
               </>
             ) : (
               <NavLink
                 to="/auth/signin"
-                className="px-5 py-2 rounded-full font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300 ease-in-out"
+                className="px-5 py-1.5 rounded-full text-sm font-medium border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300 ease-in-out"
               >
-                Sign In
+                {t("sign_in")}
               </NavLink>
             )}
           </div>
@@ -449,6 +490,15 @@ const Navbar = () => {
 
         {/* Mobile auth buttons */}
         <div className="px-6 pt-4 pb-6 flex flex-col gap-3 border-t border-gray-200 mt-4">
+          {/* Language toggle — mobile */}
+          <button
+            onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'bn' : 'en')}
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full border border-secondary/40 text-secondary text-sm font-semibold transition-all duration-300 hover:bg-secondary hover:text-white hover:border-secondary"
+          >
+            <span>{i18n.language === 'en' ? '🇧🇩' : '🇬🇧'}</span>
+            <span>{i18n.language === 'en' ? 'বাংলায় দেখুন' : 'View in English'}</span>
+          </button>
+
           {token ? (
             <>
               <NavLink

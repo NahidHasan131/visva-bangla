@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LuUsers } from 'react-icons/lu';
+import { useTranslation } from 'react-i18next';
 
 // variant: 'dark' | 'light' | 'glass'
 const ClassCard = ({ cls, variant = 'dark' }) => {
+  const {t} = useTranslation();
   const isDark = variant === 'dark';
   const isGlass = variant === 'glass';
   const [expanded, setExpanded] = useState(false);
 
   const WORD_LIMIT = 8;
-  const words = cls.desc?.split(' ') || [];
+  const translatedDesc = t(cls.desc);
+  const words = translatedDesc?.split(' ') || [];
   const isLong = words.length > WORD_LIMIT;
   const displayDesc = expanded || !isLong
-    ? cls.desc
+    ? translatedDesc
     : words.slice(0, WORD_LIMIT).join(' ') + '...';
 
   return (
@@ -54,14 +57,14 @@ const ClassCard = ({ cls, variant = 'dark' }) => {
         <div className={`flex items-center justify-between text-xs ${(isDark || isGlass) ? 'text-white/40' : 'text-gray-400'}`}>
           <span className="flex items-center gap-1">
             <LuUsers size={13} />
-            {cls.participants}
+            {cls.participants} + {t("participants")}
           </span>
         </div>
 
         {/* Title */}
         <div>
           <h3 className={`text-base font-bold leading-snug ${(isDark || isGlass) ? 'text-white' : 'text-[#11141B]'}`}>
-            {cls.title}
+            {t(cls.title)}
           </h3>
         </div>
 
@@ -75,7 +78,7 @@ const ClassCard = ({ cls, variant = 'dark' }) => {
                 (isDark || isGlass) ? 'text-white/70 hover:text-white' : 'text-secondary hover:text-secondary/80'
               }`}
             >
-              {expanded ? 'Read less' : 'Read more'}
+              {expanded ? `${t("read_less")}` : `${t("read_more")}`}
             </button>
           )}
         </div>
@@ -95,7 +98,7 @@ const ClassCard = ({ cls, variant = 'dark' }) => {
         >
           <span className={`flex items-center gap-1.5 transition-colors group-hover/btn:text-white ${isGlass ? 'text-white/80' : 'text-secondary'}`}>
             {cls.icon}
-            Join Program
+            {t("join_program")}`
           </span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
             className={`group-hover/btn:translate-x-0.5 transition-all duration-200 group-hover/btn:text-white ${(isDark || isGlass) ? 'text-white/40' : 'text-gray-400'}`}>

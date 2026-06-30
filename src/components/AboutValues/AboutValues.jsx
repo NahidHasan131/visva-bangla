@@ -84,7 +84,7 @@ const AboutValues = () => {
               <img
                 src={aboutImg}
                 alt="Our values"
-                className="w-full h-125 object-cover"
+                className="w-full h-130 object-fit"
               />
             </div>
             {/* Info card */}
@@ -114,7 +114,7 @@ const AboutValues = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 Goals & Objectives
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
                 Our Commitment to <br />
                 <span className="text-secondary">Humanity & Society</span>
               </h2>

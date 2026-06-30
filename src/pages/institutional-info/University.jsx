@@ -61,7 +61,7 @@ const University = () => (
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
                 Experimental Activities Announced
               </span>
-              <h1 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-semibold text-[#11141B] leading-tight">
                 VisvaBangla <br />
                 <span className="text-secondary">Spiritual University</span>
               </h1>
@@ -94,7 +94,7 @@ const University = () => (
           <motion.div className="lg:w-1/2 relative"
             variants={fadeRight} initial="hidden" whileInView="show" viewport={viewport}>
             <div className="rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
-              <img src={visionImg} alt="VisvaBangla Spiritual University" className="w-full h-[500px] object-cover" />
+              <img src={visionImg} alt="VisvaBangla Spiritual University" className="w-full h-130 object-cover" />
             </div>
             {/* floating stats */}
             <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 flex items-center justify-between shadow-lg">

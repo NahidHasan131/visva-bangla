@@ -33,7 +33,7 @@ const Media = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="flex flex-col gap-3">
             <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800 text-sm">Media</span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">Explore All Content</h2>
+            <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">Explore All Content</h2>
             <p className="text-gray-500 max-w-md">Classes, videos, audio and gallery — everything in one place.</p>
           </div>
 
