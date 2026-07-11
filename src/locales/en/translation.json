@@ -134,14 +134,56 @@
   "subscribe": "Subscribe",
   "subscription_note": "No spam. Only meaningful updates. Unsubscribe anytime.",
 
+
   "our_guides": "Our Guides",
   "guides_title_line_1": "Meet Our",
   "guides_title_line_2": "Spiritual Guides",
-
   "guides_description": "Our guides are dedicated researchers, educators, and practitioners rooted in universal humanitarian philosophy — committed to sharing the wisdom of meditation, Sufi tradition, and spiritual science freely with all.",
-
   "Dr. S. M. Hasib Ul Hasan" : "Dr. S. M. Hasib Ul Hasan",
   "Rajshahi, Bangladesh" : "Rajshahi, Bangladesh",
   "researcher_proposer": "Researcher & Proposer",
-  "view_profile": "View Profile"
+  "view_profile": "View Profile",
+
+
+  "community_reviews": "Community Reviews",
+  "reviews_title1": "What Our ",
+  "reviews_title2": "Community Says",
+  "reviews_description": "Real experiences from participants of our free meditation sessions, spiritual education programs, and weekly classes.",
+  "reviews": "Reviews",
+  "no_reviews_yet": "No reviews yet. Be the first to share your experience!",
+  "share_experience": "Share Your Experience",
+  "share_experience_description": "Have you attended our free meditation sessions or spiritual education programs? We'd love to hear your thoughts.",
+
+  "free_open_to_all": "Free & Open to All",
+  "non_communal_approach": "Non-Communal Approach",
+  "rooted_in_sufi_wisdom": "Rooted in Sufi Wisdom",
+
+  "your_name": "Your Name",
+  "name_placeholder": "Enter your name",
+  "name_required": "Name is required",
+
+  "your_role": "Your Role",
+  "role_placeholder": "e.g. Student, Seeker...",
+  "optional": "Optional",
+  "your_rating": "Your Rating",
+  "your_review": "Your Review",
+  "review_required": "Review is required",
+  "review_placeholder": "Share your experience with our programs...",
+  "review_minimum": "Please write at least 20 characters",
+  "characters": "chars",
+  "submit_review": "Submit Review",
+  "submitting": "Submitting...",
+  "review_thank_you": "Thank you for your review!",
+
+
+  "join_the_movement": "Join the Movement",
+  "journey_title_line_1": "Begin Your Journey of",
+  "journey_title_line_2": "Meditation & Spiritual Freedom",
+  "journey_description": "Join VisvaBangla Foundation's free meditation sessions, spiritual education programs, and weekly Sufi philosophy classes — open to all, regardless of religion, class, or background.",
+  "years_of_research": "Years of Research",
+  "join_free_meditation": "Join Free Meditation",
+  "explore_our_vision": "Explore Our Vision",
+  "join_note": "No registration fee. No commitment. Everything is completely free."
+
+
 }

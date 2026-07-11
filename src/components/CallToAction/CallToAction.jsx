@@ -5,14 +5,18 @@ import { PiHandsPrayingLight } from 'react-icons/pi';
 import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, staggerContainer, viewport } from '../../lib/motion';
 import ctaImg from '../../assets/call-to-action.jpg';
-
-const stats = [
-  { value: '150+', label: 'Regular Participants' },
-  { value: '100%', label: 'Free of Cost' },
-  { value: '15+',  label: 'Years of Research' },
-];
+import { useTranslation } from 'react-i18next';
 
 const CallToAction = () => {
+
+  const {t} = useTranslation();
+
+  const stats = [
+  { value: '150+', label: t('regular_participants') },
+  { value: '100%', label: t('free_of_cost') },
+  { value: '15+',  label: t('years_of_research') },
+];
+
   return (
     <motion.section
       className="relative py-20 lg:py-28 overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
@@ -33,7 +37,7 @@ const CallToAction = () => {
           viewport={viewport}
         >
           <PiHandsPrayingLight size={14} />
-          Join the Movement
+          {t("join_the_movement")}
         </motion.span>
 
         <motion.div
@@ -44,12 +48,12 @@ const CallToAction = () => {
           viewport={viewport}
         >
           <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
-            Begin Your Journey of
+            {t("journey_title_line_1")}
             <br />
-            <span className="text-secondary">Meditation & Spiritual Freedom</span>
+            <span className="text-secondary">{t("journey_title_line_2")}</span>
           </h2>
           <p className="text-gray-300 text-base leading-relaxed max-w-xl mx-auto">
-            Join VisvaBangla Foundation's free meditation sessions, spiritual education programs, and weekly Sufi philosophy classes — open to all, regardless of religion, class, or background.
+            {t("journey_description")}
           </p>
         </motion.div>
 
@@ -80,19 +84,19 @@ const CallToAction = () => {
             className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-secondary/90 transition-all duration-300 shadow-[0_4px_20px_rgba(6,164,167,0.4)]"
           >
             <GiLotus size={16} />
-            Join Free Meditation
+            {t("join_free_meditation")}
           </NavLink>
           <NavLink
             to="/about"
             className="flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-all duration-300"
           >
-            Explore Our Vision
+            {t("explore_our_vision")}
             <TbArrowRight size={16} />
           </NavLink>
         </motion.div>
 
         <p className="text-gray-500 text-xs">
-          No registration fee. No commitment. Everything is completely free.
+          {t("join_note")}
         </p>
 
       </div>

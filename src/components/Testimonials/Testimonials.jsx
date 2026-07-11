@@ -10,6 +10,7 @@ import { fadeIn, fadeUp, fadeLeft, fadeRight, viewport } from '../../lib/motion'
 import { useGetReviewsQuery, useCreateReviewMutation } from '../../store/reviewApi';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useTranslation } from 'react-i18next';
 
 // ── Star picker ───────────────────────────────────────────────────────────────
 const StarPicker = ({ value, onChange }) => (
@@ -49,6 +50,9 @@ const ReviewCard = ({ review }) => (
 
 // ── Main component ────────────────────────────────────────────────────────────
 const Testimonials = () => {
+
+  const {t} = useTranslation();
+
   const [form, setForm]     = useState({ name: '', role: '', text: '', stars: 5 });
   const [errors, setErrors] = useState({});
 
@@ -64,9 +68,9 @@ const Testimonials = () => {
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim())             e.name = 'Name is required';
-    if (!form.text.trim())             e.text = 'Review is required';
-    if (form.text.trim().length < 20)  e.text = 'Please write at least 20 characters';
+    if (!form.name.trim())             e.name = `${t("name_required")}`;
+    if (!form.text.trim())             e.text = `${t("review_required")}`;
+    if (form.text.trim().length < 20)  e.text = `${t("review_minimum")}`;
     return e;
   };
 
@@ -84,7 +88,7 @@ const Testimonials = () => {
       }).unwrap();
       setForm({ name: '', role: '', text: '', stars: 5 });
       setErrors({});
-      toast.success('Thank you for your review!');
+      toast.success(t("review_thank_you"));
     } catch (err) {
       toast.error(err?.data?.message || 'Failed to submit review.');
     }
@@ -102,13 +106,13 @@ const Testimonials = () => {
           variants={fadeUp} initial="hidden" whileInView="show" viewport={viewport}>
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-widest">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
-            Community Reviews
+            {t("community_reviews")}
           </span>
           <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B]">
-            What Our <span className="text-secondary">Community Says</span>
+            {t("reviews_title1")}<span className="text-secondary">{t("reviews_title2")}</span>
           </h2>
           <p className="text-gray-500 text-sm max-w-md leading-relaxed">
-            Real experiences from participants of our free meditation sessions, spiritual education programs, and weekly classes.
+            {t("reviews_description")}
           </p>
           {approvedReviews.length > 0 && (
             <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm">
@@ -118,7 +122,7 @@ const Testimonials = () => {
                 ))}
               </div>
               <span className="text-sm font-bold text-[#11141B]">{avgRating}</span>
-              <span className="text-xs text-gray-400">({approvedReviews.length} reviews)</span>
+              <span className="text-xs text-gray-400">({approvedReviews.length} {t("reviews")})</span>
             </div>
           )}
         </motion.div>
@@ -136,7 +140,7 @@ const Testimonials = () => {
               {[1,2,3].map(i => <div key={i} className="h-48 rounded-2xl bg-gray-200 animate-pulse" />)}
             </div>
           ) : approvedReviews.length === 0 ? (
-            <p className="text-center text-gray-400 py-10">No reviews yet. Be the first to share your experience!</p>
+            <p className="text-center text-gray-400 py-10">{t("no_reviews_yet")}</p>
           ) : (
             <Swiper
               className="review-swiper pb-10!"
@@ -169,13 +173,17 @@ const Testimonials = () => {
                 <MdOutlineRateReview size={24} className="text-white" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="text-2xl font-bold text-white">Share Your Experience</h3>
+                <h3 className="text-2xl font-bold text-white">{t("share_experience")}</h3>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  Have you attended our free meditation sessions or spiritual education programs? We'd love to hear your thoughts.
+                  {t("share_experience_description")}
                 </p>
               </div>
               <ul className="flex flex-col gap-3">
-                {['Free & open to all', 'Non-communal approach', 'Rooted in Sufi wisdom'].map(item => (
+                {[
+                  t("free_open_to_all"),
+                  t("non_communal_approach"),
+                  t("rooted_in_sufi_wisdom")
+                ].map(item => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-white/80">
                     <GiLotus size={14} className="text-white/60 shrink-0" />
                     {item}
@@ -192,49 +200,49 @@ const Testimonials = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold text-[#11141B] uppercase tracking-wide">
-                      Your Name <span className="text-primary">*</span>
+                      {t("your_name")} <span className="text-primary">*</span>
                     </label>
                     <input type="text" value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      placeholder="e.g. Md. Rafiqul Islam"
+                      placeholder={t("name_placeholder")}
                       className={`px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${errors.name ? 'border-primary bg-primary/5' : 'border-gray-200 focus:border-secondary'}`} />
                     {errors.name && <p className="text-xs text-primary">{errors.name}</p>}
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold text-[#11141B] uppercase tracking-wide">
-                      Your Role <span className="text-gray-400 font-normal">(optional)</span>
+                      {t("your_role")} <span className="text-gray-400 font-normal">({t("optional")})</span>
                     </label>
                     <input type="text" value={form.role}
                       onChange={e => setForm(f => ({ ...f, role: e.target.value }))}
-                      placeholder="e.g. Student, Seeker..."
+                      placeholder={t("role_placeholder")}
                       className="px-4 py-3 rounded-xl border border-gray-200 focus:border-secondary text-sm outline-none transition-colors" />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold text-[#11141B] uppercase tracking-wide">
-                    Your Rating <span className="text-primary">*</span>
+                    {t("your_rating")} <span className="text-primary">*</span>
                   </label>
                   <StarPicker value={form.stars} onChange={v => setForm(f => ({ ...f, stars: v }))} />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold text-[#11141B] uppercase tracking-wide">
-                    Your Review <span className="text-primary">*</span>
+                    {t("your_review")} <span className="text-primary">*</span>
                   </label>
                   <textarea rows={4} value={form.text}
                     onChange={e => setForm(f => ({ ...f, text: e.target.value }))}
-                    placeholder="Share your experience with our programs..."
+                    placeholder={t("review_placeholder")}
                     className={`px-4 py-3 rounded-xl border text-sm outline-none transition-colors resize-none ${errors.text ? 'border-primary bg-primary/5' : 'border-gray-200 focus:border-secondary'}`} />
                   <div className="flex items-center justify-between">
                     {errors.text ? <p className="text-xs text-primary">{errors.text}</p> : <span />}
-                    <span className="text-xs text-gray-400">{form.text.length} chars</span>
+                    <span className="text-xs text-gray-400">{form.text.length} {t("characters")}</span>
                   </div>
                 </div>
 
                 <button type="submit" disabled={submitting}
                   className="self-start px-8 py-3 rounded-full bg-secondary text-white text-sm font-semibold hover:bg-secondary/90 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
-                  {submitting ? 'Submitting...' : 'Submit Review'}
+                  {submitting ? t("submitting") : t("submit_review")}
                 </button>
               </form>
             </motion.div>
