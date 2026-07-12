@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { fadeIn, fadeUp, fadeLeft, fadeRight, staggerContainer, viewport } from '../../lib/motion';
 import { useGetBlogsQuery } from '../../store/blogsApi';
 import BlogCard from './BlogCard';
+import { useTranslation } from 'react-i18next';
 
 const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
@@ -22,6 +23,7 @@ const Blog = () => {
     path:   '/blog',
   }));
 
+  const {t} = useTranslation();
   return (
     <motion.section
       className="py-16 lg:py-24 bg-white"
@@ -43,11 +45,11 @@ const Blog = () => {
           >
             <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-              Blog & News
+              {t("blog_news")}
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
-              Latest Articles &<br />
-              <span className="text-secondary">Spiritual Insights</span>
+              {t("blog_title_line_1")}<br />
+              <span className="text-secondary">S{t("blog_title_line_2")}</span>
             </h2>
           </motion.div>
 
@@ -56,7 +58,7 @@ const Blog = () => {
               to="/blog"
               className="self-start md:self-end px-7 py-3 rounded-full text-sm font-semibold border border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
             >
-              View All Posts
+              {t("view_all_posts")}
             </NavLink>
           </motion.div>
         </div>
@@ -69,7 +71,7 @@ const Blog = () => {
             ))}
           </div>
         ) : posts.length === 0 ? (
-          <p className="text-center py-16 text-gray-400">No posts available yet.</p>
+          <p className="text-center py-16 text-gray-400">{t("no_posts_available")}</p>
         ) : (
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-7"

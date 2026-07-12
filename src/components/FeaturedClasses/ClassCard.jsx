@@ -46,7 +46,7 @@ const ClassCard = ({ cls, variant = 'dark' }) => {
           <div className="absolute inset-0 bg-linear-to-b from-white/5 via-transparent to-black/30 pointer-events-none" />
         )}
         <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white text-xs font-medium">
-          {cls.type}
+          {t(cls.type)}
         </span>
       </div>
 

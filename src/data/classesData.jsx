@@ -15,7 +15,7 @@ export const classesData = [
     title: 'morning_yoga_flow',
     desc: 'morning_yoga_flow_description',
     path: '/media/video',
-    type: 'Yoga',
+    type: 'yoga',
   },
   {
     img: meditation,
@@ -25,7 +25,7 @@ export const classesData = [
     title: 'guided_meditation',
     desc: 'guided_meditation_description',
     path: '/media/audio',
-    type: 'Meditation',
+    type: 'meditation',
   },
   {
     img: powerYoga,
@@ -35,7 +35,7 @@ export const classesData = [
     title: 'power_yoga_strength',
     desc: 'power_yoga_strength_description',
     path: '/media/video',
-    type: 'Yoga',
+    type: 'yoga',
   },
   {
     img: meditationImg,
@@ -45,6 +45,6 @@ export const classesData = [
     title: 'sufi_spiritual_meditation',
     desc: 'sufi_spiritual_meditation_description',
     path: '/media/audio',
-    type: 'Spiritual',
+    type: 'spiritual',
   },
 ];
