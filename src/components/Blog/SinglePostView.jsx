@@ -1,13 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { MdCalendarToday, MdArrowBack } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 
 const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
 
-const SinglePostView = ({ post, backPath = '/blog', backLabel = 'Back to Blog' }) => {
+const SinglePostView = ({ post, backPath = '/blog', backLabel  }) => {
+  const { t } = useTranslation();
   if (!post) return null;
 
+  const label = backLabel || t("back_to_blog");
   return (
     <article className="max-w-3xl mx-auto">
 
@@ -16,7 +19,7 @@ const SinglePostView = ({ post, backPath = '/blog', backLabel = 'Back to Blog' }
         to={backPath}
         className="inline-flex items-center gap-2 text-sm text-secondary font-medium hover:opacity-70 transition-opacity mb-8"
       >
-        <MdArrowBack size={16} /> {backLabel}
+        <MdArrowBack size={16} /> {label}
       </NavLink>
 
       {/* Cover image */}

@@ -1,43 +1,65 @@
-import React, { useState } from 'react';
-import { IoClose } from 'react-icons/io5';
-import { MdLocationOn, MdCalendarToday, MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
-import Pagination from './Pagination';
+import React, { useState } from "react";
+import { IoClose } from "react-icons/io5";
+import {
+  MdLocationOn,
+  MdCalendarToday,
+  MdArrowBackIos,
+  MdArrowForwardIos,
+} from "react-icons/md";
+import Pagination from "./Pagination";
+import { useTranslation } from "react-i18next";
 
 const PER_PAGE = 12;
 
 const normalize = (img) => ({
-  id:       img.id || img._id,
-  src:      img.src || img.imageUrl,
-  title:    img.title,
+  id: img.id || img._id,
+  src: img.src || img.imageUrl,
+  title: img.title,
   location: img.location || null,
-  date:     img.date || (img.createdAt ? new Date(img.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : null),
-  tag:      img.tag || null,
+  date:
+    img.date ||
+    (img.createdAt
+      ? new Date(img.createdAt).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      : null),
+  tag: img.tag || null,
 });
 
 const ImageGallery = ({ images: rawImages = [], tags }) => {
-  const [activeTag, setActiveTag] = useState('All');
+  const { t } = useTranslation();
+  const [activeTag, setActiveTag] = useState("All");
   const [page, setPage] = useState(1);
   const [lightbox, setLightbox] = useState(null);
 
   const images = rawImages.map(normalize);
-  const filtered = (!tags || activeTag === 'All') ? images : images.filter(img => img.tag === activeTag);
+  const filtered =
+    !tags || activeTag === "All"
+      ? images
+      : images.filter((img) => img.tag === activeTag);
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
-  const handleTagChange = (tag) => { setActiveTag(tag); setPage(1); };
+  const handleTagChange = (tag) => {
+    setActiveTag(tag);
+    setPage(1);
+  };
   const closeLightbox = () => setLightbox(null);
-  const prevImg = () => setLightbox(i => (i - 1 + filtered.length) % filtered.length);
-  const nextImg = () => setLightbox(i => (i + 1) % filtered.length);
+  const prevImg = () =>
+    setLightbox((i) => (i - 1 + filtered.length) % filtered.length);
+  const nextImg = () => setLightbox((i) => (i + 1) % filtered.length);
 
   React.useEffect(() => {
     const handler = (e) => {
       if (lightbox === null) return;
-      if (e.key === 'ArrowLeft') prevImg();
-      if (e.key === 'ArrowRight') nextImg();
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === "ArrowLeft") prevImg();
+      if (e.key === "ArrowRight") nextImg();
+      if (e.key === "Escape") closeLightbox();
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, [lightbox]);
 
   const activeImg = lightbox !== null ? filtered[lightbox] : null;
@@ -47,15 +69,17 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
       {/* Tag filter */}
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-10">
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <button
               key={tag}
               onClick={() => handleTagChange(tag)}
               className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer"
               style={{
-                backgroundColor: activeTag === tag ? 'var(--color-secondary)' : 'white',
-                color:           activeTag === tag ? '#ffffff' : '#11141B',
-                borderColor:     activeTag === tag ? 'var(--color-secondary)' : '#e5e7eb',
+                backgroundColor:
+                  activeTag === tag ? "var(--color-secondary)" : "white",
+                color: activeTag === tag ? "#ffffff" : "#11141B",
+                borderColor:
+                  activeTag === tag ? "var(--color-secondary)" : "#e5e7eb",
               }}
             >
               {tag}
@@ -74,14 +98,24 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
               onClick={() => setLightbox(globalIndex)}
               className="break-inside-avoid group relative rounded-2xl overflow-hidden cursor-pointer"
             >
-              <img src={img.src} alt={img.title} className="w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img
+                src={img.src}
+                alt={img.title}
+                className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               <div className="absolute inset-0 bg-[#11141B]/0 group-hover:bg-[#11141B]/50 transition-all duration-300 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100">
                 {img.tag && (
-                  <span className="self-start px-2 py-0.5 rounded-full bg-secondary text-white text-xs font-medium mb-2">{img.tag}</span>
+                  <span className="self-start px-2 py-0.5 rounded-full bg-secondary text-white text-xs font-medium mb-2">
+                    {img.tag}
+                  </span>
                 )}
-                <p className="text-white font-semibold text-sm leading-snug">{img.title}</p>
+                <p className="text-white font-semibold text-sm leading-snug">
+                  {img.title}
+                </p>
                 {img.location && (
-                  <p className="text-gray-300 text-xs mt-1 flex items-center gap-1"><MdLocationOn size={12} /> {img.location}</p>
+                  <p className="text-gray-300 text-xs mt-1 flex items-center gap-1">
+                    <MdLocationOn size={12} /> {img.location}
+                  </p>
                 )}
               </div>
             </div>
@@ -89,9 +123,19 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
         })}
       </div>
 
-      {filtered.length === 0 && <div className="text-center py-20 text-gray-400">No images found.</div>}
+      {filtered.length === 0 && (
+        <div className="text-center py-20 text-gray-400">
+          {t("no_images_found")}
+        </div>
+      )}
 
-      <Pagination page={page} totalPages={totalPages} total={filtered.length} label="photos" onPageChange={setPage} />
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        total={filtered.length}
+        label="photos"
+        onPageChange={setPage}
+      />
 
       {/* Lightbox */}
       {activeImg && (
@@ -99,36 +143,62 @@ const ImageGallery = ({ images: rawImages = [], tags }) => {
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={(e) => e.target === e.currentTarget && closeLightbox()}
         >
-          <button onClick={closeLightbox}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
             <IoClose size={20} />
           </button>
-          <button onClick={prevImg}
-            className="absolute left-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+          <button
+            onClick={prevImg}
+            className="absolute left-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
             <MdArrowBackIos size={16} />
           </button>
 
           <div className="flex flex-col lg:flex-row gap-6 max-w-5xl w-full max-h-[90vh]">
-            <img src={activeImg.src} alt={activeImg.title} className="lg:flex-1 max-h-[70vh] lg:max-h-[85vh] object-contain rounded-2xl" />
+            <img
+              src={activeImg.src}
+              alt={activeImg.title}
+              className="lg:flex-1 max-h-[70vh] lg:max-h-[85vh] object-contain rounded-2xl"
+            />
             <div className="lg:w-64 flex flex-col gap-4 text-white shrink-0 justify-center">
               {activeImg.tag && (
-                <span className="self-start px-3 py-1 rounded-full bg-secondary text-white text-xs font-medium">{activeImg.tag}</span>
+                <span className="self-start px-3 py-1 rounded-full bg-secondary text-white text-xs font-medium">
+                  {activeImg.tag}
+                </span>
               )}
               <h3 className="text-xl font-bold">{activeImg.title}</h3>
               <div className="flex flex-col gap-3 text-sm text-gray-300">
                 {activeImg.location && (
-                  <div className="flex items-center gap-2"><MdLocationOn size={16} className="text-secondary shrink-0" />{activeImg.location}</div>
+                  <div className="flex items-center gap-2">
+                    <MdLocationOn
+                      size={16}
+                      className="text-secondary shrink-0"
+                    />
+                    {activeImg.location}
+                  </div>
                 )}
                 {activeImg.date && (
-                  <div className="flex items-center gap-2"><MdCalendarToday size={16} className="text-secondary shrink-0" />{activeImg.date}</div>
+                  <div className="flex items-center gap-2">
+                    <MdCalendarToday
+                      size={16}
+                      className="text-secondary shrink-0"
+                    />
+                    {activeImg.date}
+                  </div>
                 )}
               </div>
-              <p className="text-xs text-gray-400 mt-2">{lightbox + 1} / {filtered.length}</p>
+              <p className="text-xs text-gray-400 mt-2">
+                {lightbox + 1} / {filtered.length}
+              </p>
             </div>
           </div>
 
-          <button onClick={nextImg}
-            className="absolute right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+          <button
+            onClick={nextImg}
+            className="absolute right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
             <MdArrowForwardIos size={16} />
           </button>
         </div>

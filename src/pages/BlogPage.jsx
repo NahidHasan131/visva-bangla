@@ -7,6 +7,7 @@ import BlogCard from '../components/Blog/BlogCard';
 import Pagination from '../components/Media/Pagination';
 import { useGetBlogsQuery } from '../store/blogsApi';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PER_PAGE = 6;
 
@@ -29,11 +30,13 @@ const BlogPage = () => {
   // rest for grid
   const rest = blogs.slice(1);
 
+  const {t} = useTranslation();
+
   // map API blog → BlogCard compatible shape
   const toCard = (b) => ({
     id:     b._id,
     img:    b.image,
-    tag:    b.tag || 'Blog',
+    tag:    b.tag || `${t("blog")}`,
     date:   formatDate(b.createdAt),
     author: b.writer?.name || '—',
     title:  b.title,
@@ -51,15 +54,15 @@ const BlogPage = () => {
 
       <div className="max-w-340 mx-auto px-6 lg:px-12 py-16 lg:py-24">
 
-        {isLoading && <p className="text-center py-20 text-gray-400">Loading posts...</p>}
+        {isLoading && <p className="text-center py-20 text-gray-400">{t("loading_posts")}</p>}
 
         {!isLoading && featured && (
           <>
-            {/* Featured post */}
+            {/* Featured Post */}
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-0.5 bg-secondary" />
-                <span className="text-sm font-medium text-secondary">Featured Post</span>
+                <span className="text-sm font-medium text-secondary">{t("featured_post")}</span>
               </div>
               <div className="grid md:grid-cols-2 gap-0 items-stretch bg-secondary/8 rounded-3xl overflow-hidden">
                 <NavLink to={`/blog/${featured._id}`} className="block overflow-hidden h-72 md:h-auto">
@@ -80,7 +83,7 @@ const BlogPage = () => {
                   <p className="text-gray-500 leading-relaxed line-clamp-3">{featured.content}</p>
                   <NavLink to={`/blog/${featured._id}`}
                     className="self-start flex items-center gap-2 px-6 py-2.5 rounded-full bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition-colors duration-300">
-                    Read More <MdArrowForward size={16} />
+                    {t("read_more")} <MdArrowForward size={16} />
                   </NavLink>
                 </div>
               </div>
@@ -94,13 +97,13 @@ const BlogPage = () => {
                 {/* Search */}
                 <div className="relative mb-8">
                   <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input type="text" placeholder="Search posts..."
+                  <input type="text" placeholder={t("search_posts")}
                     value={search} onChange={e => { setSearch(e.target.value); setPage(1); }}
                     className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-secondary transition-colors bg-white" />
                 </div>
 
                 {filteredRest.length === 0 && (
-                  <p className="text-center py-12 text-gray-400">No posts found.</p>
+                  <p className="text-center py-12 text-gray-400">{t("no_posts_found")}</p>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -117,7 +120,7 @@ const BlogPage = () => {
 
                 {/* Recent posts */}
                 <div className="flex flex-col gap-4">
-                  <h4 className="text-lg font-bold text-[#11141B]">Recent Posts</h4>
+                  <h4 className="text-lg font-bold text-[#11141B]">{t("recent_posts")}</h4>
                   <ul className="flex flex-col gap-4">
                     {blogs.slice(0, 4).map(b => (
                       <li key={b._id} className="flex items-center gap-3">
@@ -137,11 +140,11 @@ const BlogPage = () => {
 
                 {/* CTA */}
                 <div className="bg-[#11141B] rounded-2xl p-6 flex flex-col gap-4">
-                  <h4 className="text-white font-bold text-lg">Start Your Journey</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">Join our free meditation sessions and spiritual education programs.</p>
+                  <h4 className="text-white font-bold text-lg">{t("start_your_journey")}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">{t("journey_cta_description")}</p>
                   <NavLink to="/contact"
                     className="text-center py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-opacity">
-                    Join Free Class
+                    {t("join_free_class")}
                   </NavLink>
                 </div>
 

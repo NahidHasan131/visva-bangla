@@ -1,40 +1,56 @@
-import React from 'react';
-import { useParams, NavLink } from 'react-router-dom';
-import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import SinglePostView from '../components/Blog/SinglePostView';
-import { useGetBlogQuery, useGetBlogsQuery } from '../store/blogsApi';
-import { MdArrowForward } from 'react-icons/md';
+import React from "react";
+import { useParams, NavLink } from "react-router-dom";
+import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
+import SinglePostView from "../components/Blog/SinglePostView";
+import { useGetBlogQuery, useGetBlogsQuery } from "../store/blogsApi";
+import { MdArrowForward } from "react-icons/md";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (d) =>
-  d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+  d
+    ? new Date(d).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "—";
 
 const BlogDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { data, isLoading, isError } = useGetBlogQuery(id);
   const { data: recentData } = useGetBlogsQuery({ page: 1, limit: 5 });
 
   const post = data?.data?.blog;
-  const recentPosts = (recentData?.data?.blogs || []).filter(b => b._id !== id);
+  const recentPosts = (recentData?.data?.blogs || []).filter(
+    (b) => b._id !== id,
+  );
 
   return (
     <div>
       <Breadcrumb
         title="Single Blog Post"
-        desc={post?.title || ''}
+        desc={post?.title || ""}
         crumbs={[
-          { label: 'Home', path: '/' },
-          { label: 'Blog', path: '/blog' },
-          { label: post?.title || 'Post', path: '#' },
+          { label: "Home", path: "/" },
+          { label: "Blog", path: "/blog" },
+          { label: post?.title || "Post", path: "#" },
         ]}
       />
 
       <div className="max-w-340 mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        {isLoading && <p className="text-center py-20 text-gray-400">Loading...</p>}
-        {isError   && <p className="text-center py-20 text-red-400">Post not found.</p>}
+        {isLoading && (
+          <p className="text-center py-20 text-gray-400">{t("loading")}</p>
+        )}
+        {isError && (
+          <p className="text-center py-20 text-red-400">
+            {t("no_posts_found")}
+          </p>
+        )}
 
         {post && (
           <div className="flex flex-col lg:flex-row gap-12">
-
             {/* Main content */}
             <div className="flex-1 min-w-0">
               <SinglePostView post={post} />
@@ -42,44 +58,58 @@ const BlogDetail = () => {
 
             {/* Sidebar */}
             <aside className="lg:w-72 shrink-0 flex flex-col gap-8">
-
               {/* Recent posts */}
               {recentPosts.length > 0 && (
                 <div className="flex flex-col gap-4">
-                  <h4 className="text-base font-bold text-[#11141B] border-b border-gray-100 pb-3">Recent Posts</h4>
+                  <h4 className="text-base font-bold text-[#11141B] border-b border-gray-100 pb-3">
+                    {t("recent_posts")}
+                  </h4>
                   <ul className="flex flex-col gap-4">
-                    {recentPosts.slice(0, 4).map(b => (
+                    {recentPosts.slice(0, 4).map((b) => (
                       <li key={b._id}>
-                        <NavLink to={`/blog/${b._id}`} className="flex items-start gap-3 group">
-                          <img src={b.image} alt={b.title}
-                            className="w-16 h-14 rounded-xl object-cover shrink-0" />
+                        <NavLink
+                          to={`/blog/${b._id}`}
+                          className="flex items-start gap-3 group"
+                        >
+                          <img
+                            src={b.image}
+                            alt={b.title}
+                            className="w-16 h-14 rounded-xl object-cover shrink-0"
+                          />
                           <div className="min-w-0">
                             <p className="text-sm font-medium text-[#11141B] group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                               {b.title}
                             </p>
-                            <p className="text-xs text-gray-400 mt-1">{formatDate(b.createdAt)}</p>
+                            <p className="text-xs text-gray-400 mt-1">
+                              {formatDate(b.createdAt)}
+                            </p>
                           </div>
                         </NavLink>
                       </li>
                     ))}
                   </ul>
-                  <NavLink to="/blog"
-                    className="flex items-center gap-1 text-sm text-primary font-medium hover:opacity-70 transition-opacity mt-1">
-                    ← All Posts
+                  <NavLink
+                    to="/blog"
+                    className="flex items-center gap-1 text-sm text-primary font-medium hover:opacity-70 transition-opacity mt-1"
+                  >
+                    ← {t("all_posts")}
                   </NavLink>
                 </div>
               )}
 
               {/* CTA */}
               <div className="bg-primary/8 rounded-2xl p-6 flex flex-col gap-4">
-                <h4 className="font-bold text-[#11141B]">Start Your Journey</h4>
-                <p className="text-sm text-gray-500 leading-relaxed">Join our free meditation sessions and spiritual education programs.</p>
-                <NavLink to="/contact"
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-secondary/90 transition-colors">
-                  Join Free Class <MdArrowForward size={15} />
+                <h4 className="font-bold text-[#11141B]">{t("start_your_journey")}</h4>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {t("journey_cta_description")}
+                </p>
+                <NavLink
+                  to="/contact"
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-secondary/90 transition-colors"
+                >
+                  {t("join_free_class")}<MdArrowForward size={15} />
                 </NavLink>
               </div>
-
             </aside>
           </div>
         )}

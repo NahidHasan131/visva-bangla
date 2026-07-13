@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { IoTimeOutline } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
 
 const BlogCard = ({ post }) => {
   const { img, tag, date, readTime, author, title, desc, path = '/blog', id } = post;
   const to = id ? `/blog/${id}` : path;
 
+  const {t} = useTranslation();
+  
   return (
     <div className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.11)] hover:-translate-y-1 transition-all duration-300">
 
@@ -55,7 +58,7 @@ const BlogCard = ({ post }) => {
             to={to}
             className="flex items-center gap-1 text-xs font-semibold text-secondary hover:gap-2 transition-all duration-200"
           >
-            Read More
+            {t("read_more")}
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

@@ -9,21 +9,21 @@ const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 
 const Blog = () => {
+  const {t} = useTranslation();
   const { data, isLoading } = useGetBlogsQuery({ page: 1, limit: 3 });
   const apiBlogs = data?.data?.blogs || [];
 
   const posts = apiBlogs.map(b => ({
     id:     b._id,
     img:    b.image,
-    tag:    b.tag || 'Blog',
+    tag:    b.tag || `${t("blog")}`,
     date:   formatDate(b.createdAt),
-    author: b.writer?.name || 'VisvaBangla Foundation',
+    author: b.writer?.name || `${t("vision_title_line_2")}`,
     title:  b.title,
     desc:   b.content,
     path:   '/blog',
   }));
 
-  const {t} = useTranslation();
   return (
     <motion.section
       className="py-16 lg:py-24 bg-white"

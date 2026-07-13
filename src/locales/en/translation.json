@@ -1,5 +1,6 @@
 {
   "visvabangla": "VisvaBangla",
+  "visvabangla_foundation": "VisvaBangla Foundation",
   "home": "Home",
   "about_us": "About Us",
   "trainer": "Trainer",
@@ -24,7 +25,6 @@
   "sign_in": "Sign In",
   "sign_out": "Sign Out",
 
-
   "welcome_to_visvabangla": "Welcome To VisvaBangla",
   "discover_the_power": "Discover the Power of Yoga & Meditation",
   "begin_your_wellness_journey": "Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.",
@@ -45,7 +45,6 @@
   "free_education_description": "Knowledge, research, and spiritual guidance freely available to every seeker regardless of background.",
   "learn_more": "Learn More",
 
-
   "about_foundation": "About the Foundation",
   "vision_line_1": "A Vision for Universal",
   "vision_line_2": "Peace & Spiritual Freedom",
@@ -58,7 +57,6 @@
   "explore_vision": "Explore Vision",
   "established": "Established",
   "since_2015": "Since 2015",
-
 
   "featured_programs": "Featured Programs",
   "explore_programs_line_1": "Explore Our Yoga &",
@@ -80,7 +78,6 @@
   "read_more": "Read more",
   "read_less": "Read less",
   "join_program": "Join Program",
-
 
   "why_choose_us": "Why Choose Us",
   "Why_Choose_Us_title_line_1": "A Foundation Built on",
@@ -118,7 +115,6 @@
   "free_of_cost": "Free of Cost",
   "years_research": "Years Research",
 
-
   "stay_connected": "Stay Connected",
   "updates_title_line_1": "Get Updates on Free Classes",
   "updates_title_line_2": "Events & Spiritual Programs",
@@ -134,16 +130,14 @@
   "subscribe": "Subscribe",
   "subscription_note": "No spam. Only meaningful updates. Unsubscribe anytime.",
 
-
   "our_guides": "Our Guides",
   "guides_title_line_1": "Meet Our",
   "guides_title_line_2": "Spiritual Guides",
   "guides_description": "Our guides are dedicated researchers, educators, and practitioners rooted in universal humanitarian philosophy — committed to sharing the wisdom of meditation, Sufi tradition, and spiritual science freely with all.",
-  "Dr. S. M. Hasib Ul Hasan" : "Dr. S. M. Hasib Ul Hasan",
-  "Rajshahi, Bangladesh" : "Rajshahi, Bangladesh",
+  "Dr. S. M. Hasib Ul Hasan": "Dr. S. M. Hasib Ul Hasan",
+  "Rajshahi, Bangladesh": "Rajshahi, Bangladesh",
   "researcher_proposer": "Researcher & Proposer",
   "view_profile": "View Profile",
-
 
   "community_reviews": "Community Reviews",
   "reviews_title1": "What Our ",
@@ -175,7 +169,6 @@
   "submitting": "Submitting...",
   "review_thank_you": "Thank you for your review!",
 
-
   "join_the_movement": "Join the Movement",
   "journey_title_line_1": "Begin Your Journey of",
   "journey_title_line_2": "Meditation & Spiritual Freedom",
@@ -185,13 +178,12 @@
   "explore_our_vision": "Explore Our Vision",
   "join_note": "No registration fee. No commitment. Everything is completely free.",
 
-
   "blog_news": "Blog & News",
   "blog_title_line_1": "Latest Articles &",
   "blog_title_line_2": "Spiritual Insights",
   "view_all_posts": "View All Posts",
+  "all_posts": "All Posts",
   "no_posts_available": "No posts available yet.",
-
 
   "footer_description": "Universal Humanitarian Philosophy Institute of Meditation, Knowledge, Education and Spiritual Guidance — Rajshahi, Bangladesh.",
   "footer_address": "Shiroil Colony, Ghoramara, Boalia, Rajshahi, Bangladesh",
@@ -211,8 +203,6 @@
   "registration_no": "Reg. No:",
   "copyright": "© 2026 VisvaBangla Foundation. All Rights Reserved.",
   "footer_bottom_text": "Universal Humanitarian Philosophy Institute — Rajshahi, Bangladesh",
-
-
 
   "our_vision": "Our Vision",
   "vision_title_line_1": "The Purpose Behind",
@@ -239,10 +229,8 @@
 
   "year_established": "Year Established",
 
-
-
   "goals_objectives": "Goals & Objectives",
-  "goals_title_line_1": "Our Commitment to",
+  "goals_title_line_1": "Our Commitment to ",
   "goals_title_line_2": "Humanity & Society",
 
   "goals_description": "According to the constitution approved by the District Social Services Office of the Government of Bangladesh, the aims, objectives, and ideals of VisvaBangla Foundation are as follows:",
@@ -263,6 +251,24 @@
   "healthcare_social_welfare_description": "Establishing charitable medical centers, maternal and child healthcare services, and rehabilitation programs for the poor and disabled.",
 
   "environmental_social_action_desc": "Undertaking afforestation, sanitation, anti-drug campaigns, and awareness programs for environmental development and social harmony.",
+
+  "universal_family_global_outreach": "Universal Family & Global Outreach",
+  "universal_family_global_outreach_description": "The whole world is one family. The foundation works globally to spread the light of universal education and spiritual guidance, following great souls who devoted their lives to the spiritual and humanitarian development of humanity.",
+
+  "global_humanitarian_leadership": "Global Humanitarian Leadership",
+  "global_humanitarian_leadership_description": "Creating global humanitarian leaders dedicated to world peace by promoting a non-communal world and advancing the path of self-liberation beyond personal or sectarian identity.",
+
+  "world_human_religion": "World Human Religion Center",
+  "world_human_religion_description": "Establishing a safe and service-oriented residential meditation center named the \"World Human Religion Center\" for people from all walks of life.",
+
+  "education_culture_technology": "Education, Culture & Technology",
+  "education_culture_technology_description": "Working in the fields of education, culture, and technology to establish truth and beauty in human life through the harmonious integration of these disciplines.",
+
+  "child_rights_protection": "Child Rights & Protection",
+  "child_rights_protection_description": "Raising awareness and public opinion regarding child labor, child trafficking, children's rights, and opportunities for children's self-development.",
+
+  "collaboration_coordination": "Collaboration & Coordination",
+  "collaboration_coordination_description": "Working as a supporting and coordinating organization in collaboration with government, semi-government, and voluntary institutions.",
 
   "registration": "Registration",
   "ministry_social_welfare": "Ministry of Social Welfare",
@@ -294,14 +300,125 @@
   "md_mahabub_rahman": "Md. Mahabub Rahman",
   "md_sohel_islam_ripon": "Md. Sohel Islam Ripon",
 
-
   "explore_all_content": "Explore All Content",
   "explore_content_description": "Classes, videos, audio and gallery — everything in one place.",
 
   "classes": "Classes",
   "videos": "Videos",
+  "loading": "Loading...",
 
   "no_audio_available": "No audio available.",
-  "no_images_found": "No images found."
+  "no_images_found": "No images found.",
+  "no_videos_available": "No videos available.",
 
+  "audio_classes": "Audio Classes",
+  "guided_meditation_sessions": "Guided Meditation Sessions",
+  "audio_classes_description": "Listen and practice with our curated audio sessions for relaxation, meditation and mindfulness.",
+
+  "video_classes": "Video Classes",
+  "watch_practice": "Watch & Practice",
+  "video_classes_description": "Follow along with our expert-led video sessions for all levels and goals.",
+
+  "our_moments": "Our Moments",
+  "gallery_description": "A visual journey through our classes, retreats, workshops and community events.",
+
+  "loading_posts": "Loading posts...",
+  "featured_post": "Featured Post",
+  "search_posts": "Search posts...",
+  "no_posts_found": "No posts found.",
+  "recent_posts": "Recent Posts",
+
+  "start_your_journey": "Start Your Journey",
+  "journey_cta_description": "Join our free meditation sessions and spiritual education programs.",
+  "join_free_class": "Join Free Class",
+  "back_to_blog": "Back to Blog",
+
+  "experimental_activities": "Experimental Activities",
+
+  "university_title_line_1": "VisvaBangla Spiritual University — ",
+  "university_title_line_2": "A Dream for All",
+
+  "university_description_1": "Inspired by the approximately four-thousand-year-old heritage of the Barind region and the ancient centers of learning such as Nalanda, Taxila, Somapura Mahavihara, Mahasthangarh, and Mainamati, we are preparing to launch the experimental activities of the \"VisvaBangla Spiritual University.\"",
+
+  "university_description_2": "This initiative is the result of more than fifteen years of research aimed at establishing a university based on universal humanitarian meditation, knowledge, education, and spiritual guidance for self-development and self-purification — especially for non-communal Sufi-oriented spiritual seekers.",
+
+  "university_description_3": "Already, approximately <highlight>{{count}} participants</highlight> from Rajshahi and surrounding regions — including Sufi practitioners, spiritual seekers, laborers, and ordinary non-communal people — have been attending weekly thematic humanitarian philosophy classes, free meditation sessions, and Sufi spiritual education programs regularly.",
+
+  "learn_about_university": "Learn About the University",
+
+  "nature_character": "Nature & Character",
+  "nature_title": "A Non-Political, Non-Profit, Non-Governmental Organization",
+  "nature_description": "This organization operates as a voluntary organization dedicated to improving human life and society. Its operational area initially covers the Rajshahi district, with the potential to expand to other districts and sub-districts with the approval of the registration authority.",
+
+  "universal_humanitarian_title_line_1": "Universal Humanitarian",
+  "universal_humanitarian_title_line_2": "Philosophy Institute",
+
+  "institute_description": "Institute of Meditation, Knowledge, Education and Spiritual Guidance — Rajshahi, Bangladesh",
+
+  "foundation_story": "After many years of research in education, art, and literature, <highlight>Dr. Shah Syed Hasib Ul Hasan Raza</highlight> established the social and cultural organization named <highlight>VisvaBangla Foundation</highlight> with the vision of creating institutions such as the World Human Religion Center, World Meditation Center, and VisvaBangla Spiritual University — based on a universal, non-communal, non-political, and deeply humanitarian philosophy of life focused on meditation, knowledge, education, spiritual guidance, research, and publications.",
+  "registration_description": "The organization was officially registered under the Ministry of Social Welfare of the Government of the People's Republic of Bangladesh through the District Social Services Office, Rajshahi.",
+
+  "date": "Date",
+  "spiritual_university": "Spiritual University",
+
+  "foundation_address_1": "Shiroil Colony, Post Office: Ghoramara, ",
+  "foundation_address_2": "District: Rajshahi, Bangladesh",
+
+  "publication_description": "Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy.",
+
+  "notice_description": "Official notices and announcements from VisvaBangla Foundation.",
+
+  "privacy_policy_description": "Read our privacy policy and understand how VisvaBangla Foundation handles your information.",
+
+  "terms_condition": "Terms & Condition",
+  "terms_condition_description": "Terms and conditions governing the use of VisvaBangla Foundation's services and platforms.",
+
+  "download_description": "Download resources, forms, research papers, and materials from VisvaBangla Foundation.",
+
+  "page_under_development": "This page is currently under development. Please check back soon for updates from VisvaBangla Foundation.",
+
+  "get_in_touch": "Get In Touch",
+  "we_d_love_to": "We'd Love to ",
+  "hear_from_you": "Hear From You",
+
+  "contact_description": "Have questions about our free meditation sessions, spiritual education programs, or the VisvaBangla Foundation? Reach out and we'll get back to you.",
+
+  "our_location": "Our Location",
+  "call_us": "Call Us",
+  "email_us": "Email Us",
+  "working_hours": "Working Hours",
+  "send_a_message": "Send a Message!",
+  "full_name": "Full Name",
+  "email": "Email",
+  "your_email": "your@email.com",
+  "subject": "Subject",
+  "how_can_we_help": "How can we help?",
+  "message": "Message",
+  "tell_us_more": "Tell us more...",
+  "message_sent": "Message Sent!",
+  "message_sent_description": "We'll get back to you as soon as possible.",
+  "send_another": "Send Another",
+  "send_message": "Send Message",
+
+  "visvabangla_foundation_location": "VisvaBangla Foundation Location",
+  "faq": "FAQ",
+  "frequently_asked_line_1": "Frequently Asked ",
+  "frequently_asked_line_2": "Questions",
+
+  "faq_description": "Everything you need to know before joining us.",
+
+  "faq_question_1": "Do I need prior experience to join a meditation class?",
+  "faq_answer_1": "Not at all! Our programs are open to everyone — from complete beginners to experienced practitioners. Our teachers will guide you every step of the way.",
+
+  "faq_question_2": "How do I join a free meditation session?",
+  "faq_answer_2": "You can join by contacting us through this form, calling us directly, or visiting our center in Rajshahi. All sessions are completely free of charge.",
+
+  "faq_question_3": "What should I bring to my first class?",
+  "faq_answer_3": "Just bring comfortable clothing and an open mind. We provide all necessary materials. Water bottles are welcome.",
+
+  "faq_question_4": "Is the VisvaBangla Spiritual University really free?",
+  "faq_answer_4": "Yes, absolutely. All programs — meditation, spiritual education, and knowledge sessions — are entirely free of cost, open to every seeker regardless of background.",
+
+  "faq_question_5": "Can I volunteer as a teacher or researcher?",
+  "faq_answer_5": "Yes! Any knowledgeable scholar or researcher may voluntarily teach in our classes. Please contact us to discuss how you can contribute."
 }

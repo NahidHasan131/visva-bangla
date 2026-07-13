@@ -81,13 +81,13 @@ const Media = () => {
 
         {activeTab === "Videos" &&
           (videoLoading ? (
-            <p className="text-center py-12 text-gray-400">Loading...</p>
+            <p className="text-center py-12 text-gray-400">{t("loading")}</p>
           ) : (
             <VideoGrid videos={videos} />
           ))}
         {activeTab === "Audio" &&
           (audioLoading ? (
-            <p className="text-center py-12 text-gray-400">Loading...</p>
+            <p className="text-center py-12 text-gray-400">{t("loading")}</p>
           ) : tracks.length > 0 ? (
             <AudioPlayer tracks={tracks} />
           ) : (
@@ -97,7 +97,7 @@ const Media = () => {
           ))}
         {activeTab === "Gallery" &&
           (galleryLoading ? (
-            <p className="text-center py-12 text-gray-400">Loading...</p>
+            <p className="text-center py-12 text-gray-400">{t("loading")}</p>
           ) : (
             <ImageGallery images={galleryImages} />
           ))}
