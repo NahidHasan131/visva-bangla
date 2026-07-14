@@ -81,7 +81,7 @@ const WhyChooseUs = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 {t("why_choose_us")}
               </span>
-              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
                 {t("Why_Choose_Us_title_line_1")} <br />
                 <span className="text-primary">{t("Why_Choose_Us_title_line_2")}</span>
               </h2>

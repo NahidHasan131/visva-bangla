@@ -47,7 +47,7 @@ const CallToAction = () => {
           whileInView="show"
           viewport={viewport}
         >
-          <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
             {t("journey_title_line_1")}
             <br />
             <span className="text-secondary">{t("journey_title_line_2")}</span>

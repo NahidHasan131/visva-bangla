@@ -132,7 +132,7 @@ const Foundation = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                   {t("visvabangla_foundation")}
                 </span>
-                <h1 className="text-4xl lg:text-5xl font-semibold text-[#11141B] leading-tight">
+                <h1 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
                   {t("universal_humanitarian_title_line_1")} <br />
                   <span className="text-primary">{t("universal_humanitarian_title_line_2")}</span>
                 </h1>
@@ -299,7 +299,7 @@ const Foundation = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
               {t("goals_objectives")}
             </span>
-            <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
               {t("goals_title_line_1")}
               <span className="text-secondary">{t("goals_title_line_2")}</span>
             </h2>

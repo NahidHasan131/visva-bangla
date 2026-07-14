@@ -87,7 +87,7 @@ const Contact = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
                 {t("get_in_touch")}
               </span>
-              <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
                 {t("we_d_love_to")}{" "}
                 <span className="text-secondary">{t("hear_from_you")}</span>
               </h2>
@@ -251,7 +251,7 @@ const Contact = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                   {t("faq")}
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">
+                <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
                   {t("frequently_asked_line_1")}
                   <span className="text-primary">
                     {t("frequently_asked_line_2")}

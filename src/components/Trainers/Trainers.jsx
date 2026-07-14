@@ -37,7 +37,7 @@ const Trainers = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
             {t("our_guides")}
           </span>
-          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B]">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
             {t("guides_title_line_1")} <span className="text-secondary">{t("guides_title_line_2")}</span>
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed max-w-xl">

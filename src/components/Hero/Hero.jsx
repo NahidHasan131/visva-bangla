@@ -143,7 +143,7 @@ const Hero = () => {
                 </span>
 
                 {/* Title */}
-                <h1 className="animate-fade-up opacity-0 [animation-delay:350ms] text-5xl md:text-6xl lg:text-7xl font-light text-white/95 leading-[1.2] tracking-tight max-w-3xl">
+                <h1 className="animate-fade-up opacity-0 [animation-delay:350ms] text-4xl md:text-5xl lg:text-6xl font-bold text-white/95 leading-[1.2] tracking-tight max-w-3xl">
                   {slide.title}
                 </h1>
 

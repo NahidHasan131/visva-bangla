@@ -41,7 +41,7 @@ const Media = () => {
             <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800 text-sm">
               {t("media")}
             </span>
-            <h2 className="text-4xl lg:text-5xl font-semibold text-[#11141B]">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
               {t("explore_all_content")}
             </h2>
             <p className="text-gray-500 max-w-md">

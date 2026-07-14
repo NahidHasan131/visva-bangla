@@ -49,7 +49,7 @@ const Blog = () => {
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
               {t("blog_title_line_1")}<br />
-              <span className="text-secondary">S{t("blog_title_line_2")}</span>
+              <span className="text-secondary">{t("blog_title_line_2")}</span>
             </h2>
           </motion.div>
 

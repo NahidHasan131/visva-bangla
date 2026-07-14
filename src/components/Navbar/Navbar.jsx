@@ -238,7 +238,7 @@ const Navbar = () => {
           {/* Logo */}
           <NavLink to="/" className="flex items-center">
             <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
-            <span className={`pl-1 text-xl lg:text-2xl font-medium uppercase ${isOpaque ? 'text-secondary' : 'text-white/90'}`}>
+            <span className={`pl-1 text-xl lg:text-2xl pt-2 font-medium uppercase ${isOpaque ? 'text-secondary' : 'text-white/90'}`}>
               {t('visvabangla')}
             </span>
           </NavLink>

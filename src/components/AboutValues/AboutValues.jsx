@@ -131,7 +131,7 @@ const AboutValues = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                 {t("goals_objectives")}
               </span>
-              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
                 {t("goals_title_line_1")} <br />
                 <span className="text-secondary">{t("goals_title_line_2")}</span>
               </h2>

@@ -38,7 +38,7 @@ const CurrentCommittee = ({ showContactButton = false }) => {
           <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
           {t("leadership")}
         </span>
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#11141B]">
+        <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B]">
           {t("current_committee")}
         </h2>
         <p className="text-gray-500 text-sm max-w-md">

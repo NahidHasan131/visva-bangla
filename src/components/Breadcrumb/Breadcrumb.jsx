@@ -1,36 +1,39 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { MdArrowForward } from 'react-icons/md';
-
-const pageMeta = {
-  '/about':                { title: 'About Us',             desc: 'Learn more about our journey, mission and the team behind VisvaBangla Foundation.' },
-  '/about/trainer':        { title: 'Our Trainers',         desc: 'Meet the certified instructors who guide your wellness journey.' },
-  '/media':                { title: 'Media',                desc: 'Explore our audio and video yoga sessions for all levels.' },
-  '/media/audio':          { title: 'Audio Classes',        desc: 'Listen and practice with our guided audio yoga sessions.' },
-  '/media/video':          { title: 'Video Classes',        desc: 'Watch and follow along with our expert video classes.' },
-  '/media/gallery':        { title: 'Gallery',              desc: 'Browse our collection of yoga class and event photos.' },
-  '/blog':                 { title: 'Blog & News',          desc: 'Stay inspired with spiritual insights, wellness guides and the latest news from VisvaBangla Foundation.' },
-  '/contact':              { title: 'Contact Us',           desc: 'Get in touch with us for classes, queries or partnerships.' },
-  '/institutional-info':               { title: 'Others',               desc: 'Explore more from VisvaBangla Foundation.' },
-  '/institutional-info/foundation':    { title: 'Foundation',           desc: 'Learn about VisvaBangla Foundation — its history, registration, goals, and humanitarian vision.' },
-  '/institutional-info/university':    { title: 'Spiritual University', desc: 'Discover the VisvaBangla Spiritual University — a free, non-communal institution for meditation, knowledge, and spiritual education.' },
-  '/institutional-info/publication':   { title: 'Publication',          desc: 'Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy.' },
-  '/institutional-info/notice':        { title: 'Notice',               desc: 'Official notices and announcements from VisvaBangla Foundation.' },
-  '/institutional-info/privacy-policy':{ title: 'Privacy & Policy',     desc: 'Read our privacy policy and understand how VisvaBangla Foundation handles your information.' },
-  '/institutional-info/terms':         { title: 'Terms & Condition',    desc: 'Terms and conditions governing the use of VisvaBangla Foundation\'s services and platforms.' },
-  '/institutional-info/download':      { title: 'Download',             desc: 'Download resources, forms, research papers, and materials from VisvaBangla Foundation.' },
-};
+import { useTranslation } from 'react-i18next';
 
 const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) => {
   const location = useLocation();
+  const { t } = useTranslation();
   const pathname = location.pathname;
-  const meta = pageMeta[pathname] || { title: 'Page', desc: '' };
+
+  const pageMeta = {
+    '/about':                         { title: t('bc_about_title'),               desc: t('bc_about_desc') },
+    '/about/trainer':                  { title: t('bc_trainer_title'),              desc: t('bc_trainer_desc') },
+    '/media':                          { title: t('bc_media_title'),                desc: t('bc_media_desc') },
+    '/media/audio':                    { title: t('bc_audio_title'),                desc: t('bc_audio_desc') },
+    '/media/video':                    { title: t('bc_video_title'),                desc: t('bc_video_desc') },
+    '/media/gallery':                  { title: t('bc_gallery_title'),              desc: t('bc_gallery_desc') },
+    '/blog':                           { title: t('bc_blog_title'),                 desc: t('bc_blog_desc') },
+    '/contact':                        { title: t('bc_contact_title'),              desc: t('bc_contact_desc') },
+    '/institutional-info':             { title: t('bc_others_title'),               desc: t('bc_others_desc') },
+    '/institutional-info/foundation':  { title: t('bc_foundation_title'),           desc: t('bc_foundation_desc') },
+    '/institutional-info/university':  { title: t('bc_university_title'),           desc: t('bc_university_desc') },
+    '/institutional-info/publication': { title: t('bc_publication_title'),          desc: t('bc_publication_desc') },
+    '/institutional-info/notice':      { title: t('bc_notice_title'),               desc: t('bc_notice_desc') },
+    '/institutional-info/privacy-policy': { title: t('bc_privacy_title'),          desc: t('bc_privacy_desc') },
+    '/institutional-info/terms':       { title: t('bc_terms_title'),                desc: t('bc_terms_desc') },
+    '/institutional-info/download':    { title: t('bc_download_title'),             desc: t('bc_download_desc') },
+  };
+
+  const meta = pageMeta[pathname] || { title: t('bc_default_title'), desc: '' };
 
   const title = propTitle || meta.title;
   const desc  = propDesc  || meta.desc;
 
   const segments = pathname.split('/').filter(Boolean);
-  const autoCrumbs = [{ label: 'Home', path: '/' }];
+  const autoCrumbs = [{ label: t('home'), path: '/' }];
   segments.forEach((seg, i) => {
     const path = '/' + segments.slice(0, i + 1).join('/');
     const label = pageMeta[path]?.title || seg.charAt(0).toUpperCase() + seg.slice(1);
@@ -51,7 +54,7 @@ const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) =>
 
         {/* Left: title + desc */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-4xl lg:text-5xl font-semibold text-white">{title}</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white">{title}</h1>
           {desc && (
             <p className="text-gray-300 text-sm leading-relaxed max-w-md">{desc}</p>
           )}

@@ -57,7 +57,7 @@ const Newsletter = () => {
 
           {/* Heading */}
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl lg:text-[42px] font-medium text-white leading-snug">
+            <h2 className="text-2xl lg:text-[42px] font-bold text-white leading-snug">
               {t("updates_title_line_1")},
               <br />
               <span className="text-white/80">{t("updates_title_line_2")}</span>

@@ -420,5 +420,114 @@
   "faq_answer_4": "Yes, absolutely. All programs — meditation, spiritual education, and knowledge sessions — are entirely free of cost, open to every seeker regardless of background.",
 
   "faq_question_5": "Can I volunteer as a teacher or researcher?",
-  "faq_answer_5": "Yes! Any knowledgeable scholar or researcher may voluntarily teach in our classes. Please contact us to discuss how you can contribute."
+  "faq_answer_5": "Yes! Any knowledgeable scholar or researcher may voluntarily teach in our classes. Please contact us to discuss how you can contribute.",
+
+  "bc_default_title": "Page",
+  "bc_about_title": "About Us",
+  "bc_about_desc": "Learn more about our journey, mission and the team behind VisvaBangla Foundation.",
+  "bc_trainer_title": "Our Trainers",
+  "bc_trainer_desc": "Meet the certified instructors who guide your wellness journey.",
+  "bc_media_title": "Media",
+  "bc_media_desc": "Explore our audio and video yoga sessions for all levels.",
+  "bc_audio_title": "Audio Classes",
+  "bc_audio_desc": "Listen and practice with our guided audio yoga sessions.",
+  "bc_video_title": "Video Classes",
+  "bc_video_desc": "Watch and follow along with our expert video classes.",
+  "bc_gallery_title": "Gallery",
+  "bc_gallery_desc": "Browse our collection of yoga class and event photos.",
+  "bc_blog_title": "Blog & News",
+  "bc_blog_desc": "Stay inspired with spiritual insights, wellness guides and the latest news from VisvaBangla Foundation.",
+  "bc_contact_title": "Contact Us",
+  "bc_contact_desc": "Get in touch with us for classes, queries or partnerships.",
+  "bc_others_title": "Others",
+  "bc_others_desc": "Explore more from VisvaBangla Foundation.",
+  "bc_foundation_title": "Foundation",
+  "bc_foundation_desc": "Learn about VisvaBangla Foundation — its history, registration, goals, and humanitarian vision.",
+  "bc_university_title": "Spiritual University",
+  "bc_university_desc": "Discover the VisvaBangla Spiritual University — a free, non-communal institution for meditation, knowledge, and spiritual education.",
+  "bc_publication_title": "Publication",
+  "bc_publication_desc": "Explore research journals, books, and publications by VisvaBangla Foundation on universal humanitarian philosophy.",
+  "bc_notice_title": "Notice",
+  "bc_notice_desc": "Official notices and announcements from VisvaBangla Foundation.",
+  "bc_privacy_title": "Privacy & Policy",
+  "bc_privacy_desc": "Read our privacy policy and understand how VisvaBangla Foundation handles your information.",
+  "bc_terms_title": "Terms & Condition",
+  "bc_terms_desc": "Terms and conditions governing the use of VisvaBangla Foundation's services and platforms.",
+  "bc_download_title": "Download",
+  "bc_download_desc": "Download resources, forms, research papers, and materials from VisvaBangla Foundation.",
+
+
+  "under_visvabangla_foundation": "Under VisvaBangla Foundation",
+  "est_initiative": "Est. Initiative · Rajshahi, Bangladesh",
+
+  "experimental_activities_announced": "Experimental Activities Announced",
+  "spiritual_university_title_line_1": "VisvaBangla",
+  "spiritual_university_title_line_2": "Spiritual University",
+
+  "spiritual_university_subtitle": "Universal Humanitarian Philosophy Institute of Meditation, Knowledge, Education and Spiritual Guidance",
+
+  "spiritual_university_description_1": "Inspired by the approximately four-thousand-year-old heritage of the Barind region and the ancient centers of learning such as <highlight>Nalanda, Taxila, Somapura Mahavihara, Mahasthangarh, and Mainamati</highlight>, we are preparing to launch the experimental activities of the VisvaBangla Spiritual University under the initiative of VisvaBangla Foundation.",
+
+  "spiritual_university_description_2": "This initiative is the outcome of more than <highlight>fifteen years of research</highlight> aimed at establishing a university based on universal humanitarian meditation, knowledge, education, and spiritual guidance for self-development and self-purification — especially for non-communal Sufi-oriented spiritual seekers.",
+
+  "join_the_program": "Join the Program",
+  "about_foundations": "About Foundation",
+  "free": "Free",
+
+  "four_pillars": "Four Pillars",
+  "four_pillars_title_line_1": "Built on",
+  "four_pillars_title_line_2": "Universal Foundations",
+
+  "pillar_meditation_title": "Meditation",
+  "pillar_meditation_desc": "Structured meditation programs rooted in universal humanitarian philosophy for self-purification and inner liberation.",
+  "pillar_knowledge_title": "Knowledge",
+  "pillar_knowledge_desc": "Research-based spiritual and philosophical knowledge simplified and freely distributed to all seekers.",
+  "pillar_education_title": "Education",
+  "pillar_education_desc": "Free, open education for underprivileged working-class people deprived of formal learning opportunities.",
+  "pillar_spiritual_guidance_title": "Spiritual Guidance",
+  "pillar_spiritual_guidance_desc": "Guidance from experienced Sufi practitioners, researchers, and respected spiritual teachers.",
+
+  "feature_non_communal": "Non-communal & Universal",
+  "feature_free_of_charge": "Completely Free of Charge",
+  "feature_research_curriculum": "Research-Based Curriculum",
+  "feature_weekly_monthly": "Weekly & Monthly Classes",
+  "feature_participants": "150+ Regular Participants",
+  "feature_open_all": "Open to All Backgrounds",
+  "feature_sufi_traditions": "Sufi & Spiritual Traditions",
+  "feature_voluntary_faculty": "Voluntary Teaching Faculty",
+
+  "open_to_everyone": "Open to Everyone",
+  "open_to_everyone_desc": "Any interested individual may join this humanitarian educational philosophy at any time. Any knowledgeable scholar or researcher may voluntarily teach in these classes. Everything is conducted entirely free of charge.",
+  "join_now_free": "Join Now — It's Free",
+
+  "what_we_offer": "What We Offer",
+  "features_title_line_1": "A New Model of",
+  "features_title_line_2": "Free Spiritual Education",
+  "features_description": "Researchers and spiritual practitioners simplify modern scientific and research-based humanitarian and spiritual knowledge for educationally deprived ordinary people. Weekly and monthly classes include analytical and evidence-based discussions on different levels of spiritual consciousness.",
+
+  "core_principle": "Core Principle",
+  "core_principle_desc_1": "This humanitarian institution will be dedicated to realizing a noble vision. Here,",
+  "core_principle_highlight": "self-purification will be regarded as the foundation of all well-being",
+  "core_principle_desc_2": "— the path toward a compassionate, just, and service-oriented human society.",
+
+  "free_meditation": "Free Meditation",
+  "cta_title": "Ready to Begin Your Journey?",
+  "cta_desc": "Join our free weekly classes — open to all, no registration fee, no commitment.",
+
+  "our_dream": "Our Dream",
+  "vision_heading_line_1": "A University Like",
+  "vision_heading_line_2": "No Other in the World",
+  "vision_quote": "\"Nowhere in the world has a university been established solely for the purpose of freely distributing universal humanitarian and spiritual meditation-based knowledge dedicated to self-purification. We dream of building a peaceful, compassionate, non-communal, and humanitarian world through the study, research, and publication of the philosophies of the great human beings of the world.\"",
+  "vision_quote_footer": "— Dr. S. M. Hasib Ul Hasan, Founder",
+  "vision_context": "In today's capitalist and materialistic social system, essential aspects of human life such as education, healthcare, employment, and housing have become commodities. This institution stands as a counter-vision — a sanctuary of free knowledge, compassion, and spiritual liberation.",
+
+  "participating_regions": "Participating Regions",
+  "region_rajshahi": "Rajshahi",
+  "region_naogaon": "Naogaon",
+  "region_chapainawabganj": "Chapainawabganj",
+  "region_natore": "Natore",
+  "region_kushtia": "Kushtia",
+  "vision_participants_desc": "People from Rajshahi and neighboring districts — including followers of Sufism, Gurubadi and Tariqa traditions, spiritual seekers, laborers, and ordinary non-communal people devoted to self-discovery — have participated in weekly thematic classes focused on humanitarian philosophy, meditation, spiritual knowledge, and Sufi teachings.",
+  "vision_teachers_desc": "Teachers, researchers, and scholars from various educational institutions and universities are working with us to simplify and freely distribute research-based spiritual and philosophical knowledge among underprivileged working-class people — including laborers, day workers, porters, blacksmiths, potters, fishermen, and weavers."
+
 }

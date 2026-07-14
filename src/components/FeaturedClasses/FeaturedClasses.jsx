@@ -48,7 +48,7 @@ const FeaturedClasses = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
               {t("featured_programs")}
             </span>
-            <h2 className="text-4xl lg:text-5xl font-medium text-white leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
               {t("explore_programs_line_1")}<br />
               <span className="text-white/80">{t("explore_programs_line_2")}</span>
             </h2>

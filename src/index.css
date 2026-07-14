@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 * {
-  /* font-family: "Plus Jakarta Sans", sans-serif; */
-   font-family: "Noto Sans Display", sans-serif;
+  font-family: "Noto Sans Display", sans-serif;
+}
+
+/* Bangla language — use Hind Siliguri */
+:lang(bn) * {
+  font-family: "Hind Siliguri", sans-serif;
 }
 
 html {

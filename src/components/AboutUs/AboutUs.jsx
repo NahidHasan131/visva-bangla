@@ -59,7 +59,7 @@ import { useTranslation } from 'react-i18next';
             <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
             {t("universal_humanitarian_philosophy")}
           </span>
-          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight max-w-2xl">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight max-w-2xl">
             {t("visvabangla")} <span className="text-primary">{t("foundation")}</span>
           </h2>
           <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
@@ -86,7 +86,7 @@ import { useTranslation } from 'react-i18next';
                 {React.cloneElement(card.icon, { size: 26 })}
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="text-base font-bold text-[#11141B] tracking-tight">{card.title}</h3>
+                <h3 className="text-lg font-bold text-[#11141B] tracking-tight">{card.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
               </div>
               <div className="mt-auto pt-2 flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
@@ -134,7 +134,7 @@ import { useTranslation } from 'react-i18next';
               <span className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest">
                {t("about_foundation")}
               </span>
-              <h3 className="text-3xl lg:text-4xl font-medium text-[#11141B] leading-snug">
+              <h3 className="text-3xl lg:text-4xl font-bold text-[#11141B] leading-snug">
                 {t("vision_line_1")} <br />
                 <span className="text-primary">{t("vision_line_2")}</span>
               </h3>
