@@ -19,9 +19,9 @@ const FeaturedClasses = () => {
       viewport={viewport}
     >
       {/* Glowing orbs — premium depth */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#06a4a7]/20 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#06a4a7]/15 blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-white/3 blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-125 h-125 rounded-full bg-[#06a4a7]/20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-125 h-125 rounded-full bg-[#06a4a7]/15 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 rounded-full bg-white/3 blur-3xl pointer-events-none" />
       {/* Subtle grid texture */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"

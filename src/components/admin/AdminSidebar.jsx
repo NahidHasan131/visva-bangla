@@ -8,32 +8,30 @@ import { HiHome } from 'react-icons/hi';
 import { IoClose } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import visvaBangala from '../../assets/logo/visva-bangala.png';
-
-const baseNavItems = [
-  { label: 'Dashboard',  path: '/admin',           icon: <MdDashboard size={20} />,    end: true },
-  { label: 'Blog Posts', path: '/admin/blog',       icon: <MdArticle size={20} /> },
-  { label: 'Videos',     path: '/admin/videos',     icon: <MdVideoLibrary size={20} /> },
-  { label: 'Audio',      path: '/admin/audio',      icon: <MdAudiotrack size={20} /> },
-  { label: 'Gallery',    path: '/admin/gallery',    icon: <MdPhotoLibrary size={20} /> },
-  { label: 'Reviews',    path: '/admin/reviews',    icon: <MdStar size={20} /> },
-];
-
-const adminOnlyItems = [
-  { label: 'Users',      path: '/admin/users',      icon: <MdPeople size={20} /> },
-];
-
-const bottomItems = [
-  { label: 'Profile',    path: '/admin/profile',    icon: <MdPerson size={20} /> },
-];
+import { useTranslation } from 'react-i18next';
 
 const AdminSidebar = ({ open, onToggle }) => {
+  const { t } = useTranslation();
   const user = useSelector(state => state.auth.user);
   const isAdmin = user?.role === 'admin';
+
+  const baseNavItems = [
+    { label: t('adm_dashboard'),  path: '/admin',           icon: <MdDashboard size={20} />,    end: true },
+    { label: t('adm_blog_posts'), path: '/admin/blog',       icon: <MdArticle size={20} /> },
+    { label: t('adm_videos'),     path: '/admin/videos',     icon: <MdVideoLibrary size={20} /> },
+    { label: t('adm_audio'),      path: '/admin/audio',      icon: <MdAudiotrack size={20} /> },
+    { label: t('adm_gallery'),    path: '/admin/gallery',    icon: <MdPhotoLibrary size={20} /> },
+    { label: t('adm_reviews'),    path: '/admin/reviews',    icon: <MdStar size={20} /> },
+  ];
+
+  const adminOnlyItems = [
+    { label: t('adm_users'),      path: '/admin/users',      icon: <MdPeople size={20} /> },
+  ];
 
   const navItems = [
     ...baseNavItems,
     ...(isAdmin ? adminOnlyItems : []),
-    ...bottomItems,
+    { label: t('adm_profile'),    path: '/admin/profile',    icon: <MdPerson size={20} /> },
   ];
 
   return (
@@ -51,9 +49,9 @@ const AdminSidebar = ({ open, onToggle }) => {
       `}>
         {/* Logo */}
         <div className="flex items-center h-16 px-4 justify-between border-b border-white/8">
-          <div className={`flex items-center gap-2 overflow-hidden transition-all duration-300 ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
+          <div className={`flex items-center gap-1 overflow-hidden transition-all duration-300 ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
             <img src={visvaBangala} alt="Visva Bangla" className="h-7 w-auto object-contain shrink-0" />
-            <span className="text-white font-bold text-sm uppercase whitespace-nowrap">VisvaBangla</span>
+            <span className="text-white font-bold text-sm uppercase whitespace-nowrap">{t("visvabangla")}</span>
           </div>
           <button
             onClick={onToggle}
@@ -101,7 +99,7 @@ const AdminSidebar = ({ open, onToggle }) => {
           >
             <HiHome size={20} className="shrink-0" />
             <span className={`text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
-              Back to Site
+              {t('adm_back_to_site')}
             </span>
           </NavLink>
         </div>

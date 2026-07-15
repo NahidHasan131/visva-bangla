@@ -12,17 +12,19 @@ import { setCredentials } from '../store/authSlice';
 import { toast } from 'sonner';
 import AuthInput from '../components/auth/AuthInput';
 import visvaBangala from '../assets/logo/visva-bangala.png';
-
-const schema = yup.object({
-  email:    yup.string().required('Email is required').email('Enter a valid email'),
-  password: yup.string().required('Password is required').min(8, 'Min 8 characters'),
-});
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading, error: apiError }] = useLoginMutation();
+
+  const schema = yup.object({
+    email:    yup.string().required(t('auth_email_required')).email(t('auth_email_invalid')),
+    password: yup.string().required(t('auth_password_required')).min(8, t('auth_min_8')),
+  });
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -32,10 +34,10 @@ const Login = () => {
     try {
       const res = await login(data).unwrap();
       dispatch(setCredentials(res.data));
-      toast.success('Signed in successfully!');
+      toast.success(t('auth_signin_success'));
       navigate('/admin');
     } catch (err) {
-      toast.error(err?.data?.message || 'Login failed. Please check your credentials.');
+      toast.error(err?.data?.message || t('auth_login_failed'));
       console.error('Login error:', err);
     }
   };
@@ -45,38 +47,38 @@ const Login = () => {
       <div className="w-full max-w-md">
 
         <div className="flex items-center justify-between mb-8">
-          <NavLink to="/" className="flex items-center gap-2">
+          <NavLink to="/" className="flex items-center gap-1">
             <img src={visvaBangala} alt="Visva Bangla" className="h-10 w-auto object-contain" />
-            <span className="text-xl font-bold uppercase text-secondary">VisvaBangla</span>
+            <span className="text-xl font-bold uppercase text-secondary">{t("visvabangla")}</span>
           </NavLink>
           <NavLink to="/" className="text-sm text-secondary font-medium hover:opacity-70 transition-opacity">
-            ← Back to Home
+            ← {t('auth_back_home')}
           </NavLink>
         </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-1 mb-8">
-            <h1 className="text-2xl font-bold text-[#11141B]">Welcome back</h1>
-            <p className="text-sm text-gray-500">Sign in to continue your wellness journey</p>
+            <h1 className="text-2xl font-bold text-[#11141B]">{t('auth_welcome_back')}</h1>
+            <p className="text-sm text-gray-500">{t('auth_signin_subtitle')}</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
             {apiError && (
               <p className="text-xs text-red-500 bg-red-50 px-4 py-2 rounded-xl">
-                {apiError?.data?.message || 'Login failed. Please check your credentials.'}
+                {apiError?.data?.message || t('auth_login_failed')}
               </p>
             )}
 
-            <AuthInput label="Email" icon={<MdOutlineEmail size={18} />} error={errors.email?.message}>
+            <AuthInput label={t('email')} icon={<MdOutlineEmail size={18} />} error={errors.email?.message}>
               <input {...register('email')} type="email" placeholder="your@email.com"
                 className="flex-1 text-sm outline-none bg-transparent" />
             </AuthInput>
 
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium text-[#11141B]">Password</label>
-                <NavLink to="#" className="text-xs text-secondary hover:underline">Forgot password?</NavLink>
+                <label className="text-sm font-medium text-[#11141B]">{t('auth_password')}</label>
+                <NavLink to="#" className="text-xs text-secondary hover:underline">{t('auth_forgot_password')}</NavLink>
               </div>
               <AuthInput icon={<RiLockPasswordLine size={18} />} error={errors.password?.message}>
                 <input {...register('password')} type={showPass ? 'text' : 'password'} placeholder="••••••••"
@@ -89,13 +91,13 @@ const Login = () => {
 
             <button type="submit" disabled={isLoading}
               className="w-full py-3 rounded-full bg-secondary text-white font-medium hover:bg-secondary/90 transition-colors duration-300 mt-2 disabled:opacity-60">
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? t('auth_signing_in') : t('sign_in')}
             </button>
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            Don't have an account?{' '}
-            <NavLink to="/auth/signup" className="text-secondary font-medium hover:underline">Sign up</NavLink>
+            {t('auth_no_account')}{' '}
+            <NavLink to="/auth/signup" className="text-secondary font-medium hover:underline">{t('auth_sign_up')}</NavLink>
           </p>
         </div>
 

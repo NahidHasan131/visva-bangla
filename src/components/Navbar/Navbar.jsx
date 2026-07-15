@@ -53,7 +53,7 @@ const MegaMenu = ({ columns }) => (
     style={{ top: '85%', width: '900px' }}
   >
     <div className="bg-white rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.15)]">
-      <div className="flex h-[420px]">
+      <div className="flex h-105">
 
         {/* Left half — columns */}
         <div className="flex flex-1 divide-x divide-gray-100">
@@ -496,7 +496,7 @@ const Navbar = () => {
             className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full border border-secondary/40 text-secondary text-sm font-semibold transition-all duration-300 hover:bg-secondary hover:text-white hover:border-secondary"
           >
             <span>{i18n.language === 'en' ? '🇧🇩' : '🇬🇧'}</span>
-            <span>{i18n.language === 'en' ? 'বাংলায় দেখুন' : 'View in English'}</span>
+            <span>{i18n.language === 'en' ? t('view_in_bangla') : t('view_in_english')}</span>
           </button>
 
           {token ? (
@@ -506,13 +506,13 @@ const Navbar = () => {
                 onClick={() => setMobileOpen(false)}
                 className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-secondary"
               >
-                Admin Panel
+                {t('admin_panel')}
               </NavLink>
               <button
                 onClick={() => { handleSignOut(); setMobileOpen(false); }}
                 className="w-full py-2.5 rounded-full border border-secondary text-secondary text-sm font-medium"
               >
-                Sign Out
+                {t('sign_out')}
               </button>
             </>
           ) : (
@@ -521,7 +521,7 @@ const Navbar = () => {
               onClick={() => setMobileOpen(false)}
               className="block text-center py-2.5 rounded-full text-white text-sm font-medium bg-secondary"
             >
-              Sign In
+              {t('sign_in')}
             </NavLink>
           )}
         </div>

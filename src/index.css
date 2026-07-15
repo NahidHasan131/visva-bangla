@@ -5,8 +5,11 @@
 }
 
 /* Bangla language — use Hind Siliguri */
-:lang(bn) * {
+/* :lang(bn) * {
   font-family: "Hind Siliguri", sans-serif;
+} */
+:lang(bn) * {
+  font-family: "Tiro Bangla", serif;
 }
 
 html {

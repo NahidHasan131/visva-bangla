@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -16,13 +17,15 @@ import { useSearchParams } from 'react-router-dom';
 
 const PER_PAGE = 10;
 
-const schema = yup.object({
-  title:       yup.string().required('Title is required').min(3, 'Min 3 characters'),
-  description: yup.string().required('Description is required').min(10, 'Min 10 characters'),
-  videoUrl:    yup.string().required('Video URL is required').url('Enter a valid URL'),
-});
-
 const VideoManager = () => {
+  const { t } = useTranslation();
+
+  const schema = yup.object({
+    title:       yup.string().required(t('adm_title_required')).min(3, t('adm_min_3')),
+    description: yup.string().required(t('adm_description_required')).min(10, t('adm_min_10')),
+    videoUrl:    yup.string().required(t('adm_video_url_required')).url(t('adm_valid_url')),
+  });
+
   const [search, setSearch]           = useState('');
   const [searchParams] = useSearchParams();
   const [page, setPage]               = useState(Number(searchParams.get('page')) || 1);
@@ -70,26 +73,26 @@ const VideoManager = () => {
     try {
       if (editingItem) {
         await updateVideo({ id: editingItem._id, ...body }).unwrap();
-        toast.success('Video updated successfully.');
+        toast.success(t('adm_video_updated'));
       } else {
         await createVideo(body).unwrap();
-        toast.success('Video added successfully.');
+        toast.success(t('adm_video_added'));
       }
       setShowForm(false);
       reset();
       setThumbnail('');
     } catch (err) {
-      toast.error(err?.data?.message || 'Something went wrong.');
+      toast.error(err?.data?.message || t('adm_something_wrong'));
     }
   };
 
   const confirmDelete = async () => {
     try {
       await deleteVideo(deleteId).unwrap();
-      toast.error('Video deleted.');
+      toast.error(t('adm_video_deleted'));
       setDeleteId(null);
     } catch (err) {
-      toast.error(err?.data?.message || 'Delete failed.');
+      toast.error(err?.data?.message || t('adm_delete_failed'));
     }
   };
 
@@ -101,14 +104,14 @@ const VideoManager = () => {
         <div>
           <div className="flex items-center gap-2">
             <MdVideoLibrary size={30} className="text-[var(--color-secondary)]" />
-            <h1 className="text-3xl font-bold text-[#11141B]">Videos</h1>
+            <h1 className="text-3xl font-bold text-[#11141B]">{t('adm_videos')}</h1>
           </div>
-          <p className="text-sm text-gray-400 mt-1">{filtered.length} videos total</p>
+          <p className="text-sm text-gray-400 mt-1">{filtered.length} {t('adm_videos_total')}</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
-            <MdAdd size={18} /> Add Video
+            <MdAdd size={18} /> {t('adm_add_video')}
           </button>
         )}
       </div>
@@ -117,7 +120,7 @@ const VideoManager = () => {
       <div className="flex items-center gap-3">
         <div className="relative flex-1">
           <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input type="text" placeholder="Search videos..."
+          <input type="text" placeholder={t('adm_search_videos')}
             value={search} onChange={e => { setSearch(e.target.value); setPage(1); }}
             className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
         </div>
@@ -129,9 +132,9 @@ const VideoManager = () => {
         ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
         : 'flex flex-col gap-3'
       }>
-        {isLoading && <p className="text-center py-12 text-gray-400 col-span-full">Loading...</p>}
+        {isLoading && <p className="text-center py-12 text-gray-400 col-span-full">{t('loading')}</p>}
         {!isLoading && filtered.length === 0 && (
-          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100 col-span-full">No videos found.</div>
+          <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100 col-span-full">{t('adm_no_videos_found')}</div>
         )}
         {paged.map(item => (
           view === 'grid' ? (
@@ -151,9 +154,9 @@ const VideoManager = () => {
                 {isAdmin && (
                   <div className="flex items-center gap-1 pt-2 border-t border-gray-100">
                     <button onClick={() => openEdit(item)}
-                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">Edit</button>
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10 transition-colors">{t('adm_edit')}</button>
                     <button onClick={() => setDeleteId(item._id)}
-                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">Delete</button>
+                      className="flex-1 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">{t('adm_delete')}</button>
                   </div>
                 )}
               </div>
@@ -197,24 +200,24 @@ const VideoManager = () => {
 
       {/* Create / Edit modal */}
       {showForm && (
-        <AdminModal title={editingItem ? 'Edit Video' : 'Add Video'} onClose={() => setShowForm(false)}>
+        <AdminModal title={editingItem ? t('adm_edit_video') : t('adm_add_video')} onClose={() => setShowForm(false)}>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
-            <AdminFormField label="Thumbnail">
+            <AdminFormField label={t('adm_thumbnail')}>
               <ImageInput value={thumbnail} onChange={setThumbnail} />
             </AdminFormField>
 
-            <AdminFormField label="Title" error={errors.title?.message}>
-              <input {...register('title')} placeholder="Video title"
+            <AdminFormField label={t('adm_title')} error={errors.title?.message}>
+              <input {...register('title')} placeholder={t('adm_video_title_placeholder')}
                 className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
 
-            <AdminFormField label="Description" error={errors.description?.message}>
-              <textarea {...register('description')} rows={3} placeholder="Short description..."
+            <AdminFormField label={t('adm_description')} error={errors.description?.message}>
+              <textarea {...register('description')} rows={3} placeholder={t('adm_short_description')}
                 className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors resize-none" />
             </AdminFormField>
 
-            <AdminFormField label="Video URL" error={errors.videoUrl?.message}>
+            <AdminFormField label={t('adm_video_url')} error={errors.videoUrl?.message}>
               <input {...register('videoUrl')} placeholder="https://youtu.be/... or https://example.com/video.mp4"
                 className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
             </AdminFormField>
@@ -222,11 +225,11 @@ const VideoManager = () => {
             <div className="flex items-center justify-end gap-3 pt-2">
               <button type="button" onClick={() => setShowForm(false)}
                 className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-                Cancel
+                {t('adm_cancel')}
               </button>
               <button type="submit" disabled={creating || updating}
                 className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
-                {creating || updating ? 'Saving...' : editingItem ? 'Save Changes' : 'Add Video'}
+                {creating || updating ? t('adm_saving') : editingItem ? t('adm_save_changes') : t('adm_add_video')}
               </button>
             </div>
           </form>
@@ -235,16 +238,16 @@ const VideoManager = () => {
 
       {/* Delete confirm */}
       {deleteId && (
-        <AdminModal title="Delete Video?" onClose={() => setDeleteId(null)}>
-          <p className="text-sm text-gray-500 mb-5">This action cannot be undone.</p>
+        <AdminModal title={t('adm_delete_video_confirm')} onClose={() => setDeleteId(null)}>
+          <p className="text-sm text-gray-500 mb-5">{t('adm_cannot_undo')}</p>
           <div className="flex items-center justify-end gap-3">
             <button onClick={() => setDeleteId(null)}
               className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-              Cancel
+              {t('adm_cancel')}
             </button>
             <button onClick={confirmDelete}
               className="px-5 py-2.5 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors">
-              Delete
+              {t('adm_delete')}
             </button>
           </div>
         </AdminModal>
@@ -255,4 +258,3 @@ const VideoManager = () => {
 };
 
 export default VideoManager;
-

@@ -5,12 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 const AdminHeader = ({ onMenuClick }) => {
+  const {t} = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const handleSignOut = () => {
     dispatch(logout());
@@ -30,6 +33,19 @@ const AdminHeader = ({ onMenuClick }) => {
       <div className="hidden lg:block" />
 
       <div className="flex items-center gap-4">
+        {/* Language toggle */}
+        <button
+          onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'bn' : 'en')}
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 border group border-secondary/40 text-secondary hover:bg-secondary hover:text-white hover:border-secondary"
+          aria-label="Toggle language"
+        >
+          <span>{i18n.language === 'en' ? 'EN' : 'বাং'}</span>
+          <span className="opacity-30">|</span>
+          <span className="opacity-40 group-hover:opacity-80 transition-opacity duration-200">
+            {i18n.language === 'en' ? 'বাং' : 'EN'}
+          </span>
+        </button>
+
         {/* Notification */}
         <button className="relative text-gray-400 hover:text-secondary transition-colors">
           <MdNotifications size={22} />
@@ -72,13 +88,13 @@ const AdminHeader = ({ onMenuClick }) => {
                   onClick={() => setDropdownOpen(false)}
                   className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
                 >
-                  <MdPerson size={16} className="text-secondary" /> View Profile
+                  <MdPerson size={16} className="text-secondary" /> {t('adm_view_profile')}
                 </NavLink>
                 <button
                   onClick={handleSignOut}
                   className="w-full flex items-center gap-3 px-4 py-3 text-sm text-primary hover:bg-primary/5 transition-colors"
                 >
-                  <MdLogout size={16} /> Sign Out
+                  <MdLogout size={16} /> {t('sign_out')}
                 </button>
               </div>
             </>

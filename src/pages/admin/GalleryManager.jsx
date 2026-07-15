@@ -11,15 +11,18 @@ import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
 import Pagination from '../../components/Media/Pagination';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PER_PAGE = 12;
 
-const schema = yup.object({
-  title:    yup.string().required('Title is required').min(3, 'Min 3 characters'),
-  location: yup.string().optional(),
-});
-
 const GalleryManager = () => {
+  const { t } = useTranslation();
+
+  const schema = yup.object({
+    title:    yup.string().required(t('adm_title_required')).min(3, t('adm_min_3')),
+    location: yup.string().optional(),
+  });
+
   const [search, setSearch]           = useState('');
   const [searchParams] = useSearchParams();
   const [page, setPage]               = useState(Number(searchParams.get('page')) || 1);
@@ -36,8 +39,7 @@ const GalleryManager = () => {
   const isAdmin = currentUser?.role === 'admin';
 
   const allItems = data?.data || [];
-  const items = allItems;
-  const filtered = items.filter(i =>
+  const filtered = allItems.filter(i =>
     i.title.toLowerCase().includes(search.toLowerCase())
   );
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
@@ -66,26 +68,26 @@ const GalleryManager = () => {
     try {
       if (editingItem) {
         await updateGallery({ id: editingItem._id, ...body }).unwrap();
-        toast.success('Image updated successfully.');
+        toast.success(t('adm_image_updated'));
       } else {
         await createGallery(body).unwrap();
-        toast.success('Image added successfully.');
+        toast.success(t('adm_image_added'));
       }
       setShowForm(false);
       reset();
       setImageUrl('');
     } catch (err) {
-      toast.error(err?.data?.message || 'Something went wrong.');
+      toast.error(err?.data?.message || t('adm_something_wrong'));
     }
   };
 
   const confirmDelete = async () => {
     try {
       await deleteGallery(deleteId).unwrap();
-      toast.error('Image deleted.');
+      toast.error(t('adm_image_deleted'));
       setDeleteId(null);
     } catch (err) {
-      toast.error(err?.data?.message || 'Delete failed.');
+      toast.error(err?.data?.message || t('adm_delete_failed'));
     }
   };
 
@@ -96,15 +98,15 @@ const GalleryManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <MdPhotoLibrary size={30} className="text-[var(--color-secondary)]" />
-            <h1 className="text-3xl font-bold text-[#11141B]">Gallery</h1>
+            <MdPhotoLibrary size={30} className="text-(--color-secondary)" />
+            <h1 className="text-3xl font-bold text-[#11141B]">{t('adm_gallery')}</h1>
           </div>
-          <p className="text-sm text-gray-400 mt-1">{filtered.length} images total</p>
+          <p className="text-sm text-gray-400 mt-1">{filtered.length} {t('adm_images_total')}</p>
         </div>
         {isAdmin && (
           <button onClick={openCreate}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
-            <MdAdd size={18} /> Add Image
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-(--color-secondary) text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            <MdAdd size={18} /> {t('adm_add_image')}
           </button>
         )}
       </div>
@@ -112,15 +114,14 @@ const GalleryManager = () => {
       {/* Search */}
       <div className="relative">
         <MdSearch size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input type="text" placeholder="Search gallery..."
+        <input type="text" placeholder={t('adm_search_gallery')}
           value={search} onChange={e => { setSearch(e.target.value); setPage(1); }}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors bg-white" />
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors bg-white" />
       </div>
 
-      {/* Grid */}
-      {isLoading && <p className="text-center py-12 text-gray-400">Loading...</p>}
+      {isLoading && <p className="text-center py-12 text-gray-400">{t('loading')}</p>}
       {!isLoading && filtered.length === 0 && (
-        <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100">No images found.</div>
+        <div className="text-center py-16 text-gray-400 bg-white rounded-2xl border border-gray-100">{t('adm_no_images_found')}</div>
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {paged.map(item => (
@@ -129,7 +130,6 @@ const GalleryManager = () => {
               ? <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
               : <div className="w-full h-full flex items-center justify-center"><MdImage size={32} className="text-gray-300" /></div>
             }
-            {/* Hover overlay */}
             <div className="absolute inset-0 bg-[#11141B]/0 group-hover:bg-[#11141B]/50 transition-all duration-200 flex flex-col justify-between p-3 opacity-0 group-hover:opacity-100">
               <div>
                 <p className="text-white text-xs font-medium line-clamp-1">{item.title}</p>
@@ -158,31 +158,27 @@ const GalleryManager = () => {
 
       {/* Create / Edit modal */}
       {showForm && (
-        <AdminModal title={editingItem ? 'Edit Image' : 'Add Image'} onClose={() => setShowForm(false)}>
+        <AdminModal title={editingItem ? t('adm_edit_image') : t('adm_add_image')} onClose={() => setShowForm(false)}>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-
-            <AdminFormField label="Image">
+            <AdminFormField label={t('adm_image_label')}>
               <ImageInput value={imageUrl} onChange={setImageUrl} />
             </AdminFormField>
-
-            <AdminFormField label="Title" error={errors.title?.message}>
-              <input {...register('title')} placeholder="Image title"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
+            <AdminFormField label={t('adm_title')} error={errors.title?.message}>
+              <input {...register('title')} placeholder={t('adm_image_title_placeholder')}
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors" />
             </AdminFormField>
-
-            <AdminFormField label="Location" error={errors.location?.message}>
-              <input {...register('location')} placeholder="e.g. Dhaka Studio"
-                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[var(--color-secondary)] transition-colors" />
+            <AdminFormField label={t('adm_location')} error={errors.location?.message}>
+              <input {...register('location')} placeholder={t('adm_location_placeholder')}
+                className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-(--color-secondary) transition-colors" />
             </AdminFormField>
-
             <div className="flex items-center justify-end gap-3 pt-2">
               <button type="button" onClick={() => setShowForm(false)}
                 className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-                Cancel
+                {t('adm_cancel')}
               </button>
               <button type="submit" disabled={creating || updating}
-                className="px-5 py-2.5 rounded-xl bg-[var(--color-secondary)] text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
-                {creating || updating ? 'Saving...' : editingItem ? 'Save Changes' : 'Add Image'}
+                className="px-5 py-2.5 rounded-xl bg-(--color-secondary) text-white text-sm font-medium hover:bg-[#11141B] transition-colors disabled:opacity-60">
+                {creating || updating ? t('adm_saving') : editingItem ? t('adm_save_changes') : t('adm_add_image')}
               </button>
             </div>
           </form>
@@ -191,16 +187,16 @@ const GalleryManager = () => {
 
       {/* Delete confirm */}
       {deleteId && (
-        <AdminModal title="Delete Image?" onClose={() => setDeleteId(null)}>
-          <p className="text-sm text-gray-500 mb-5">This action cannot be undone.</p>
+        <AdminModal title={t('adm_delete_image_confirm')} onClose={() => setDeleteId(null)}>
+          <p className="text-sm text-gray-500 mb-5">{t('adm_cannot_undo')}</p>
           <div className="flex items-center justify-end gap-3">
             <button onClick={() => setDeleteId(null)}
               className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-              Cancel
+              {t('adm_cancel')}
             </button>
             <button onClick={confirmDelete}
               className="px-5 py-2.5 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors">
-              Delete
+              {t('adm_delete')}
             </button>
           </div>
         </AdminModal>
@@ -211,4 +207,3 @@ const GalleryManager = () => {
 };
 
 export default GalleryManager;
-

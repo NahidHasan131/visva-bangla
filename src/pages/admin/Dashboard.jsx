@@ -10,18 +10,13 @@ import { useGetAudiosQuery } from '../../store/audioApi';
 import { useGetVideosQuery } from '../../store/videoApi';
 import { useGetGalleryQuery } from '../../store/galleryApi';
 import { useGetUsersQuery } from '../../store/usersApi';
+import { useTranslation } from 'react-i18next';
 
 const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 
-const quickActions = [
-  { label: 'New Blog Post',     path: '/admin/blog',    icon: <MdArticle size={16} />,      color: 'text-violet-600 bg-violet-50' },
-  { label: 'Add Video',         path: '/admin/videos',  icon: <MdVideoLibrary size={16} />, color: 'text-blue-600 bg-blue-50' },
-  { label: 'Upload Audio',      path: '/admin/audio',   icon: <MdAudiotrack size={16} />,   color: 'text-amber-600 bg-amber-50' },
-  { label: 'Add Gallery Image', path: '/admin/gallery', icon: <MdPhotoLibrary size={16} />, color: 'text-pink-600 bg-pink-50' },
-];
-
 const Dashboard = () => {
+  const { t } = useTranslation();
   const user = useSelector(state => state.auth.user);
   const isAdmin = user?.role === 'admin';
 
@@ -44,19 +39,26 @@ const Dashboard = () => {
   const myVideos  = allVideos.filter(v => v.uploadedBy === user?._id || v.uploadedBy?._id === user?._id);
   const myGallery = allGallery.filter(g => g.uploadedBy === user?._id || g.uploadedBy?._id === user?._id);
 
+  const quickActions = [
+    { label: t('adm_new_blog'),     path: '/admin/blog',    icon: <MdArticle size={16} />,      color: 'text-violet-600 bg-violet-50' },
+    { label: t('adm_add_video'),    path: '/admin/videos',  icon: <MdVideoLibrary size={16} />, color: 'text-blue-600 bg-blue-50' },
+    { label: t('adm_upload_audio'), path: '/admin/audio',   icon: <MdAudiotrack size={16} />,   color: 'text-amber-600 bg-amber-50' },
+    { label: t('adm_add_gallery'),  path: '/admin/gallery', icon: <MdPhotoLibrary size={16} />, color: 'text-pink-600 bg-pink-50' },
+  ];
+
   const adminStats = [
-    { label: 'Blog Posts',     value: blogsData?.pagination?.total ?? allBlogs.length, icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
-    { label: 'Videos',         value: allVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
-    { label: 'Audio Tracks',   value: allAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
-    { label: 'Gallery Photos', value: allGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
-    { label: 'Total Users',    value: allUsers.length,   icon: <MdPeople size={22} />,       path: '/admin/users',   gradient: 'from-secondary to-[#047f82]' },
+    { label: t('adm_blog_posts'),     value: blogsData?.pagination?.total ?? allBlogs.length, icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
+    { label: t('adm_videos'),         value: allVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
+    { label: t('adm_audio_tracks'),   value: allAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
+    { label: t('adm_gallery_photos'), value: allGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
+    { label: t('adm_total_users'),    value: allUsers.length,   icon: <MdPeople size={22} />,       path: '/admin/users',   gradient: 'from-secondary to-[#047f82]' },
   ];
 
   const userStats = [
-    { label: 'My Blog Posts',     value: myBlogs.length,   icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
-    { label: 'My Videos',         value: myVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
-    { label: 'My Audio Tracks',   value: myAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
-    { label: 'My Gallery Photos', value: myGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
+    { label: t('adm_my_blog_posts'),     value: myBlogs.length,   icon: <MdArticle size={22} />,      path: '/admin/blog',    gradient: 'from-violet-500 to-violet-600' },
+    { label: t('adm_my_videos'),         value: myVideos.length,  icon: <MdVideoLibrary size={22} />, path: '/admin/videos',  gradient: 'from-blue-500 to-blue-600' },
+    { label: t('adm_my_audio_tracks'),   value: myAudios.length,  icon: <MdAudiotrack size={22} />,   path: '/admin/audio',   gradient: 'from-amber-500 to-amber-600' },
+    { label: t('adm_my_gallery_photos'), value: myGallery.length, icon: <MdPhotoLibrary size={22} />, path: '/admin/gallery', gradient: 'from-pink-500 to-pink-600' },
   ];
 
   const stats = isAdmin ? adminStats : userStats;
@@ -72,10 +74,10 @@ const Dashboard = () => {
             <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center">
               <MdDashboard size={20} className="text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-[#11141B]">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-[#11141B]">{t('adm_dashboard')}</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1 ml-11">
-            Welcome back, <span className="font-semibold text-[#11141B]">{user?.name}</span>
+            {t('adm_welcome_back')}, <span className="font-semibold text-[#11141B]">{user?.name}</span>
             {user?.role && (
               <span className="ml-2 px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs font-semibold capitalize">
                 {user.role}
@@ -118,14 +120,14 @@ const Dashboard = () => {
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4 shadow-sm">
           <div className="flex items-center justify-between">
             <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">
-              {isAdmin ? 'Recent Blog Posts' : 'My Recent Posts'}
+              {isAdmin ? t('adm_recent_posts') : t('adm_my_recent_posts')}
             </h2>
             <NavLink to="/admin/blog" className="text-xs text-secondary hover:underline font-medium">
-              View all
+              {t('adm_view_all')}
             </NavLink>
           </div>
           {recentBlogs.length === 0 ? (
-            <p className="text-sm text-gray-400 py-4 text-center">No posts yet.</p>
+            <p className="text-sm text-gray-400 py-4 text-center">{t('adm_no_posts')}</p>
           ) : (
             <div className="flex flex-col divide-y divide-gray-50">
               {recentBlogs.map(b => (
@@ -153,8 +155,8 @@ const Dashboard = () => {
           {isAdmin ? (
             <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4 shadow-sm">
               <div className="flex items-center justify-between">
-                <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">Users</h2>
-                <NavLink to="/admin/users" className="text-xs text-secondary hover:underline font-medium">Manage</NavLink>
+                <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">{t('adm_users')}</h2>
+                <NavLink to="/admin/users" className="text-xs text-secondary hover:underline font-medium">{t('adm_manage')}</NavLink>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-[#047f82] flex items-center justify-center shadow-sm">
@@ -162,7 +164,7 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-[#11141B]">{allUsers.length}</p>
-                  <p className="text-xs text-gray-400">Total registered users</p>
+                  <p className="text-xs text-gray-400">{t('adm_total_registered')}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-2 pt-2 border-t border-gray-50">
@@ -181,12 +183,12 @@ const Dashboard = () => {
             </div>
           ) : (
             <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3 shadow-sm">
-              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">My Content</h2>
+              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">{t('adm_my_content')}</h2>
               {[
-                { label: 'Blog Posts', value: myBlogs.length,   icon: <MdArticle size={16} className="text-violet-500" /> },
-                { label: 'Videos',     value: myVideos.length,  icon: <MdPlayCircle size={16} className="text-blue-500" /> },
-                { label: 'Audio',      value: myAudios.length,  icon: <MdMusicNote size={16} className="text-amber-500" /> },
-                { label: 'Gallery',    value: myGallery.length, icon: <MdImage size={16} className="text-pink-500" /> },
+                { label: t('adm_blog_posts'), value: myBlogs.length,   icon: <MdArticle size={16} className="text-violet-500" /> },
+                { label: t('adm_videos'),     value: myVideos.length,  icon: <MdPlayCircle size={16} className="text-blue-500" /> },
+                { label: t('adm_audio'),      value: myAudios.length,  icon: <MdMusicNote size={16} className="text-amber-500" /> },
+                { label: t('adm_gallery'),    value: myGallery.length, icon: <MdImage size={16} className="text-pink-500" /> },
               ].map(item => (
                 <div key={item.label} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                   <div className="flex items-center gap-2">
@@ -202,7 +204,7 @@ const Dashboard = () => {
           {/* Quick actions */}
           {isAdmin && (
             <div className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-3 shadow-sm">
-              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">Quick Actions</h2>
+              <h2 className="font-bold text-sm uppercase tracking-widest text-gray-400">{t('adm_quick_actions')}</h2>
               {quickActions.map(a => (
                 <NavLink
                   key={a.label}
